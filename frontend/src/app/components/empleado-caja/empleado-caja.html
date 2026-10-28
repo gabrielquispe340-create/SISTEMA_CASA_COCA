@@ -1,0 +1,766 @@
+<div class="empleado-layout">
+  <!-- BARRA LATERAL PROFESIONAL (IDENTICA A DASHBOARD Y POS) -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      </div>
+      <div class="brand-title">
+        <h2>CASA COCA</h2>
+        <span>Estación de Empleado</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label">OPERACIÓN DE VENTAS</div>
+    <nav class="sidebar-nav">
+      <a routerLink="/empleado/dashboard" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        <span>Panel Operativo</span>
+      </a>
+
+      <a routerLink="/empleado/pos" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Punto de Venta (POS)</span>
+      </a>
+
+      <a routerLink="/empleado/caja" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="M7 15h0M2 9.5h20"></path>
+        </svg>
+        <span>Turno y Arqueo de Caja</span>
+      </a>
+
+      <div class="nav-section-label">ATENCIÓN Y CONSULTAS</div>
+
+      <a routerLink="/empleado/catalogo" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Consultar Catálogo y Stock</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button type="button" class="btn-logout-sidebar" (click)="cerrarSesion()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-titles">
+        <div class="breadcrumb">CONTROL DE CAJA</div>
+        <h1>Gestión de Turnos y Arqueo de Caja</h1>
+        <p>Apertura de turno, arqueo y cierre de caja de efectivo</p>
+      </div>
+
+      <div class="topbar-actions">
+
+        <!-- Indicador de Turno de Caja -->
+        <div class="caja-status-pill" [class.abierta]="cajaActual" [class.cerrada]="!cajaActual">
+          <span class="status-dot"></span>
+          <span *ngIf="cajaActual">Turno Activo #{{ cajaActual.id }}</span>
+          <span *ngIf="!cajaActual">Caja Cerrada</span>
+        </div>
+
+        <a routerLink="/admin/dashboard" class="btn-pos-cta" style="background: #1e293b; border-color: #334155;" *ngIf="usuario?.rol?.nombre === 'ADMIN'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+          </svg>
+          <span>Panel Admin</span>
+        </a>
+
+        <a routerLink="/empleado/pos" class="btn-pos-cta" *ngIf="cajaActual">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span>Ir a Cobrar (POS)</span>
+        </a>
+
+        <div class="user-chip">
+          <div class="user-avatar">{{ obtenerIniciales() }}</div>
+          <div class="user-meta">
+            <span class="user-name">{{ usuario?.nombre_completo || 'Empleado' }}</span>
+            <span class="user-role">{{ usuario?.rol?.nombre || 'EMPLEADO' }}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="caja-content-scroll">
+      <!-- SPINNER DE CARGA INICIAL -->
+      <div *ngIf="cargando" class="loading-state-box">
+        <div class="spinner"></div>
+        <p>Verificando estado de turno de caja...</p>
+      </div>
+
+      <div *ngIf="!cargando" class="caja-grid-container">
+
+        <!-- ================================================================= -->
+        <!-- PESTAÑA 1: TURNO Y ARQUEO DE CAJA                                -->
+        <!-- ================================================================= -->
+        <div class="turno-view-container">
+
+          <!-- CASO 1: CAJA CERRADA -> FORMULARIO DE APERTURA DE CAJA            -->
+          <section *ngIf="!cajaActual" class="card-apertura-wrapper">
+          <!-- BANNER DE ALERTA AMIGABLE -->
+          <div class="banner-aviso-caja">
+            <div class="banner-icon">💡</div>
+            <div class="banner-body">
+              <strong>Turno de cobro no iniciado</strong>
+              <p>Para comenzar a registrar ventas y cobros en el Punto de Venta (POS), debes registrar la apertura de turno indicando el fondo inicial de cambio recibido.</p>
+            </div>
+          </div>
+
+          <!-- FORMULARIO PRINCIPAL DE APERTURA -->
+          <div class="card-box apertura-box">
+            <div class="card-box-header">
+              <div class="header-icon-title">
+                <div class="icon-circle emerald">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="M7 15h0M2 9.5h20"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h2>Apertura de Turno de Caja</h2>
+                  <p class="sub-header">Establece el monto inicial en efectivo para iniciar operaciones de venta</p>
+                </div>
+              </div>
+
+              <div class="reloj-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>{{ fechaHoraActual | date:'dd/MM/yyyy HH:mm:ss' }}</span>
+              </div>
+            </div>
+
+            <div class="card-box-body">
+              <!-- DATOS DEL CAJERO RESPONSABLE -->
+              <div class="cajero-info-strip">
+                <div class="cajero-col">
+                  <span class="label">Cajero Responsable:</span>
+                  <strong class="value">{{ usuario?.nombre_completo }}</strong>
+                </div>
+                <div class="cajero-col">
+                  <span class="label">Rol en Turno:</span>
+                  <strong class="value role-badge">{{ usuario?.rol?.nombre || 'EMPLEADO' }}</strong>
+                </div>
+                <div class="cajero-col">
+                  <span class="label">Moneda Operativa:</span>
+                  <strong class="value">Bolivianos (Bs.)</strong>
+                </div>
+              </div>
+
+              <!-- INPUT PRINCIPAL MONTO INICIAL -->
+              <div class="input-monto-section">
+                <label for="montoInicialInput" class="input-main-label">
+                  Monto Inicial / Fondo de Cambio Entregado (Bs.): *
+                </label>
+                <div class="monto-hero-input-wrap">
+                  <span class="hero-prefix">Bs.</span>
+                  <input
+                    id="montoInicialInput"
+                    type="number"
+                    step="0.50"
+                    min="0"
+                    class="hero-input"
+                    [(ngModel)]="montoInicial"
+                    placeholder="0.00"
+                    autofocus
+                  />
+                  <button
+                    type="button"
+                    class="btn-clear-input"
+                    *ngIf="montoInicial > 0"
+                    (click)="limpiarFondo()"
+                    title="Restablecer a cero"
+                  >
+                    ✕ Limpiar
+                  </button>
+                </div>
+                <span class="input-helper">
+                  Ingresa el total en efectivo entregado para iniciar caja (monedas y billetes pequeños para dar vuelto).
+                </span>
+              </div>
+
+              <!-- CHIPS RÁPIDOS DE FONDO DE CAJA -->
+              <div class="chips-fondo-section">
+                <span class="chips-title">Montos habituales de fondo rápido:</span>
+                <div class="chips-list">
+                  <button
+                    *ngFor="let m of chipsFondoRapido"
+                    type="button"
+                    class="btn-chip-fondo"
+                    [class.selected]="montoInicial === m"
+                    (click)="fijarFondoRapido(m)"
+                  >
+                    Bs. {{ m }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-chip-fondo add"
+                    (click)="sumarFondoRapido(50)"
+                  >
+                    +50 Bs.
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-chip-fondo add"
+                    (click)="sumarFondoRapido(100)"
+                  >
+                    +100 Bs.
+                  </button>
+                </div>
+              </div>
+
+              <!-- DESGLOSE DE MONEDAS Y BILLETES (ACORDEÓN OPCIONAL) -->
+              <div class="calculadora-desglose-panel">
+                <button
+                  type="button"
+                  class="btn-toggle-desglose"
+                  (click)="toggleCalculadoraDesglose()"
+                >
+                  <span class="toggle-text">
+                    <span class="icon">🧮</span>
+                    <span>Conteo detallado por monedas y billetes (Opcional)</span>
+                  </span>
+                  <span class="toggle-chevron">{{ mostrarCalculadoraDesglose ? '▲ Ocultar' : '▼ Mostrar Desglose' }}</span>
+                </button>
+
+                <div *ngIf="mostrarCalculadoraDesglose" class="desglose-grid">
+                  <div *ngFor="let item of cortesEfectivo" class="corte-row-item">
+                    <span class="corte-label">{{ item.label }}</span>
+                    <div class="corte-calc-wrap">
+                      <span class="corte-multi">x</span>
+                      <input
+                        type="number"
+                        min="0"
+                        class="corte-qty-input"
+                        [value]="item.cantidad"
+                        (input)="actualizarDesglose(item, $any($event.target).value)"
+                        placeholder="0"
+                      />
+                      <span class="corte-subtotal">= Bs. {{ (item.corte * item.cantidad) | number:'1.2-2' }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- OBSERVACIONES DE APERTURA -->
+              <div class="form-group-obs">
+                <label for="obsApertura">Observaciones / Notas de Apertura (Opcional):</label>
+                <textarea
+                  id="obsApertura"
+                  rows="2"
+                  class="obs-textarea"
+                  [(ngModel)]="observacionesApertura"
+                  placeholder="Ej. Fondo entregado por supervisión en billetes de 10 y 20 Bs. para cambio matutino..."
+                ></textarea>
+              </div>
+
+              <!-- BOTÓN DE ACCIÓN PRINCIPAL DE APERTURA -->
+              <div class="actions-footer">
+                <button
+                  type="button"
+                  class="btn-abrir-caja"
+                  [disabled]="procesandoApertura || montoInicial < 0"
+                  (click)="abrirCaja()"
+                >
+                  <span *ngIf="!procesandoApertura">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>ABRIR TURNO DE CAJA (Bs. {{ montoInicial | number:'1.2-2' }})</span>
+                  </span>
+                  <span *ngIf="procesandoApertura" class="btn-spinner-wrap">
+                    <div class="mini-spinner"></div>
+                    <span>Iniciando turno de caja...</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- CASO 2: CAJA ABIERTA -> PANEL DE CONTROL DEL TURNO Y ARQUEO        -->
+        <!-- ================================================================= -->
+        <section *ngIf="cajaActual" class="card-abierta-wrapper">
+          <!-- CABECERA DE TURNO ACTIVO -->
+          <div class="card-box turno-activo-box">
+            <div class="card-box-header">
+              <div class="header-icon-title">
+                <div class="pulse-indicator-emerald"></div>
+                <div>
+                  <div class="turno-badge-line">
+                    <h2>Turno de Caja Activo #{{ cajaActual.id }}</h2>
+                    <span class="badge-status-abierta">EN CURSO</span>
+                  </div>
+                  <p class="sub-header">
+                    Apertura registrada el {{ cajaActual.fecha_apertura | date:'dd/MM/yyyy HH:mm' }} por {{ usuario?.nombre_completo }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="turno-header-actions">
+                <button type="button" class="btn-pos-primary" (click)="irAPuntoDeVenta()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                  <span>Ir a Vender al POS</span>
+                </button>
+
+                <button type="button" class="btn-cerrar-turno-cta" (click)="abrirModalCierre()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                  <span>Cerrar y Arquear Turno</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="card-box-body">
+              <!-- KPI GRID DEL TURNO ACTUAL -->
+              <div class="kpi-turno-grid">
+                <div class="kpi-card-turno">
+                  <div class="kpi-icon-wrap emerald">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                      <path d="M7 15h0M2 9.5h20"></path>
+                    </svg>
+                  </div>
+                  <div class="kpi-info-col">
+                    <span class="kpi-tag">Fondo Inicial Asignado</span>
+                    <h3 class="kpi-num">Bs. {{ (cajaActual.monto_inicial || 0) | number:'1.2-2' }}</h3>
+                    <span class="kpi-foot">Fondo inicial de cambio</span>
+                  </div>
+                </div>
+
+                <div class="kpi-card-turno">
+                  <div class="kpi-icon-wrap amber">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                      <line x1="12" y1="6" x2="12" y2="8"></line>
+                      <line x1="12" y1="16" x2="12" y2="18"></line>
+                    </svg>
+                  </div>
+                  <div class="kpi-info-col">
+                    <span class="kpi-tag">Ventas en Efectivo</span>
+                    <h3 class="kpi-num">Bs. {{ (cajaActual.total_ventas_efectivo || 0) | number:'1.2-2' }}</h3>
+                    <span class="kpi-foot">Recaudado en mostrador</span>
+                  </div>
+                </div>
+
+                <div class="kpi-card-turno highlight-total">
+                  <div class="kpi-icon-wrap blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    </svg>
+                  </div>
+                  <div class="kpi-info-col">
+                    <span class="kpi-tag">Efectivo en Caja Esperado</span>
+                    <h3 class="kpi-num">Bs. {{ totalEsperadoActual | number:'1.2-2' }}</h3>
+                    <span class="kpi-foot">Fondo Inicial + Ventas en Efectivo</span>
+                  </div>
+                </div>
+
+                <div class="kpi-card-turno">
+                  <div class="kpi-icon-wrap purple">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                      <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                    </svg>
+                  </div>
+                  <div class="kpi-info-col">
+                    <span class="kpi-tag">Cobros con QR</span>
+                    <h3 class="kpi-num">Bs. {{ (cajaActual.total_ventas_otros || 0) | number:'1.2-2' }}</h3>
+                    <span class="kpi-foot">Pagos electrónicos por QR</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- NOTAS Y DETALLE DEL TURNO -->
+              <div *ngIf="cajaActual.observaciones" class="caja-notas-box">
+                <strong>Nota de apertura:</strong>
+                <p>{{ cajaActual.observaciones }}</p>
+              </div>
+
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECCIÓN 3: HISTORIAL DE TURNOS DE CAJA                            -->
+        <!-- ================================================================= -->
+        <section class="card-box historial-turnos-box">
+          <div class="card-box-header">
+            <div class="header-icon-title">
+              <div class="icon-circle slate">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <path d="M12 8v4l3 3"></path>
+                  <circle cx="12" cy="12" r="9"></circle>
+                </svg>
+              </div>
+              <div>
+                <h3>Historial de Turnos de Caja</h3>
+                <p class="sub-header">Registro de aperturas, ventas recaudadas y arqueos de cierre de tu usuario</p>
+              </div>
+            </div>
+
+            <button type="button" class="btn-refresh-historial" (click)="cargarHistorial()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
+              <span>Actualizar</span>
+            </button>
+          </div>
+
+          <div class="card-box-body">
+            <div *ngIf="cargandoHistorial" class="loading-state-mini">
+              <div class="mini-spinner"></div>
+              <span>Cargando turnos de caja...</span>
+            </div>
+
+            <div *ngIf="!cargandoHistorial && historialCajas.length === 0" class="empty-turnos-state">
+              <div class="empty-icon">📂</div>
+              <h4>No hay turnos registrados</h4>
+              <p>Tus aperturas y cierres de caja quedarán registrados aquí para auditoría.</p>
+            </div>
+
+            <div *ngIf="!cargandoHistorial && historialCajas.length > 0" class="table-responsive">
+              <table class="turnos-table">
+                <thead>
+                  <tr>
+                    <th>N° Turno</th>
+                    <th>Apertura</th>
+                    <th>Cierre</th>
+                    <th class="text-right">Fondo Inicial</th>
+                    <th class="text-right">Ventas Efectivo</th>
+                    <th class="text-right">Ventas QR</th>
+                    <th class="text-right">Esperado</th>
+                    <th class="text-right">Real Contado</th>
+                    <th class="text-right">Diferencia</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Comprobante</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let h of historialCajas" [class.row-activa]="h.estado === 'ABIERTA'">
+                    <td><strong>#{{ h.id }}</strong></td>
+                    <td>{{ h.fecha_apertura | date:'dd/MM/yyyy HH:mm' }}</td>
+                    <td>
+                      <span *ngIf="h.fecha_cierre">{{ h.fecha_cierre | date:'dd/MM/yyyy HH:mm' }}</span>
+                      <span *ngIf="!h.fecha_cierre" class="text-muted">En curso...</span>
+                    </td>
+                    <td class="text-right">Bs. {{ (h.monto_inicial || 0) | number:'1.2-2' }}</td>
+                    <td class="text-right">Bs. {{ (h.total_ventas_efectivo || 0) | number:'1.2-2' }}</td>
+                    <td class="text-right">Bs. {{ (h.total_ventas_otros || 0) | number:'1.2-2' }}</td>
+                    <td class="text-right">Bs. {{ (h.monto_final_esperado || 0) | number:'1.2-2' }}</td>
+                    <td class="text-right">
+                      <span *ngIf="h.monto_final_real !== null">Bs. {{ h.monto_final_real | number:'1.2-2' }}</span>
+                      <span *ngIf="h.monto_final_real === null" class="text-muted">—</span>
+                    </td>
+                    <td class="text-right">
+                      <span *ngIf="h.diferencia !== null" [ngClass]="{
+                        'diff-positive': h.diferencia > 0,
+                        'diff-exact': h.diferencia === 0,
+                        'diff-negative': h.diferencia < 0
+                      }">
+                        {{ h.diferencia >= 0 ? '+' : '' }}Bs. {{ h.diferencia | number:'1.2-2' }}
+                      </span>
+                      <span *ngIf="h.diferencia === null" class="text-muted">—</span>
+                    </td>
+                    <td class="text-center">
+                      <span class="badge-status-pill" [class.abierta]="h.estado === 'ABIERTA'" [class.cerrada]="h.estado === 'CERRADA'">
+                        {{ h.estado }}
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <button type="button" class="btn-ver-comprobante" (click)="verDetalleTurno(h)" title="Ver comprobante térmico">
+                        🧾 Ver
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- MODAL: CIERRE Y ARQUEO DE CAJA                                           -->
+<!-- ========================================================================= -->
+<div *ngIf="modalConfirmarCierre" class="modal-backdrop" (click)="cerrarModalCierre()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <h3>Cierre y Arqueo de Turno de Caja #{{ cajaActual?.id }}</h3>
+        <p>Ingresa el efectivo contado físicamente en caja para cuadrar el turno</p>
+      </div>
+      <button type="button" class="btn-close-modal" (click)="cerrarModalCierre()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <!-- RESUMEN DE SALDOS ESPERADOS -->
+      <div class="arqueo-summary-box">
+        <div class="arqueo-row">
+          <span>Fondo Inicial de Apertura:</span>
+          <strong>Bs. {{ (cajaActual?.monto_inicial || 0) | number:'1.2-2' }}</strong>
+        </div>
+        <div class="arqueo-row">
+          <span>(+) Ventas Recaudadas en Efectivo:</span>
+          <strong>Bs. {{ (cajaActual?.total_ventas_efectivo || 0) | number:'1.2-2' }}</strong>
+        </div>
+        <div class="arqueo-row" *ngIf="(cajaActual?.total_ingresos || 0) > 0">
+          <span>(+) Ingresos Extra de Efectivo:</span>
+          <strong class="text-emerald">+ Bs. {{ (cajaActual?.total_ingresos || 0) | number:'1.2-2' }}</strong>
+        </div>
+        <div class="arqueo-row" *ngIf="(cajaActual?.total_egresos || 0) > 0">
+          <span>(-) Egresos / Gastos de Caja:</span>
+          <strong class="text-rose">- Bs. {{ (cajaActual?.total_egresos || 0) | number:'1.2-2' }}</strong>
+        </div>
+        <div class="arqueo-row total-row">
+          <span>TOTAL EN EFECTIVO ESPERADO:</span>
+          <span class="total-esperado-num">Bs. {{ totalEsperadoActual | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <!-- INPUT MONTO CONTADO FÍSICO -->
+      <div class="form-group-cierre">
+        <label for="montoRealInput">Efectivo Contado Físicamente en Caja (Bs.): *</label>
+        <div class="input-bs-wrapper-lg">
+          <span class="prefix">Bs.</span>
+          <input
+            id="montoRealInput"
+            type="number"
+            step="0.50"
+            min="0"
+            class="input-monto-real"
+            [(ngModel)]="montoFinalReal"
+            placeholder="0.00"
+          />
+        </div>
+      </div>
+
+      <!-- ESTADO DE LA DIFERENCIA / ARQUEO -->
+      <div class="arqueo-diff-badge" [ngClass]="{
+        'exact': diferenciaArqueo === 0,
+        'sobrante': diferenciaArqueo > 0,
+        'faltante': diferenciaArqueo < 0
+      }">
+        <div class="diff-icon">
+          <span *ngIf="diferenciaArqueo === 0">✅</span>
+          <span *ngIf="diferenciaArqueo > 0">📈</span>
+          <span *ngIf="diferenciaArqueo < 0">⚠️</span>
+        </div>
+        <div class="diff-info">
+          <strong *ngIf="diferenciaArqueo === 0">Arqueo Cuadrado Exacto</strong>
+          <strong *ngIf="diferenciaArqueo > 0">Sobrante en Caja: Bs. {{ diferenciaArqueo | number:'1.2-2' }}</strong>
+          <strong *ngIf="diferenciaArqueo < 0">Faltante en Caja: Bs. {{ (diferenciaArqueo * -1) | number:'1.2-2' }}</strong>
+          <p *ngIf="diferenciaArqueo === 0">El dinero contado coincide exactamente con el total esperado.</p>
+          <p *ngIf="diferenciaArqueo > 0">Hay más dinero físico en caja que el registrado en ventas.</p>
+          <p *ngIf="diferenciaArqueo < 0">Falta dinero físico respecto al total esperado de ventas.</p>
+        </div>
+      </div>
+
+      <!-- NOTAS DE CIERRE -->
+      <div class="form-group-cierre">
+        <label for="obsCierre">Observaciones del Arqueo (Opcional):</label>
+        <textarea
+          id="obsCierre"
+          rows="2"
+          class="obs-textarea"
+          [(ngModel)]="observacionesCierre"
+          placeholder="Ej. Cuadre verificado con supervisión al terminar turno de tarde..."
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="cerrarModalCierre()">Cancelar</button>
+      <button
+        type="button"
+        class="btn-confirm-cierre"
+        [disabled]="procesandoCierre || montoFinalReal < 0"
+        (click)="confirmarCierreCaja()"
+      >
+        <span *ngIf="!procesandoCierre">FINALIZAR Y CERRAR TURNO</span>
+        <span *ngIf="procesandoCierre" class="btn-spinner-wrap">
+          <div class="mini-spinner"></div>
+          <span>Cerrando turno...</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- MODAL: COMPROBANTE TÉRMICO (APERTURA O ARQUEO DE CIERRE)                  -->
+<!-- ========================================================================= -->
+<div *ngIf="modalComprobante" class="modal-backdrop" (click)="cerrarModalComprobante()">
+  <div class="modal-card modal-ticket-card" (click)="$event.stopPropagation()">
+    <!-- BARRA SUPERIOR DE ACCIONES -->
+    <div class="ticket-actions-bar">
+      <div class="ticket-status-heading">
+        <div class="success-icon">✓</div>
+        <h4>Comprobante de {{ tipoComprobante === 'APERTURA' ? 'Apertura de Turno' : 'Cierre y Arqueo' }}</h4>
+      </div>
+      <div class="actions-group">
+        <button type="button" class="btn-print-ticket" (click)="imprimirComprobante()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>Imprimir</span>
+        </button>
+        <button type="button" class="btn-done-ticket" (click)="cerrarModalComprobante()">Cerrar</button>
+      </div>
+    </div>
+
+    <!-- PAPEL TÉRMICO IMPRIMIBLE -->
+    <div id="thermal-receipt" class="thermal-receipt-paper">
+      <div class="receipt-header">
+        <h2 class="receipt-brand">CASA COCA</h2>
+        <p class="receipt-sub">CONTROL DE CAJA Y ARQUEO</p>
+        <p class="receipt-nit">NIT: 1028475019 · La Paz, Bolivia</p>
+        <div class="dotted-divider"></div>
+
+        <div class="receipt-meta">
+          <p><strong>DOCUMENTO:</strong> {{ tipoComprobante === 'APERTURA' ? 'APERTURA DE TURNO' : 'ARQUEO Y CIERRE DE TURNO' }}</p>
+          <p><strong>N° TURNO:</strong> #{{ datosComprobante?.turnoId }}</p>
+          <p><strong>CAJERO:</strong> {{ datosComprobante?.cajero }}</p>
+          <p><strong>FECHA:</strong> {{ (datosComprobante?.fecha || datosComprobante?.fechaApertura) | date:'dd/MM/yyyy HH:mm' }}</p>
+          <p *ngIf="datosComprobante?.fechaCierre"><strong>CIERRE:</strong> {{ datosComprobante?.fechaCierre | date:'dd/MM/yyyy HH:mm' }}</p>
+        </div>
+        <div class="dotted-divider"></div>
+      </div>
+
+      <!-- DETALLE FINANCIERO -->
+      <div class="receipt-financial-details">
+        <div class="receipt-line">
+          <span>FONDO INICIAL:</span>
+          <strong>Bs. {{ (datosComprobante?.montoInicial || 0) | number:'1.2-2' }}</strong>
+        </div>
+
+        <ng-container *ngIf="tipoComprobante === 'CIERRE'">
+          <div class="receipt-line">
+            <span>VENTAS EFECTIVO:</span>
+            <strong>Bs. {{ (datosComprobante?.ventasEfectivo || 0) | number:'1.2-2' }}</strong>
+          </div>
+          <div class="receipt-line" *ngIf="(datosComprobante?.totalIngresos || 0) > 0">
+            <span>(+) INGRESOS EXTRA:</span>
+            <strong>Bs. {{ (datosComprobante?.totalIngresos || 0) | number:'1.2-2' }}</strong>
+          </div>
+          <div class="receipt-line" *ngIf="(datosComprobante?.totalEgresos || 0) > 0">
+            <span>(-) EGRESOS GASTOS:</span>
+            <strong>Bs. {{ (datosComprobante?.totalEgresos || 0) | number:'1.2-2' }}</strong>
+          </div>
+          <div class="receipt-line">
+            <span>VENTAS QR:</span>
+            <strong>Bs. {{ (datosComprobante?.ventasOtros || 0) | number:'1.2-2' }}</strong>
+          </div>
+          <div class="dotted-divider"></div>
+          <div class="receipt-line highlight">
+            <span>TOTAL ESPERADO:</span>
+            <strong>Bs. {{ (datosComprobante?.montoEsperado || 0) | number:'1.2-2' }}</strong>
+          </div>
+          <div class="receipt-line highlight">
+            <span>TOTAL REAL CONTADO:</span>
+            <strong>Bs. {{ (datosComprobante?.montoReal || 0) | number:'1.2-2' }}</strong>
+          </div>
+          <div class="receipt-line" [ngClass]="{
+            'diff-pos': (datosComprobante?.diferencia || 0) > 0,
+            'diff-zero': (datosComprobante?.diferencia || 0) === 0,
+            'diff-neg': (datosComprobante?.diferencia || 0) < 0
+          }">
+            <span>DIFERENCIA:</span>
+            <strong>{{ (datosComprobante?.diferencia || 0) >= 0 ? '+' : '' }}Bs. {{ (datosComprobante?.diferencia || 0) | number:'1.2-2' }}</strong>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="dotted-divider"></div>
+
+      <div class="receipt-footer">
+        <p class="receipt-obs" *ngIf="datosComprobante?.observaciones">
+          <strong>Notas:</strong> {{ datosComprobante?.observaciones }}
+        </p>
+        <div class="signatures-wrap">
+          <div class="sign-box">
+            <div class="sign-line"></div>
+            <span>Firma Cajero</span>
+          </div>
+          <div class="sign-box">
+            <div class="sign-line"></div>
+            <span>Firma Supervisor</span>
+          </div>
+        </div>
+        <p class="receipt-thanks">CASA COCA · Sistema de Gestión y POS</p>
+      </div>
+    </div>
+
+    <!-- BOTÓN FINAL DIRECTO A POS TRAS ABRIR -->
+    <div class="modal-voucher-actions" *ngIf="tipoComprobante === 'APERTURA'">
+      <button type="button" class="btn-go-to-pos" (click)="cerrarModalComprobante(); irAPuntoDeVenta()">
+        <span>🚀 Ir al Punto de Venta (POS) a Vender</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ========================================================================= -->
+<!-- TOAST DE NOTIFICACIÓN FLOTANTE                                            -->
+<!-- ========================================================================= -->
+<div *ngIf="toast.visible" class="toast-notification" [ngClass]="toast.tipo">
+  <div class="toast-content">
+    <span class="toast-icon">
+      <span *ngIf="toast.tipo === 'success'">✓</span>
+      <span *ngIf="toast.tipo === 'error'">✕</span>
+      <span *ngIf="toast.tipo === 'warning'">⚠</span>
+      <span *ngIf="toast.tipo === 'info'">ℹ</span>
+    </span>
+    <span class="toast-text">{{ toast.mensaje }}</span>
+  </div>
+  <button type="button" class="btn-toast-close" (click)="cerrarToast()">✕</button>
+</div>

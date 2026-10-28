@@ -1,0 +1,177 @@
+<div class="login-wrapper">
+  <!-- PANEL IZQUIERDO: IDENTIDAD COMERCIAL Y ESTADO EN TIEMPO REAL -->
+  <aside class="brand-panel">
+    <div class="brand-glow"></div>
+
+    <div class="brand-top">
+      <div class="brand-logo">
+        <div class="logo-icon logo-icon-brand">
+          <img src="/logo.png" alt="CASA COCA" class="brand-logo-img">
+        </div>
+        <div class="logo-text">
+          <h1>CASA COCA</h1>
+          <span>Coca Machucada · Sistema Comercial</span>
+        </div>
+      </div>
+
+      <div class="status-pill" [ngClass]="estadoServidor">
+        <span class="status-dot"></span>
+        <span>{{ textoEstadoServidor }}</span>
+      </div>
+    </div>
+
+    <div class="brand-hero">
+      <span class="hero-badge">PLATAFORMA EN LA NUBE • SUPABASE + PYTHON</span>
+      <h2>Control total de tus ventas, caja e inventario en tiempo real.</h2>
+      <p>
+        Accede con tu cuenta asignada. El sistema detectará automáticamente tu rol para abrir el
+        <strong>Punto de Venta (POS)</strong> o el <strong>Panel Ejecutivo de Administración</strong>.
+      </p>
+
+      <div class="role-cards">
+        <div class="role-card">
+          <div class="role-card-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="M7 15h0M2 9.5h20"></path>
+            </svg>
+            <span>Rol Empleado</span>
+          </div>
+          <p>Apertura de caja, facturación rápida por código de barras, cobros y atención a clientes.</p>
+        </div>
+
+        <div class="role-card">
+          <div class="role-card-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>Rol Administrador</span>
+          </div>
+          <p>Reportes de ganancias reales, alertas de stock crítico, compras a proveedores y auditoría.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-footer">
+      <span>Terminal de Acceso Seguro (JWT + Bcrypt)</span>
+      <span class="live-clock">{{ relojActual }}</span>
+    </div>
+  </aside>
+
+  <!-- PANEL DERECHO: FORMULARIO DE AUTENTICACIÓN -->
+  <main class="auth-panel">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo-badge">
+          <img src="/logo.png" alt="CASA COCA" class="auth-logo-img">
+        </div>
+        <h3>Bienvenido a CASA COCA</h3>
+        <p>Ingresa tus credenciales para acceder a tu estación de trabajo</p>
+      </div>
+
+      <!-- Botones de selección de rol -->
+      <div class="quick-role-bar">
+        <button
+          type="button"
+          class="quick-role-btn"
+          [class.active]="rolSeleccionadoRapido === 'empleado'"
+          (click)="seleccionarRol('empleado')"
+        >
+          👨‍💼 Acceso Empleado
+        </button>
+        <button
+          type="button"
+          class="quick-role-btn"
+          [class.active]="rolSeleccionadoRapido === 'admin'"
+          (click)="seleccionarRol('admin')"
+        >
+          🛡️ Acceso Administrador
+        </button>
+      </div>
+
+      <!-- Nota de seguridad si se selecciona Administrador -->
+      <div *ngIf="rolSeleccionadoRapido === 'admin'" class="admin-security-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <span>Acceso Administrador protegido: ingresa tu contraseña de forma manual.</span>
+      </div>
+
+      <!-- Caja de Alertas -->
+      <div *ngIf="mensajeAlerta" class="alert-box show" [ngClass]="tipoAlerta" role="alert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>{{ mensajeAlerta }}</span>
+      </div>
+
+      <form (ngSubmit)="iniciarSesion()" #formLogin="ngForm" novalidate>
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              [(ngModel)]="credenciales.username"
+              (ngModelChange)="onUsernameChange()"
+              placeholder="Ej. admin o empleado"
+              autocomplete="username"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input
+              [type]="mostrarPassword ? 'text' : 'password'"
+              id="password"
+              name="password"
+              [(ngModel)]="credenciales.password"
+              placeholder="Ingresa tu contraseña"
+              autocomplete="current-password"
+              required
+            />
+            <button type="button" class="toggle-password" (click)="alternarPassword()" title="Mostrar / Ocultar contraseña">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" name="recordarUsuario" [(ngModel)]="recordarUsuario" />
+            <span>Recordar mi usuario en esta caja</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-submit" [disabled]="cargando" [class.loading]="cargando">
+          <span class="spinner"></span>
+          <span>{{ cargando ? 'Verificando credenciales...' : 'Iniciar Sesión en el Sistema' }}</span>
+        </button>
+      </form>
+
+      <div class="auth-footer-note">
+        Protegido con control de acceso basado en roles (RBAC)
+      </div>
+    </div>
+  </main>
+</div>

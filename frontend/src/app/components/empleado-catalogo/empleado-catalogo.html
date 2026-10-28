@@ -1,0 +1,554 @@
+<div class="empleado-layout">
+  <!-- BARRA LATERAL PROFESIONAL (IDÉNTICA A EMPLEADO DASHBOARD) -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      </div>
+      <div class="brand-title">
+        <h2>CASA COCA</h2>
+        <span>Estación de Empleado</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label">OPERACIÓN DE VENTAS</div>
+    <nav class="sidebar-nav">
+      <a routerLink="/empleado/dashboard" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        <span>Panel Operativo</span>
+      </a>
+
+      <a routerLink="/empleado/pos" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Punto de Venta (POS)</span>
+      </a>
+
+      <a routerLink="/empleado/caja" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="M7 15h0M2 9.5h20"></path>
+        </svg>
+        <span>Caja y Movimientos</span>
+      </a>
+
+      <div class="nav-section-label">ATENCIÓN Y CONSULTAS</div>
+
+      <a routerLink="/empleado/catalogo" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Consultar Catálogo y Stock</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button type="button" class="btn-logout-sidebar" (click)="cerrarSesion()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-titles">
+        <div class="breadcrumb">CONSULTA DE MOSTRADOR</div>
+        <h1>Catálogo de Productos, Precios y Stock</h1>
+        <p>Consulta instantánea de precios de venta al público, códigos SKU y existencias en tienda</p>
+      </div>
+
+      <div class="topbar-actions">
+        <a routerLink="/empleado/pos" class="btn-pos-cta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span>Ir a Cobrar (POS)</span>
+        </a>
+
+        <div class="user-chip">
+          <div class="user-avatar">{{ obtenerIniciales() }}</div>
+          <div class="user-meta">
+            <span class="user-name">{{ usuario?.nombre_completo || 'Empleado' }}</span>
+            <span class="user-role">{{ usuario?.rol?.nombre || 'EMPLEADO' }}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-body">
+      <!-- KPI CARDS DE CONSULTA -->
+      <section class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Catálogo Habilitado</span>
+            <h3 class="kpi-value">{{ totalCatalogoActivo }}</h3>
+            <span class="kpi-sub">Productos activos para venta</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon emerald">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Con Stock Disponible</span>
+            <h3 class="kpi-value">{{ totalConStock }}</h3>
+            <span class="kpi-sub">Listos para entrega inmediata</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+              <line x1="7" y1="7" x2="7.01" y2="7"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Categorías Activas</span>
+            <h3 class="kpi-value">{{ categorias.length }}</h3>
+            <span class="kpi-sub">Rubros de bebidas y snacks</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Últimas Unidades</span>
+            <h3 class="kpi-value">{{ totalUltimasUnidades }}</h3>
+            <span class="kpi-sub">Productos con stock bajo</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- VERIFICADOR DE PRECIOS POR LECTOR DE CÓDIGO DE BARRAS / SKU -->
+      <section class="scanner-card">
+        <div class="scanner-header">
+          <div class="scanner-title">
+            <span class="scanner-badge">Verificador Rápido de Precios</span>
+            <h3>Consulta por Código de Barras / SKU</h3>
+          </div>
+          <form (ngSubmit)="verificarPorCodigo()" class="scanner-form">
+            <input
+              type="text"
+              [(ngModel)]="codigoVerificador"
+              name="codigoVerificador"
+              placeholder="Escanea o escribe el código SKU (ej. 7774001) y presiona Enter..."
+            />
+            <button type="submit" class="btn-scan">Consultar Precio</button>
+            <button
+              type="button"
+              *ngIf="productoVerificado || errorVerificador"
+              class="btn-clear-scan"
+              (click)="limpiarVerificador()"
+            >
+              Limpiar
+            </button>
+          </form>
+        </div>
+
+        <div *ngIf="errorVerificador" class="scanner-error">
+          {{ errorVerificador }}
+        </div>
+
+        <div *ngIf="productoVerificado" class="scanner-result">
+          <div class="result-main">
+            <span class="sku-pill">SKU: {{ productoVerificado.codigo_barras }}</span>
+            <h4>{{ productoVerificado.nombre }}</h4>
+            <p>
+              {{ productoVerificado.descripcion || 'Presentación estándar' }} · Categoría:
+              <strong>{{ productoVerificado.categoria?.nombre || 'General' }}</strong>
+            </p>
+          </div>
+          <div class="result-price-box">
+            <span class="price-label">PRECIO DE VENTA AL PÚBLICO</span>
+            <div class="price-big">
+              Bs. {{ productoVerificado.precio_venta | number: '1.2-2' }}
+            </div>
+            <span
+              class="stock-tag"
+              [ngClass]="productoVerificado.stock_actual > 0 ? 'tag-ok' : 'tag-out'"
+            >
+              Stock disponible: {{ productoVerificado.stock_actual }} unidades
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PÍLDORAS DE CATEGORÍAS -->
+      <section class="categories-pills-bar">
+        <button
+          type="button"
+          class="cat-filter-pill"
+          [class.active]="categoriaSeleccionadaId === 0"
+          (click)="seleccionarCategoria(0)"
+        >
+          Todas las Categorías ({{ productos.length }})
+        </button>
+        <button
+          type="button"
+          class="cat-filter-pill"
+          *ngFor="let cat of categorias"
+          [class.active]="categoriaSeleccionadaId === cat.id"
+          (click)="seleccionarCategoria(cat.id)"
+        >
+          {{ cat.nombre }}
+        </button>
+      </section>
+
+      <!-- BARRA DE BÚSQUEDA Y SELECTOR DE VISTA -->
+      <section class="toolbar-card">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            [(ngModel)]="filtroTexto"
+            placeholder="Buscar producto por nombre, marca, presentación o código de barras..."
+          />
+          <button *ngIf="filtroTexto" class="btn-clear-input" (click)="filtroTexto = ''">✕</button>
+        </div>
+
+        <div class="toolbar-controls">
+          <select [(ngModel)]="filtroDisponibilidad">
+            <option value="TODOS">Toda disponibilidad</option>
+            <option value="DISPONIBLES">Con stock disponible</option>
+            <option value="ULTIMAS_UNIDADES">Últimas unidades</option>
+            <option value="AGOTADOS">Sin stock (Agotados)</option>
+          </select>
+
+          <div class="view-toggle">
+            <button
+              type="button"
+              [class.active]="modoVista === 'TARJETAS'"
+              (click)="modoVista = 'TARJETAS'"
+            >
+              Tarjetas
+            </button>
+            <button
+              type="button"
+              [class.active]="modoVista === 'TABLA'"
+              (click)="modoVista = 'TABLA'"
+            >
+              Tabla Precios
+            </button>
+            <button
+              type="button"
+              [class.active]="modoVista === 'STOCK'"
+              (click)="modoVista = 'STOCK'"
+            >
+              Semáforo Stock
+            </button>
+          </div>
+
+          <button type="button" class="btn-sync" (click)="cargarCatalogo()">
+            Actualizar
+          </button>
+        </div>
+      </section>
+
+      <!-- VISTA 1: TARJETAS DE CATÁLOGO Y PRECIOS -->
+      <section *ngIf="modoVista === 'TARJETAS'" class="catalog-grid">
+        <div *ngIf="cargando" class="empty-catalog-box">
+          Cargando catálogo de productos y precios...
+        </div>
+
+        <div
+          *ngIf="!cargando && productosFiltrados.length === 0"
+          class="empty-catalog-box"
+        >
+          No se encontraron productos que coincidan con tu búsqueda.
+          <button class="btn-reset-link" (click)="limpiarFiltros()">Ver todo el catálogo</button>
+        </div>
+
+        <article
+          class="product-card"
+          *ngFor="let prod of productosFiltrados"
+          (click)="abrirDetalleProducto(prod)"
+        >
+          <div class="card-top">
+            <span
+              class="card-cat-badge"
+              [ngClass]="obtenerColorRubro(prod.categoria?.nombre)"
+            >
+              {{ prod.categoria?.nombre || 'General' }}
+            </span>
+            <span class="card-sku">#{{ prod.codigo_barras }}</span>
+          </div>
+
+          <div class="card-thumb-area">
+            <img *ngIf="prod.imagen_url" [src]="obtenerUrlImagen(prod.imagen_url)" [alt]="prod.nombre" class="card-thumb-img" loading="lazy" (error)="prod.imagen_url = null" />
+            <div *ngIf="!prod.imagen_url" class="card-thumb-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="30" height="30">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <h3 class="card-title">{{ prod.nombre }}</h3>
+            <p class="card-desc">{{ prod.descripcion || 'Presentación estándar de tienda' }}</p>
+          </div>
+
+          <div class="card-footer">
+            <div class="card-price-block">
+              <span class="price-caption">Precio Venta</span>
+              <span class="price-amount">Bs. {{ prod.precio_venta | number: '1.2-2' }}</span>
+            </div>
+
+            <div
+              class="card-stock-badge"
+              [ngClass]="
+                prod.stock_actual <= 0
+                  ? 'stock-zero'
+                  : prod.stock_actual <= prod.stock_minimo
+                    ? 'stock-warn'
+                    : 'stock-good'
+              "
+            >
+              {{
+                prod.stock_actual <= 0
+                  ? 'Agotado'
+                  : prod.stock_actual + ' en stock'
+              }}
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- VISTA 2: TABLA DE CONSULTA DE PRECIOS -->
+      <section *ngIf="modoVista === 'TABLA'" class="panel-card">
+        <div class="table-responsive">
+          <table class="modern-table">
+            <thead>
+              <tr>
+                <th style="width: 55px; text-align: center;">Foto</th>
+                <th>Código / SKU</th>
+                <th>Producto y Presentación</th>
+                <th>Categoría</th>
+                <th>Precio de Venta</th>
+                <th>Disponibilidad en Tienda</th>
+                <th class="text-right">Ficha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let prod of productosFiltrados">
+                <td style="text-align: center;">
+                  <div class="table-mini-thumb" *ngIf="prod.imagen_url">
+                    <img [src]="obtenerUrlImagen(prod.imagen_url)" [alt]="prod.nombre" loading="lazy" (error)="prod.imagen_url = null" />
+                  </div>
+                  <div class="table-mini-thumb-empty" *ngIf="!prod.imagen_url">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                  </div>
+                </td>
+                <td class="mono-code">{{ prod.codigo_barras }}</td>
+                <td>
+                  <div class="td-title">{{ prod.nombre }}</div>
+                  <div class="td-sub">{{ prod.descripcion || 'Presentación estándar' }}</div>
+                </td>
+                <td>
+                  <span
+                    class="card-cat-badge"
+                    [ngClass]="obtenerColorRubro(prod.categoria?.nombre)"
+                  >
+                    {{ prod.categoria?.nombre || 'General' }}
+                  </span>
+                </td>
+                <td class="td-price">Bs. {{ prod.precio_venta | number: '1.2-2' }}</td>
+                <td>
+                  <span
+                    class="card-stock-badge"
+                    [ngClass]="
+                      prod.stock_actual <= 0
+                        ? 'stock-zero'
+                        : prod.stock_actual <= prod.stock_minimo
+                          ? 'stock-warn'
+                          : 'stock-good'
+                    "
+                  >
+                    {{ prod.stock_actual }} unidades disponibles
+                  </span>
+                </td>
+                <td class="text-right">
+                  <button class="btn-detail" (click)="abrirDetalleProducto(prod)">
+                    Ver Detalle
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- VISTA 3: SEMÁFORO DE STOCK DISPONIBLE -->
+      <section *ngIf="modoVista === 'STOCK'" class="panel-card">
+        <div class="table-responsive">
+          <table class="modern-table">
+            <thead>
+              <tr>
+                <th>Código / SKU</th>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Stock Disponible</th>
+                <th>Mínimo Requerido</th>
+                <th style="width: 210px">Nivel de Cobertura</th>
+                <th>Estado Semáforo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let prod of productosFiltrados">
+                <td class="mono-code">{{ prod.codigo_barras }}</td>
+                <td>
+                  <div class="td-title">{{ prod.nombre }}</div>
+                  <div class="td-sub">Precio: Bs. {{ prod.precio_venta | number: '1.2-2' }}</div>
+                </td>
+                <td>
+                  <span
+                    class="card-cat-badge"
+                    [ngClass]="obtenerColorRubro(prod.categoria?.nombre)"
+                  >
+                    {{ prod.categoria?.nombre || 'General' }}
+                  </span>
+                </td>
+                <td>
+                  <strong class="td-price">{{ prod.stock_actual }} uds.</strong>
+                </td>
+                <td>{{ prod.stock_minimo }} uds.</td>
+                <td>
+                  <div class="stock-bar-track">
+                    <div
+                      class="stock-bar-fill"
+                      [style.width.%]="calcularPorcentajeStock(prod.stock_actual, prod.stock_minimo)"
+                      [ngClass]="
+                        prod.stock_actual <= 0
+                          ? 'bar-red'
+                          : prod.stock_actual <= prod.stock_minimo
+                            ? 'bar-amber'
+                            : 'bar-green'
+                      "
+                    ></div>
+                  </div>
+                </td>
+                <td>
+                  <span
+                    class="card-stock-badge"
+                    [ngClass]="
+                      prod.stock_actual <= 0
+                        ? 'stock-zero'
+                        : prod.stock_actual <= prod.stock_minimo
+                          ? 'stock-warn'
+                          : 'stock-good'
+                    "
+                  >
+                    {{
+                      prod.stock_actual <= 0
+                        ? 'Agotado'
+                        : prod.stock_actual <= prod.stock_minimo
+                          ? 'Últimas Unidades'
+                          : 'Stock Óptimo'
+                    }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- MODAL DE FICHA DE PRODUCTO Y PRECIO -->
+<div class="modal-backdrop" *ngIf="productoDetalle" (click)="cerrarDetalleProducto()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">{{ productoDetalle.categoria?.nombre || 'Catálogo Oficial' }}</span>
+        <h2>{{ productoDetalle.nombre }}</h2>
+      </div>
+      <button class="btn-close-modal" (click)="cerrarDetalleProducto()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-product-photo" *ngIf="productoDetalle.imagen_url">
+        <img [src]="obtenerUrlImagen(productoDetalle.imagen_url)" [alt]="productoDetalle.nombre" />
+      </div>
+
+      <div class="detail-price-banner">
+        <span>PRECIO OFICIAL DE VENTA</span>
+        <strong>Bs. {{ productoDetalle.precio_venta | number: '1.2-2' }}</strong>
+      </div>
+
+      <div class="detail-grid">
+        <div class="detail-item">
+          <span class="label">Código de Barras / SKU</span>
+          <span class="value mono">{{ productoDetalle.codigo_barras }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Categoría</span>
+          <span class="value">{{ productoDetalle.categoria?.nombre || 'General' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Stock Disponible</span>
+          <span class="value">{{ productoDetalle.stock_actual }} unidades</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Estado en Mostrador</span>
+          <span class="value">
+            {{ productoDetalle.stock_actual > 0 ? 'Disponible para venta' : 'Sin existencias' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="detail-desc">
+        <span class="label">Descripción / Presentación</span>
+        <p>{{ productoDetalle.descripcion || 'Sin observaciones adicionales registradas.' }}</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-close-action" (click)="cerrarDetalleProducto()">
+          Cerrar Ficha
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

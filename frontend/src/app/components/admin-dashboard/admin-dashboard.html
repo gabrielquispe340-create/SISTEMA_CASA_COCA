@@ -1,0 +1,335 @@
+<div class="admin-layout">
+  <!-- BARRA LATERAL PROFESIONAL -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      </div>
+      <div class="brand-title">
+        <h2>CASA COCA</h2>
+        <span>Panel Administrativo</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label">GESTIÓN PRINCIPAL</div>
+    <nav class="sidebar-nav">
+      <a routerLink="/admin/dashboard" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        <span>Dashboard General</span>
+      </a>
+
+      <a routerLink="/admin/reportes" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Reportes y Ganancias</span>
+      </a>
+
+      <a routerLink="/admin/ventas" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Ventas y Cobros (POS)</span>
+      </a>
+
+      <div class="nav-section-label">CATÁLOGO E INVENTARIO</div>
+
+      <a routerLink="/admin/productos" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        <span>Productos y Precios</span>
+      </a>
+
+      <a routerLink="/admin/categorias" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+          <line x1="7" y1="7" x2="7.01" y2="7"></line>
+        </svg>
+        <span>Categorías</span>
+      </a>
+
+      <a routerLink="/admin/inventario" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        <span>Compras y Kardex</span>
+      </a>
+
+      <a routerLink="/admin/proveedores" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        <span>Proveedores</span>
+      </a>
+
+      <div class="nav-section-label">CONTROL INTERNO</div>
+
+      <a routerLink="/admin/usuarios" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        <span>Usuarios y Empleados</span>
+      </a>
+
+      <a routerLink="/admin/bitacora" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Bitácora de Actividades</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button type="button" class="btn-logout-sidebar" (click)="cerrarSesion()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-titles">
+        <h1>Panel de Control Ejecutivo</h1>
+        <p>Monitoreo financiero, inventario y rendimiento operativo en tiempo real</p>
+      </div>
+
+      <div class="topbar-actions">
+        <button type="button" class="btn-refresh" (click)="cargarDatosDashboard()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+          <span>Actualizar Datos</span>
+        </button>
+
+        <div class="user-chip">
+          <div class="user-avatar">{{ obtenerIniciales() }}</div>
+          <div class="user-meta">
+            <span class="user-name">{{ usuario?.nombre_completo || 'Administrador' }}</span>
+            <span class="user-role">{{ usuario?.rol?.nombre || 'ADMIN' }}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-body">
+      <!-- TARJETAS KPI EN TIEMPO REAL -->
+      <section class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Ingresos por Ventas</span>
+            <h3 class="kpi-value">Bs. {{ resumen.ingresos_totales }}</h3>
+            <span class="kpi-sub">Ticket promedio: Bs. {{ resumen.ticket_promedio }}</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon emerald">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Ganancia Neta Estimada</span>
+            <h3 class="kpi-value">Bs. {{ resumen.ganancia_neta_estimada }}</h3>
+            <span class="kpi-sub">Costo mercadería: Bs. {{ resumen.costo_mercaderia_vendida }}</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Ventas Completadas</span>
+            <h3 class="kpi-value">{{ resumen.cantidad_ventas }}</h3>
+            <span class="kpi-sub">Transacciones registradas</span>
+          </div>
+        </div>
+
+        <div class="kpi-card" [class.alert-border]="resumen.productos_con_stock_bajo > 0">
+          <div class="kpi-icon danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Alertas de Stock Bajo</span>
+            <h3 class="kpi-value">{{ resumen.productos_con_stock_bajo }}</h3>
+            <span class="kpi-sub">Productos por reabastecer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACCESOS RÁPIDOS A MÓDULOS -->
+      <section class="section-block">
+        <div class="section-header">
+          <h2>Acceso Directo a Apartados</h2>
+          <span>Gestión integral del negocio</span>
+        </div>
+
+        <div class="quick-modules-grid">
+          <a routerLink="/admin/reportes" class="module-tile">
+            <div class="tile-icon blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </div>
+            <div class="tile-text">
+              <h4>Reportes Financieros</h4>
+              <p>Rentabilidad, métodos de pago y ranking de vendedores.</p>
+            </div>
+          </a>
+
+          <a routerLink="/admin/productos" class="module-tile">
+            <div class="tile-icon emerald">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+            </div>
+            <div class="tile-text">
+              <h4>Catálogo de Productos</h4>
+              <p>Códigos de barra, costos de compra y precios al público.</p>
+            </div>
+          </a>
+
+          <a routerLink="/admin/inventario" class="module-tile">
+            <div class="tile-icon amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+            <div class="tile-text">
+              <h4>Compras y Kardex</h4>
+              <p>Abastecimiento de mercadería y auditoría de stock.</p>
+            </div>
+          </a>
+
+          <a routerLink="/admin/usuarios" class="module-tile">
+            <div class="tile-icon purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+            </div>
+            <div class="tile-text">
+              <h4>Personal y Usuarios</h4>
+              <p>Control de cuentas de Empleados y Administradores.</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- TABLAS DE MONITOREO EN VIVO (2 COLUMNAS) -->
+      <section class="tables-grid">
+        <!-- Alertas de Stock Crítico -->
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Productos con Stock Crítico</h3>
+              <p>Artículos con existencias iguales o menores al mínimo permitido</p>
+            </div>
+            <a routerLink="/admin/inventario" class="panel-link">Reabastecer →</a>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Producto</th>
+                  <th>Stock Actual</th>
+                  <th>Mínimo</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let prod of productosStockCritico">
+                  <td class="mono">{{ prod.codigo_barras }}</td>
+                  <td class="font-semibold">{{ prod.nombre }}</td>
+                  <td class="text-danger font-bold">{{ prod.stock_actual }} uds.</td>
+                  <td>{{ prod.stock_minimo }} uds.</td>
+                  <td><span class="status-tag danger">Reponer Urgente</span></td>
+                </tr>
+                <tr *ngIf="productosStockCritico.length === 0">
+                  <td colspan="5" class="empty-row">
+                    Todo el inventario se encuentra con niveles óptimos de stock.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Últimas Ventas Registradas -->
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Últimas Ventas Registradas</h3>
+              <p>Operaciones recientes emitidas en Punto de Venta</p>
+            </div>
+            <a routerLink="/admin/ventas" class="panel-link">Ver todas →</a>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Comprobante</th>
+                  <th>Método</th>
+                  <th>Total</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let venta of ultimasVentas">
+                  <td class="mono font-semibold">{{ venta.numero_comprobante }}</td>
+                  <td>{{ venta.metodo_pago }}</td>
+                  <td class="font-bold">Bs. {{ venta.total }}</td>
+                  <td>
+                    <span class="status-tag" [ngClass]="venta.estado === 'COMPLETADA' ? 'success' : 'danger'">
+                      {{ venta.estado }}
+                    </span>
+                  </td>
+                </tr>
+                <tr *ngIf="ultimasVentas.length === 0">
+                  <td colspan="4" class="empty-row">
+                    Aún no se han registrado ventas en el sistema.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

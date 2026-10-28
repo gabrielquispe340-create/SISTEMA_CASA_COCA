@@ -1,0 +1,339 @@
+<div class="admin-layout">
+  <!-- BARRA LATERAL PROFESIONAL -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      </div>
+      <div class="brand-title">
+        <h2>CASA COCA</h2>
+        <span>Panel Administrativo</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label">GESTIÓN PRINCIPAL</div>
+    <nav class="sidebar-nav">
+      <a routerLink="/admin/dashboard" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        <span>Dashboard General</span>
+      </a>
+
+      <a routerLink="/admin/reportes" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Reportes y Ganancias</span>
+      </a>
+
+      <a routerLink="/admin/ventas" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Ventas y Cobros (POS)</span>
+      </a>
+
+      <div class="nav-section-label">CATÁLOGO E INVENTARIO</div>
+
+      <a routerLink="/admin/productos" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        <span>Productos y Precios</span>
+      </a>
+
+      <a routerLink="/admin/categorias" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+          <line x1="7" y1="7" x2="7.01" y2="7"></line>
+        </svg>
+        <span>Categorías</span>
+      </a>
+
+      <a routerLink="/admin/inventario" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        <span>Compras y Kardex</span>
+      </a>
+
+      <a routerLink="/admin/proveedores" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        <span>Proveedores</span>
+      </a>
+
+      <div class="nav-section-label">CONTROL INTERNO</div>
+
+      <a routerLink="/admin/usuarios" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        <span>Usuarios y Empleados</span>
+      </a>
+
+      <a routerLink="/admin/bitacora" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Bitácora de Actividades</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button type="button" class="btn-logout-sidebar" (click)="cerrarSesion()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-titles">
+        <div class="breadcrumb">AUDITORÍA Y SEGURIDAD</div>
+        <h1>Bitácora de Actividades del Sistema</h1>
+        <p>Registro cronológico inmutable de inicios de sesión, ventas, arqueos de caja y cambios administrativos</p>
+      </div>
+
+      <div class="topbar-actions">
+        <button type="button" class="btn-export-csv" (click)="exportarCSV()" [disabled]="eventos.length === 0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Exportar CSV</span>
+        </button>
+
+        <div class="user-chip">
+          <div class="user-avatar">{{ obtenerIniciales(usuarioSesion?.nombre_completo) }}</div>
+          <div class="user-meta">
+            <span class="user-name">{{ usuarioSesion?.nombre_completo || 'Administrador' }}</span>
+            <span class="user-role">{{ usuarioSesion?.rol?.nombre || 'ADMIN' }}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-body">
+      <!-- TARJETAS KPI DE AUDITORÍA -->
+      <section class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Total Eventos Registrados</span>
+            <h3 class="kpi-value">{{ resumen.total_eventos }}</h3>
+            <span class="kpi-sub">Historial acumulado en Supabase</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Actividades de Hoy</span>
+            <h3 class="kpi-value">{{ resumen.eventos_hoy }}</h3>
+            <span class="kpi-sub">Operaciones en la jornada actual</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon emerald">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+              <polyline points="10 17 15 12 10 7"></polyline>
+              <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Accesos Exitosos</span>
+            <h3 class="kpi-value">{{ resumen.accesos_exitosos }}</h3>
+            <span class="kpi-sub">Inicios de sesión verificados</span>
+          </div>
+        </div>
+
+        <div class="kpi-card" [class.alert-border]="resumen.alertas_criticas > 0">
+          <div class="kpi-icon danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Alertas y Eventos Críticos</span>
+            <h3 class="kpi-value">{{ resumen.alertas_criticas }}</h3>
+            <span class="kpi-sub">Anulaciones, bajas o accesos fallidos</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- BARRA DE FILTROS AVANZADOS -->
+      <section class="filters-panel">
+        <div class="filters-row">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="text"
+              [(ngModel)]="filtroBuscar"
+              (keyup.enter)="consultarBitacora()"
+              placeholder="Buscar por empleado, acción, comprobante o detalle..."
+            />
+          </div>
+
+          <div class="filter-group">
+            <label>Módulo</label>
+            <select [(ngModel)]="filtroModulo" (change)="consultarBitacora()">
+              <option value="TODOS">Todos los módulos</option>
+              <option value="AUTENTICACION">Autenticación / Login</option>
+              <option value="USUARIOS">Usuarios y Empleados</option>
+              <option value="VENTAS">Ventas POS</option>
+              <option value="CAJA">Turnos de Caja</option>
+              <option value="INVENTARIO">Inventario y Compras</option>
+              <option value="CATALOGO">Catálogo de Productos</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Severidad</label>
+            <select [(ngModel)]="filtroNivel" (change)="consultarBitacora()">
+              <option value="TODOS">Todos los niveles</option>
+              <option value="SUCCESS">Éxito (SUCCESS)</option>
+              <option value="INFO">Informativo (INFO)</option>
+              <option value="WARNING">Advertencia (WARNING)</option>
+              <option value="CRITICAL">Crítico (CRITICAL)</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Desde</label>
+            <input type="date" [(ngModel)]="filtroFechaInicio" (change)="consultarBitacora()" />
+          </div>
+
+          <div class="filter-group">
+            <label>Hasta</label>
+            <input type="date" [(ngModel)]="filtroFechaFin" (change)="consultarBitacora()" />
+          </div>
+
+          <div class="filter-buttons">
+            <button type="button" class="btn-filter-apply" (click)="consultarBitacora()">
+              Filtrar
+            </button>
+            <button type="button" class="btn-filter-clear" (click)="limpiarFiltros()" title="Restablecer filtros">
+              Limpiar
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TABLA DE AUDITORÍA DE ACTIVIDADES -->
+      <section class="table-panel">
+        <div class="table-header-bar">
+          <div>
+            <h3>Registro Cronológico de Eventos ({{ eventos.length }})</h3>
+            <p>Ordenado del evento más reciente al más antiguo</p>
+          </div>
+          <button type="button" class="btn-reload" (click)="cargarTodo()">
+            ↻ Actualizar Bitácora
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="audit-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Fecha y Hora</th>
+                <th>Usuario Responsable</th>
+                <th>Módulo</th>
+                <th>Acción</th>
+                <th>Descripción Detallada del Evento</th>
+                <th>IP Origen</th>
+                <th>Nivel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ev of eventos">
+                <td class="mono">#{{ ev.id }}</td>
+                <td class="date-col">{{ ev.fecha_registro | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                <td>
+                  <div class="user-cell" *ngIf="ev.usuario; else sistemaTpl">
+                    <div
+                      class="mini-avatar"
+                      [ngClass]="ev.usuario.rol?.nombre === 'ADMIN' ? 'admin-bg' : 'emp-bg'"
+                    >
+                      {{ obtenerIniciales(ev.usuario.nombre_completo) }}
+                    </div>
+                    <div class="user-cell-info">
+                      <span class="u-name">{{ ev.usuario.nombre_completo }}</span>
+                      <span class="u-handle">@{{ ev.usuario.username }} • {{ ev.usuario.rol?.nombre }}</span>
+                    </div>
+                  </div>
+                  <ng-template #sistemaTpl>
+                    <span class="system-user">Sistema / Público</span>
+                  </ng-template>
+                </td>
+                <td>
+                  <span class="module-badge" [attr.data-mod]="ev.modulo">
+                    {{ ev.modulo }}
+                  </span>
+                </td>
+                <td>
+                  <span class="action-code">{{ ev.accion }}</span>
+                </td>
+                <td class="desc-col">{{ ev.descripcion }}</td>
+                <td class="mono ip-col">{{ ev.ip_origen || '127.0.0.1' }}</td>
+                <td>
+                  <span class="level-badge" [ngClass]="(ev.nivel || 'INFO').toLowerCase()">
+                    {{ etiquetaNivel(ev.nivel) }}
+                  </span>
+                </td>
+              </tr>
+
+              <tr *ngIf="!cargando && eventos.length === 0">
+                <td colspan="8" class="empty-table-msg">
+                  No se encontraron registros en la bitácora con los criterios seleccionados.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

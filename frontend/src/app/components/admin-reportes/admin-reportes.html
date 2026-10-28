@@ -1,0 +1,1232 @@
+<div class="admin-layout">
+  <!-- BARRA LATERAL ADMINISTRATIVA -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      </div>
+      <div class="brand-title">
+        <h2>CASA COCA</h2>
+        <span>Panel Administrativo</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label">GESTIÓN PRINCIPAL</div>
+    <nav class="sidebar-nav">
+      <a routerLink="/admin/dashboard" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        <span>Dashboard General</span>
+      </a>
+
+      <a routerLink="/admin/reportes" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Reportes y Ganancias</span>
+      </a>
+
+      <a routerLink="/admin/ventas" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Ventas y Cobros (POS)</span>
+      </a>
+
+      <div class="nav-section-label">CATÁLOGO E INVENTARIO</div>
+
+      <a routerLink="/admin/productos" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        <span>Productos y Precios</span>
+      </a>
+
+      <a routerLink="/admin/categorias" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+          <line x1="7" y1="7" x2="7.01" y2="7"></line>
+        </svg>
+        <span>Categorías</span>
+      </a>
+
+      <a routerLink="/admin/inventario" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        <span>Compras y Kardex</span>
+      </a>
+
+      <a routerLink="/admin/proveedores" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        <span>Proveedores</span>
+      </a>
+
+      <div class="nav-section-label">CONTROL INTERNO</div>
+
+      <a routerLink="/admin/usuarios" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        <span>Usuarios y Empleados</span>
+      </a>
+
+      <a routerLink="/admin/bitacora" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Bitácora de Actividades</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button type="button" class="btn-logout-sidebar" (click)="cerrarSesion()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-wrapper">
+    <!-- ENCABEZADO SUPERIOR LIMPIO -->
+    <header class="topbar">
+      <div class="topbar-titles">
+        <div class="breadcrumb">ADMINISTRACIÓN · FINANZAS Y GESTIÓN</div>
+        <h1>Reportes y Analítica de Negocio</h1>
+        <p>Monitoreo financiero, control de ventas, inventario y productos líderes</p>
+      </div>
+
+      <div class="topbar-actions">
+        <button
+          type="button"
+          class="btn-action-topbar btn-export-excel"
+          (click)="exportarCSV()"
+          title="Descargar datos en formato CSV para Microsoft Excel"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Exportar CSV</span>
+        </button>
+
+        <button
+          type="button"
+          class="btn-action-topbar btn-print-report"
+          (click)="imprimirReporte()"
+          title="Imprimir informe oficial formal o guardar en PDF"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>Imprimir / PDF</span>
+        </button>
+
+        <div class="user-chip">
+          <div class="user-avatar">{{ obtenerIniciales() }}</div>
+          <div class="user-meta">
+            <span class="user-name">{{ usuario?.nombre_completo || 'Administrador' }}</span>
+            <span class="user-role">{{ usuario?.rol?.nombre || 'ADMIN' }}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="reportes-content-scroll">
+      <!-- SELECTOR PRINCIPAL DE REPORTES (ESPACIOSO Y ELEGANTE) -->
+      <nav class="reportes-nav-bar">
+        <button
+          type="button"
+          class="reporte-tab-btn"
+          [class.active]="pestanaActiva === 'ventas'"
+          (click)="cambiarPestana('ventas')"
+        >
+          <div class="tab-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+          </div>
+          <div class="tab-text-col">
+            <strong>Ventas Multicriterio</strong>
+            <span>Por fecha, empleado, producto y categoría</span>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="reporte-tab-btn"
+          [class.active]="pestanaActiva === 'inventario'"
+          (click)="cambiarPestana('inventario')"
+        >
+          <div class="tab-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            </svg>
+          </div>
+          <div class="tab-text-col">
+            <strong>Inventario Valorizado</strong>
+            <span>Inversión al costo, venta y margen de stock</span>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="reporte-tab-btn"
+          [class.active]="pestanaActiva === 'top_productos'"
+          (click)="cambiarPestana('top_productos')"
+        >
+          <div class="tab-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <circle cx="12" cy="8" r="7"></circle>
+              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+            </svg>
+          </div>
+          <div class="tab-text-col">
+            <strong>Productos Más Vendidos</strong>
+            <span>Rotación comercial, ranking y recaudación</span>
+          </div>
+        </button>
+      </nav>
+
+      <!-- ===================================================================== -->
+      <!-- PESTAÑA 1: REPORTE DE VENTAS MULTICRITERIO                           -->
+      <!-- ===================================================================== -->
+      <section *ngIf="pestanaActiva === 'ventas'" class="reporte-section-view">
+        <!-- TARJETA DE FILTROS ORGANIZADA -->
+        <div class="filters-card">
+          <div class="filters-card-top">
+            <div class="filters-heading">
+              <div class="icon-circle-filter">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+              </div>
+              <div>
+                <h3>Filtros de Ventas</h3>
+                <p>Personaliza el rango temporal y la segmentación del reporte</p>
+              </div>
+            </div>
+
+            <!-- CHIPS DE RANGO RÁPIDO DE FECHA -->
+            <div class="date-shortcuts-bar">
+              <span class="shortcuts-title">Atajos:</span>
+              <button type="button" class="btn-date-chip" [class.selected]="rangoFechaSeleccionado === 'hoy'" (click)="establecerRangoFecha('hoy')">Hoy</button>
+              <button type="button" class="btn-date-chip" [class.selected]="rangoFechaSeleccionado === 'ayer'" (click)="establecerRangoFecha('ayer')">Ayer</button>
+              <button type="button" class="btn-date-chip" [class.selected]="rangoFechaSeleccionado === 'semana'" (click)="establecerRangoFecha('semana')">Últimos 7 días</button>
+              <button type="button" class="btn-date-chip" [class.selected]="rangoFechaSeleccionado === 'mes'" (click)="establecerRangoFecha('mes')">Este Mes</button>
+              <button type="button" class="btn-date-chip" [class.selected]="rangoFechaSeleccionado === 'mes_anterior'" (click)="establecerRangoFecha('mes_anterior')">Mes Anterior</button>
+              <button type="button" class="btn-date-chip" [class.selected]="rangoFechaSeleccionado === 'todo'" (click)="establecerRangoFecha('todo')">Histórico Completo</button>
+            </div>
+          </div>
+
+          <!-- FORMULARIO DE FILTROS EN 2 FILAS CLARAS Y BALANCEADAS -->
+          <div class="filters-form-layout">
+            <!-- FILA 1: FECHAS Y MÉTODO DE PAGO -->
+            <div class="filter-row-group">
+              <div class="input-field-group">
+                <label for="fechaDesdeInput">Fecha Inicial:</label>
+                <input id="fechaDesdeInput" type="date" class="form-input" [(ngModel)]="filtroVentas.fechaInicio" (change)="rangoFechaSeleccionado = 'custom'" (keydown.enter)="consultarReporteVentas()" />
+              </div>
+
+              <div class="input-field-group">
+                <label for="fechaHastaInput">Fecha Final:</label>
+                <input id="fechaHastaInput" type="date" class="form-input" [(ngModel)]="filtroVentas.fechaFin" (change)="rangoFechaSeleccionado = 'custom'" (keydown.enter)="consultarReporteVentas()" />
+              </div>
+
+              <div class="input-field-group">
+                <label for="metodoPagoSelect">Método de Pago:</label>
+                <select id="metodoPagoSelect" class="form-input" [(ngModel)]="filtroVentas.metodoPago">
+                  <option value="TODOS">Todos los métodos (Efectivo y QR)</option>
+                  <option value="EFECTIVO">Solo Efectivo</option>
+                  <option value="QR">Solo Pago QR</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- FILA 2: SEGMENTACIÓN ESPECÍFICA -->
+            <div class="filter-row-group">
+              <div class="input-field-group">
+                <label for="usuarioSelect">Empleado / Cajero:</label>
+                <select id="usuarioSelect" class="form-input" [(ngModel)]="filtroVentas.usuarioId">
+                  <option [ngValue]="0">Todos los empleados</option>
+                  <option *ngFor="let u of usuarios" [ngValue]="u.id">
+                    {{ u.nombre_completo }} ({{ u.rol?.nombre }})
+                  </option>
+                </select>
+              </div>
+
+              <div class="input-field-group">
+                <label for="categoriaSelect">Categoría de Producto:</label>
+                <select id="categoriaSelect" class="form-input" [(ngModel)]="filtroVentas.categoriaId">
+                  <option [ngValue]="0">Todas las categorías</option>
+                  <option *ngFor="let c of categorias" [ngValue]="c.id">
+                    {{ c.nombre }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="input-field-group">
+                <label for="productoSelect">Producto Específico:</label>
+                <select id="productoSelect" class="form-input" [(ngModel)]="filtroVentas.productoId">
+                  <option [ngValue]="0">Todos los productos</option>
+                  <option *ngFor="let p of productosCatalogo" [ngValue]="p.id">
+                    {{ p.nombre }} [{{ p.codigo_barras }}]
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN DE FILTRADO -->
+          <div class="filters-bottom-actions">
+            <button type="button" class="btn-filter-neutral" (click)="limpiarFiltrosVentas()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+              <span>Restablecer Filtros</span>
+            </button>
+
+            <button type="button" class="btn-filter-primary" [disabled]="cargandoVentas" (click)="consultarReporteVentas()">
+              <svg *ngIf="!cargandoVentas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <div *ngIf="cargandoVentas" class="btn-mini-spinner"></div>
+              <span>{{ cargandoVentas ? 'Aplicando Filtros...' : 'Aplicar Filtros de Ventas' }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SPINNER DE CARGA INICIAL (Solo en primera carga) -->
+        <div *ngIf="cargandoVentas && !reporteVentas" class="loading-state-panel">
+          <div class="spinner"></div>
+          <p>Calculando consolidado financiero de ventas...</p>
+        </div>
+
+        <!-- CONTENIDO RESULTADOS (Se mantiene siempre visible con feedback elegante) -->
+        <div *ngIf="reporteVentas" class="reporte-data-container" [class.is-refreshing]="cargandoVentas">
+          <!-- BARRA DE ACTUALIZACIÓN RÁPIDA -->
+          <div *ngIf="cargandoVentas" class="refreshing-indicator-bar">
+            <div class="refreshing-spinner"></div>
+            <span>Actualizando datos y recalculando consolidado...</span>
+          </div>
+          <!-- TARJETAS KPI DE RESUMEN (4 COLUMNAS BALANCEADAS) -->
+          <div class="kpi-grid">
+            <div class="kpi-box border-emerald">
+              <div class="kpi-icon-pill emerald">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <div class="kpi-details">
+                <span class="kpi-title">Ingresos Totales Recaudados</span>
+                <strong class="kpi-amount text-emerald">Bs. {{ reporteVentas.resumen.total_ingresos | number:'1.2-2' }}</strong>
+                <span class="kpi-footnote">Total facturado en el período</span>
+              </div>
+            </div>
+
+            <div class="kpi-box border-slate">
+              <div class="kpi-icon-pill slate">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                </svg>
+              </div>
+              <div class="kpi-details">
+                <span class="kpi-title">Costo de Mercadería</span>
+                <strong class="kpi-amount">Bs. {{ reporteVentas.resumen.costo_total | number:'1.2-2' }}</strong>
+                <span class="kpi-footnote">Costo histórico de adquisición</span>
+              </div>
+            </div>
+
+            <div class="kpi-box border-blue">
+              <div class="kpi-icon-pill blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+              </div>
+              <div class="kpi-details">
+                <span class="kpi-title">Ganancia Neta Real</span>
+                <strong class="kpi-amount text-blue">+ Bs. {{ reporteVentas.resumen.ganancia_neta | number:'1.2-2' }}</strong>
+                <span class="kpi-footnote">Margen de utilidad: <strong>{{ reporteVentas.resumen.margen_porcentaje }}%</strong></span>
+              </div>
+            </div>
+
+            <div class="kpi-box border-amber">
+              <div class="kpi-icon-pill amber">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                  <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+              </div>
+              <div class="kpi-details">
+                <span class="kpi-title">Transacciones / Tickets</span>
+                <strong class="kpi-amount">{{ reporteVentas.resumen.cantidad_ventas }}</strong>
+                <span class="kpi-footnote">Ticket promedio: Bs. {{ reporteVentas.resumen.ticket_promedio | number:'1.2-2' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BARRA DE SUB-PESTAÑAS PROFESIONAL (SEGMENTED CONTROL) -->
+          <div class="subviews-segmented-bar">
+            <button
+              type="button"
+              class="subview-tab"
+              [class.active]="subvistaVentas === 'tabla'"
+              (click)="subvistaVentas = 'tabla'"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              <span>Listado de Ventas</span>
+              <span class="tab-badge">{{ reporteVentas.ventas.length }}</span>
+            </button>
+
+            <button
+              type="button"
+              class="subview-tab"
+              [class.active]="subvistaVentas === 'empleados'"
+              (click)="subvistaVentas = 'empleados'"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>Por Empleado / Cajero</span>
+              <span class="tab-badge">{{ reporteVentas.por_empleado.length }}</span>
+            </button>
+
+            <button
+              type="button"
+              class="subview-tab"
+              [class.active]="subvistaVentas === 'categorias'"
+              (click)="subvistaVentas = 'categorias'"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+              </svg>
+              <span>Por Categoría</span>
+              <span class="tab-badge">{{ reporteVentas.por_categoria.length }}</span>
+            </button>
+
+            <button
+              type="button"
+              class="subview-tab"
+              [class.active]="subvistaVentas === 'metodos'"
+              (click)="subvistaVentas = 'metodos'"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+              <span>Por Método de Pago</span>
+            </button>
+          </div>
+
+          <!-- SUB-VISTA 1: LISTADO DE VENTAS -->
+          <div *ngIf="subvistaVentas === 'tabla'" class="table-card">
+            <div *ngIf="reporteVentas.ventas.length === 0" class="empty-state-notice">
+              <div class="empty-icon-wrap">🔍</div>
+              <h4>No se encontraron ventas con los filtros aplicados</h4>
+              <p>Prueba ampliando el rango de fechas o seleccionando otros criterios de búsqueda.</p>
+            </div>
+
+            <div *ngIf="reporteVentas.ventas.length > 0" class="table-responsive-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Comprobante</th>
+                    <th>Fecha / Hora</th>
+                    <th>Cajero / Empleado</th>
+                    <th>Cliente</th>
+                    <th>Artículos Vendidos</th>
+                    <th class="text-center">Método Pago</th>
+                    <th class="text-right">Costo Total</th>
+                    <th class="text-right">Total Venta</th>
+                    <th class="text-right">Ganancia</th>
+                    <th class="text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let v of reporteVentas.ventas">
+                    <td>
+                      <span class="comprobante-pill">{{ v.numero_comprobante }}</span>
+                    </td>
+                    <td>
+                      <strong>{{ v.fecha_venta | date:'HH:mm:ss' }}</strong>
+                      <span class="sub-date-text">{{ v.fecha_venta | date:'dd/MM/yyyy' }}</span>
+                    </td>
+                    <td>
+                      <strong class="user-text">{{ v.cajero_nombre }}</strong>
+                    </td>
+                    <td>
+                      <span>{{ v.cliente_nombre }}</span>
+                    </td>
+                    <td class="td-summary-col" [title]="v.items_resumen">
+                      <span class="items-qty-tag">{{ v.cantidad_articulos }} art.</span>
+                      <span class="items-summary-text">{{ v.items_resumen }}</span>
+                    </td>
+                    <td class="text-center">
+                      <span class="badge-payment" [class.efectivo]="v.metodo_pago === 'EFECTIVO'" [class.qr]="v.metodo_pago === 'QR'">
+                        {{ v.metodo_pago }}
+                      </span>
+                    </td>
+                    <td class="text-right text-muted-money">
+                      Bs. {{ v.costo_total | number:'1.2-2' }}
+                    </td>
+                    <td class="text-right">
+                      <strong>Bs. {{ v.total | number:'1.2-2' }}</strong>
+                    </td>
+                    <td class="text-right">
+                      <strong class="text-emerald">+ Bs. {{ v.ganancia | number:'1.2-2' }}</strong>
+                    </td>
+                    <td class="text-center">
+                      <button type="button" class="btn-table-action" (click)="verDetalleVenta(v)" title="Ver detalle de la venta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                          <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <span>Detalle</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SUB-VISTA 2: RENDIMIENTO POR EMPLEADO -->
+          <div *ngIf="subvistaVentas === 'empleados'" class="table-card">
+            <div class="table-responsive-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Empleado / Cajero</th>
+                    <th>Usuario de Acceso</th>
+                    <th class="text-center">Ventas Realizadas</th>
+                    <th class="text-right">Total Vendido</th>
+                    <th style="width: 280px;">Contribución (% del Total)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let emp of reporteVentas.por_empleado">
+                    <td><strong>{{ emp.nombre_completo }}</strong></td>
+                    <td><span class="text-username">&#64;{{ emp.username }}</span></td>
+                    <td class="text-center"><span class="pill-number">{{ emp.cantidad_ventas }} ventas</span></td>
+                    <td class="text-right"><strong>Bs. {{ emp.total_vendido | number:'1.2-2' }}</strong></td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill emerald" [style.width.%]="emp.porcentaje_total"></div>
+                        </div>
+                        <span class="progress-pct">{{ emp.porcentaje_total }}%</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SUB-VISTA 3: VENTAS POR CATEGORÍA -->
+          <div *ngIf="subvistaVentas === 'categorias'" class="table-card">
+            <div class="table-responsive-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Categoría de Producto</th>
+                    <th class="text-center">Unidades Vendidas</th>
+                    <th class="text-right">Ingresos Generados</th>
+                    <th style="width: 280px;">Participación (% del Total)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cat of reporteVentas.por_categoria">
+                    <td><strong>{{ cat.categoria_nombre }}</strong></td>
+                    <td class="text-center"><span class="pill-number">{{ cat.unidades_vendidas }} uds.</span></td>
+                    <td class="text-right"><strong>Bs. {{ cat.total_vendido | number:'1.2-2' }}</strong></td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill blue" [style.width.%]="cat.porcentaje_total"></div>
+                        </div>
+                        <span class="progress-pct">{{ cat.porcentaje_total }}%</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SUB-VISTA 4: POR MÉTODO DE PAGO -->
+          <div *ngIf="subvistaVentas === 'metodos'" class="table-card">
+            <div class="payment-methods-grid">
+              <div *ngFor="let met of reporteVentas.por_metodo_pago" class="payment-method-card">
+                <div class="pm-header">
+                  <span class="badge-payment-lg" [class.efectivo]="met.metodo_pago === 'EFECTIVO'" [class.qr]="met.metodo_pago === 'QR'">
+                    {{ met.metodo_pago }}
+                  </span>
+                  <span class="pm-ops">{{ met.cantidad_operaciones }} transacciones</span>
+                </div>
+                <div class="pm-total">
+                  Bs. {{ met.total_recaudado | number:'1.2-2' }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- PESTAÑA 2: REPORTE DE INVENTARIO VALORIZADO                          -->
+      <!-- ===================================================================== -->
+      <section *ngIf="pestanaActiva === 'inventario'" class="reporte-section-view">
+        <!-- FILTROS DE INVENTARIO -->
+        <div class="filters-card">
+          <div class="filters-card-top">
+            <div class="filters-heading">
+              <div class="icon-circle-filter">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3>Filtros de Inventario Valorizado</h3>
+                <p>Evalúa el capital inmovilizado en almacén y el margen de retorno comercial</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="filters-form-layout four-columns">
+            <div class="input-field-group">
+              <label for="buscarInvInput">Buscar por Nombre o Código:</label>
+              <input
+                id="buscarInvInput"
+                type="text"
+                class="form-input"
+                placeholder="Ej. Coca Cola 2L, 77501..."
+                [(ngModel)]="filtroInventario.busqueda"
+                (keydown.enter)="consultarReporteInventario()"
+              />
+            </div>
+
+            <div class="input-field-group">
+              <label for="catInvSelect">Categoría:</label>
+              <select id="catInvSelect" class="form-input" [(ngModel)]="filtroInventario.categoriaId">
+                <option [ngValue]="0">Todas las categorías</option>
+                <option *ngFor="let c of categorias" [ngValue]="c.id">
+                  {{ c.nombre }}
+                </option>
+              </select>
+            </div>
+
+            <div class="input-field-group">
+              <label for="provInvSelect">Proveedor:</label>
+              <select id="provInvSelect" class="form-input" [(ngModel)]="filtroInventario.proveedorId">
+                <option [ngValue]="0">Todos los proveedores</option>
+                <option *ngFor="let p of proveedores" [ngValue]="p.id">
+                  {{ p.nombre_empresa }}
+                </option>
+              </select>
+            </div>
+
+            <div class="input-field-group">
+              <label for="estadoInvSelect">Estado de Stock:</label>
+              <select id="estadoInvSelect" class="form-input" [(ngModel)]="filtroInventario.estadoStock">
+                <option value="TODOS">Todos los estados</option>
+                <option value="NORMAL">Stock Normal (Óptimo)</option>
+                <option value="BAJO">Stock Crítico / Bajo Mínimo</option>
+                <option value="AGOTADO">Agotados (Stock 0)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filters-bottom-actions">
+            <button type="button" class="btn-filter-neutral" (click)="limpiarFiltrosInventario()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+              <span>Restablecer Filtros</span>
+            </button>
+
+            <button type="button" class="btn-filter-primary" [disabled]="cargandoInventario" (click)="consultarReporteInventario()">
+              <svg *ngIf="!cargandoInventario" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <div *ngIf="cargandoInventario" class="btn-mini-spinner"></div>
+              <span>{{ cargandoInventario ? 'Calculando Valuación...' : 'Calcular Valuación de Almacén' }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SPINNER DE CARGA INICIAL -->
+        <div *ngIf="cargandoInventario && !reporteInventario" class="loading-state-panel">
+          <div class="spinner"></div>
+          <p>Calculando valuación de inventario al costo y precio comercial...</p>
+        </div>
+
+        <!-- RESULTADOS INVENTARIO (Siempre visible con feedback) -->
+        <div *ngIf="reporteInventario" class="reporte-data-container" [class.is-refreshing]="cargandoInventario">
+          <!-- BARRA DE ACTUALIZACIÓN RÁPIDA -->
+          <div *ngIf="cargandoInventario" class="refreshing-indicator-bar">
+            <div class="refreshing-spinner"></div>
+            <span>Actualizando valuación del stock...</span>
+          </div>
+          <!-- TARJETAS DE VALUACIÓN -->
+          <div class="kpi-grid">
+            <div class="kpi-box border-slate">
+              <div class="kpi-icon-pill slate">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                </svg>
+              </div>
+              <div class="kpi-details">
+                <span class="kpi-title">Capital Invertido (Costo)</span>
+                <strong class="kpi-amount">Bs. {{ reporteInventario.resumen.valor_total_costo | number:'1.2-2' }}</strong>
+                <span class="kpi-footnote">{{ reporteInventario.resumen.total_unidades_stock }} unidades en almacén</span>
+              </div>
+            </div>
+
+            <div class="kpi-box border-blue">
+              <div class="kpi-icon-pill blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <div class="kpi-details">
+                <span class="kpi-title">Valor Comercial Proyectado</span>
+                <strong class="kpi-amount text-blue">Bs. {{ reporteInventario.resumen.valor_total_venta | number:'1.2-2' }}</strong>
+                <span class="kpi-footnote">Total proyectado a precio de venta</span>
+              </div>
+            </div>
+
+            <div class="kpi-box border-emerald">
+              <div class="kpi-icon-pill emerald">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+              </div>
+              <div class="kpi-details">
+                <span class="kpi-title">Ganancia Potencial en Almacén</span>
+                <strong class="kpi-amount text-emerald">+ Bs. {{ reporteInventario.resumen.ganancia_potencial | number:'1.2-2' }}</strong>
+                <span class="kpi-footnote">Margen esperado: <strong>{{ reporteInventario.resumen.margen_potencial_porcentaje }}%</strong></span>
+              </div>
+            </div>
+
+            <div class="kpi-box border-rose">
+              <div class="kpi-icon-pill rose">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </div>
+              <div class="kpi-details">
+                <span class="kpi-title">Alertas de Stock</span>
+                <strong class="kpi-amount text-rose">{{ reporteInventario.resumen.productos_stock_critico }} críticos / {{ reporteInventario.resumen.productos_agotados }} agotados</strong>
+                <span class="kpi-footnote">{{ reporteInventario.resumen.total_productos_distintos }} productos catalogados</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TABLA VALORIZADA DE INVENTARIO -->
+          <div class="table-card">
+            <div *ngIf="reporteInventario.items.length === 0" class="empty-state-notice">
+              <div class="empty-icon-wrap">📦</div>
+              <h4>No hay productos que coincidan con los filtros</h4>
+              <p>Intenta restablecer los filtros para visualizar la totalidad del catálogo.</p>
+            </div>
+
+            <div *ngIf="reporteInventario.items.length > 0" class="table-responsive-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Proveedor</th>
+                    <th class="text-center">Stock Actual</th>
+                    <th class="text-center">Mínimo</th>
+                    <th class="text-right">P. Costo</th>
+                    <th class="text-right">P. Venta</th>
+                    <th class="text-right">Valuación Costo</th>
+                    <th class="text-right">Valuación Venta</th>
+                    <th class="text-center">Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of reporteInventario.items">
+                    <td><span class="comprobante-pill">{{ item.codigo_barras }}</span></td>
+                    <td><strong>{{ item.nombre }}</strong></td>
+                    <td><span class="category-tag">{{ item.categoria_nombre }}</span></td>
+                    <td><span class="supplier-text">{{ item.proveedor_nombre }}</span></td>
+                    <td class="text-center">
+                      <strong class="stock-number" [class.danger]="item.stock_actual <= item.stock_minimo">
+                        {{ item.stock_actual }}
+                      </strong>
+                    </td>
+                    <td class="text-center text-muted-money">{{ item.stock_minimo }}</td>
+                    <td class="text-right text-muted-money">Bs. {{ item.precio_compra | number:'1.2-2' }}</td>
+                    <td class="text-right"><strong>Bs. {{ item.precio_venta | number:'1.2-2' }}</strong></td>
+                    <td class="text-right text-muted-money">Bs. {{ item.valor_costo_linea | number:'1.2-2' }}</td>
+                    <td class="text-right"><strong>Bs. {{ item.valor_venta_linea | number:'1.2-2' }}</strong></td>
+                    <td class="text-center">
+                      <span class="badge-stock-status" [ngClass]="item.estado_stock.toLowerCase()">
+                        {{ item.estado_stock === 'NORMAL' ? 'NORMAL' : (item.estado_stock === 'BAJO' ? 'CRÍTICO' : 'AGOTADO') }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- PESTAÑA 3: REPORTE DE PRODUCTOS MÁS VENDIDOS                         -->
+      <!-- ===================================================================== -->
+      <section *ngIf="pestanaActiva === 'top_productos'" class="reporte-section-view">
+        <!-- FILTROS DE PRODUCTOS MÁS VENDIDOS -->
+        <div class="filters-card">
+          <div class="filters-card-top">
+            <div class="filters-heading">
+              <div class="icon-circle-filter">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <circle cx="12" cy="8" r="7"></circle>
+                  <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                </svg>
+              </div>
+              <div>
+                <h3>Ranking y Rotación de Productos</h3>
+                <p>Identifica los artículos con mayor rotación e ingresos generados</p>
+              </div>
+            </div>
+
+            <!-- CHIPS DE FECHA -->
+            <div class="date-shortcuts-bar">
+              <span class="shortcuts-title">Atajos:</span>
+              <button type="button" class="btn-date-chip" [class.selected]="rangoFechaSeleccionado === 'semana'" (click)="establecerRangoFecha('semana')">Últimos 7 días</button>
+              <button type="button" class="btn-date-chip" [class.selected]="rangoFechaSeleccionado === 'mes'" (click)="establecerRangoFecha('mes')">Este Mes</button>
+              <button type="button" class="btn-date-chip" [class.selected]="rangoFechaSeleccionado === 'todo'" (click)="establecerRangoFecha('todo')">Histórico Completo</button>
+            </div>
+          </div>
+
+          <div class="filters-form-layout four-columns">
+            <div class="input-field-group">
+              <label for="fechaDesdeTop">Desde:</label>
+              <input id="fechaDesdeTop" type="date" class="form-input" [(ngModel)]="filtroTop.fechaInicio" />
+            </div>
+
+            <div class="input-field-group">
+              <label for="fechaHastaTop">Hasta:</label>
+              <input id="fechaHastaTop" type="date" class="form-input" [(ngModel)]="filtroTop.fechaFin" />
+            </div>
+
+            <div class="input-field-group">
+              <label for="catTopSelect">Categoría:</label>
+              <select id="catTopSelect" class="form-input" [(ngModel)]="filtroTop.categoriaId">
+                <option [ngValue]="0">Todas las categorías</option>
+                <option *ngFor="let c of categorias" [ngValue]="c.id">
+                  {{ c.nombre }}
+                </option>
+              </select>
+            </div>
+
+            <div class="input-field-group">
+              <label for="limitTopSelect">Cantidad en Ranking:</label>
+              <select id="limitTopSelect" class="form-input" [(ngModel)]="filtroTop.limit">
+                <option [ngValue]="5">Top 5 productos</option>
+                <option [ngValue]="10">Top 10 productos</option>
+                <option [ngValue]="15">Top 15 productos</option>
+                <option [ngValue]="30">Top 30 productos</option>
+                <option [ngValue]="50">Top 50 productos</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filters-bottom-actions">
+            <button type="button" class="btn-filter-neutral" (click)="limpiarFiltrosTop()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+              <span>Restablecer Filtros</span>
+            </button>
+
+            <button type="button" class="btn-filter-primary" [disabled]="cargandoTop" (click)="consultarTopProductos()">
+              <svg *ngIf="!cargandoTop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <div *ngIf="cargandoTop" class="btn-mini-spinner"></div>
+              <span>{{ cargandoTop ? 'Actualizando Ranking...' : 'Actualizar Ranking' }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SPINNER DE CARGA INICIAL -->
+        <div *ngIf="cargandoTop && topProductos.length === 0" class="loading-state-panel">
+          <div class="spinner"></div>
+          <p>Calculando ranking comercial de productos líderes...</p>
+        </div>
+
+        <!-- RESULTADOS TOP (Siempre visible con feedback) -->
+        <div *ngIf="!cargandoTop || topProductos.length > 0" class="reporte-data-container" [class.is-refreshing]="cargandoTop">
+          <!-- BARRA DE ACTUALIZACIÓN RÁPIDA -->
+          <div *ngIf="cargandoTop" class="refreshing-indicator-bar">
+            <div class="refreshing-spinner"></div>
+            <span>Actualizando ranking comercial...</span>
+          </div>
+          <div *ngIf="topProductos.length === 0" class="empty-state-notice">
+            <div class="empty-icon-wrap">🏆</div>
+            <h4>Sin datos de ventas registradas en el período</h4>
+            <p>No se encontraron productos vendidos con los filtros establecidos.</p>
+          </div>
+
+          <div *ngIf="topProductos.length > 0">
+            <!-- GRÁFICO VISUAL DE ROTACIÓN COMERCIAL -->
+            <div class="chart-panel">
+              <div class="chart-header">
+                <div>
+                  <h3>Comparativa Visual de Rotación (Unidades Vendidas)</h3>
+                  <p>Distribución proporcional frente al producto líder de ventas</p>
+                </div>
+              </div>
+
+              <div class="chart-bars-container">
+                <div *ngFor="let p of topProductos.slice(0, 8)" class="chart-bar-row">
+                  <div class="bar-info-row">
+                    <div class="bar-name-side">
+                      <span class="ranking-pill">#{{ p.ranking }}</span>
+                      <strong>{{ p.nombre }}</strong>
+                      <span class="cat-muted">({{ p.categoria_nombre }})</span>
+                    </div>
+                    <div class="bar-value-side">
+                      <strong class="bar-units">{{ p.unidades_vendidas }} unidades</strong>
+                      <span class="bar-revenue">Bs. {{ p.ingresos_generados | number:'1.2-2' }}</span>
+                    </div>
+                  </div>
+                  <div class="bar-bg-track">
+                    <div class="bar-fill-color emerald" [style.width.%]="(p.unidades_vendidas / maxUnidadesTop) * 100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TABLA DE RANKING COMPLETA -->
+            <div class="table-card" style="margin-top: 1.5rem;">
+              <div class="table-responsive-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th class="text-center" style="width: 75px;">Ranking</th>
+                      <th>Código</th>
+                      <th>Producto</th>
+                      <th>Categoría</th>
+                      <th class="text-center">Unidades Vendidas</th>
+                      <th class="text-right">Ingresos Generados</th>
+                      <th class="text-right">Utilidad Generada</th>
+                      <th class="text-center">Stock Disponible</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let p of topProductos">
+                      <td class="text-center">
+                        <span class="medal-badge" [class.rank-1]="p.ranking === 1" [class.rank-2]="p.ranking === 2" [class.rank-3]="p.ranking === 3">
+                          {{ p.ranking === 1 ? '🥇 1°' : (p.ranking === 2 ? '🥈 2°' : (p.ranking === 3 ? '🥉 3°' : '#' + p.ranking)) }}
+                        </span>
+                      </td>
+                      <td><span class="comprobante-pill">{{ p.codigo_barras }}</span></td>
+                      <td><strong>{{ p.nombre }}</strong></td>
+                      <td><span class="category-tag">{{ p.categoria_nombre }}</span></td>
+                      <td class="text-center">
+                        <span class="pill-number highlight">{{ p.unidades_vendidas }} uds.</span>
+                      </td>
+                      <td class="text-right">
+                        <strong>Bs. {{ p.ingresos_generados | number:'1.2-2' }}</strong>
+                      </td>
+                      <td class="text-right">
+                        <strong class="text-emerald">+ Bs. {{ p.ganancia_generada | number:'1.2-2' }}</strong>
+                      </td>
+                      <td class="text-center">
+                        <span class="stock-pill" [class.danger]="p.stock_actual <= 5">
+                          {{ p.stock_actual }} disponibles
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- MODAL: DETALLE DE ARTÍCULOS DE VENTA                                      -->
+<!-- ========================================================================= -->
+<div *ngIf="modalDetalleVenta" class="modal-backdrop" (click)="cerrarModalDetalleVenta()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <h3>Detalle de Venta: {{ ventaSeleccionada?.numero_comprobante }}</h3>
+        <p>{{ ventaSeleccionada?.fecha_venta | date:'dd/MM/yyyy HH:mm:ss' }} · Cajero: {{ ventaSeleccionada?.cajero_nombre || ventaSeleccionada?.usuario_nombre }}</p>
+      </div>
+      <button type="button" class="btn-close-modal" (click)="cerrarModalDetalleVenta()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-meta-strip">
+        <div class="meta-item">
+          <span class="meta-label">Cliente:</span>
+          <strong class="meta-val">{{ ventaSeleccionada?.cliente_nombre || 'Cliente Mostrador' }}</strong>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Forma de Pago:</span>
+          <span class="badge-payment" [class.efectivo]="ventaSeleccionada?.metodo_pago === 'EFECTIVO'" [class.qr]="ventaSeleccionada?.metodo_pago === 'QR'">
+            {{ ventaSeleccionada?.metodo_pago }}
+          </span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Total Cobrado:</span>
+          <strong class="meta-val text-emerald">Bs. {{ ventaSeleccionada?.total | number:'1.2-2' }}</strong>
+        </div>
+      </div>
+
+      <!-- TABLA DE ARTÍCULOS -->
+      <div *ngIf="ventaSeleccionada?.detalles && ventaSeleccionada.detalles.length > 0" class="table-responsive-wrap" style="margin-top: 1rem;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th class="text-center">Cantidad</th>
+              <th class="text-right">Precio Unitario</th>
+              <th class="text-right">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let det of ventaSeleccionada.detalles">
+              <td><strong>{{ det.producto?.nombre || 'Producto' }}</strong></td>
+              <td class="text-center">{{ det.cantidad }}</td>
+              <td class="text-right">Bs. {{ det.precio_unitario | number:'1.2-2' }}</td>
+              <td class="text-right"><strong>Bs. {{ det.subtotal_linea | number:'1.2-2' }}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="!ventaSeleccionada?.detalles || ventaSeleccionada.detalles.length === 0" class="items-summary-card">
+        <strong>Resumen de Productos:</strong>
+        <p>{{ ventaSeleccionada?.items_resumen }}</p>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-modal-close" (click)="cerrarModalDetalleVenta()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- TOAST DE NOTIFICACIONES                                                   -->
+<!-- ========================================================================= -->
+<div *ngIf="toast.visible" class="toast-notification" [ngClass]="toast.tipo">
+  <div class="toast-content">
+    <span class="toast-icon">
+      <span *ngIf="toast.tipo === 'success'">✓</span>
+      <span *ngIf="toast.tipo === 'error'">✕</span>
+      <span *ngIf="toast.tipo === 'warning'">⚠</span>
+      <span *ngIf="toast.tipo === 'info'">ℹ</span>
+    </span>
+    <span class="toast-text">{{ toast.mensaje }}</span>
+  </div>
+  <button type="button" class="btn-toast-close" (click)="cerrarToast()">✕</button>
+</div>
+
+<!-- ========================================================================= -->
+<!-- PLANTILLA DE IMPRESIÓN OFICIAL (A4 / CARTA)                                -->
+<!-- ========================================================================= -->
+<div id="print-report-container" class="print-only-container">
+  <div class="print-header">
+    <div class="print-brand-col">
+      <img src="/logo.png" alt="CASA COCA" class="print-logo-img">
+      <div>
+        <h1>CASA COCA</h1>
+        <p class="print-sub">COCA MACHUCADA · CONTROL COMERCIAL</p>
+        <p class="print-nit">NIT: 1028475019 · La Paz, Bolivia</p>
+      </div>
+    </div>
+    <div class="print-meta-col">
+      <h2>
+        {{ pestanaActiva === 'ventas' ? 'INFORME DE VENTAS Y GANANCIAS' : (pestanaActiva === 'inventario' ? 'INFORME DE INVENTARIO VALORIZADO' : 'INFORME DE PRODUCTOS MÁS VENDIDOS') }}
+      </h2>
+      <p><strong>Fecha de Emisión:</strong> {{ '' | date:'dd/MM/yyyy HH:mm' }}</p>
+      <p><strong>Generado por:</strong> {{ usuario?.nombre_completo }} (ADMIN)</p>
+    </div>
+  </div>
+
+  <div class="print-divider"></div>
+
+  <!-- REPORTE DE VENTAS EN IMPRESIÓN -->
+  <div *ngIf="pestanaActiva === 'ventas' && reporteVentas">
+    <div class="print-kpi-row">
+      <div class="print-kpi"><strong>Total Recaudado:</strong> Bs. {{ reporteVentas.resumen.total_ingresos | number:'1.2-2' }}</div>
+      <div class="print-kpi"><strong>Costo Mercadería:</strong> Bs. {{ reporteVentas.resumen.costo_total | number:'1.2-2' }}</div>
+      <div class="print-kpi"><strong>Ganancia Neta:</strong> Bs. {{ reporteVentas.resumen.ganancia_neta | number:'1.2-2' }} ({{ reporteVentas.resumen.margen_porcentaje }}%)</div>
+      <div class="print-kpi"><strong>Tickets:</strong> {{ reporteVentas.resumen.cantidad_ventas }}</div>
+    </div>
+
+    <table class="print-table">
+      <thead>
+        <tr>
+          <th>Comprobante</th>
+          <th>Fecha / Hora</th>
+          <th>Cajero</th>
+          <th>Cliente</th>
+          <th>Método</th>
+          <th>Costo (Bs.)</th>
+          <th>Total (Bs.)</th>
+          <th>Ganancia (Bs.)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of reporteVentas.ventas">
+          <td>{{ v.numero_comprobante }}</td>
+          <td>{{ v.fecha_venta | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ v.cajero_nombre }}</td>
+          <td>{{ v.cliente_nombre }}</td>
+          <td>{{ v.metodo_pago }}</td>
+          <td>Bs. {{ v.costo_total | number:'1.2-2' }}</td>
+          <td>Bs. {{ v.total | number:'1.2-2' }}</td>
+          <td>Bs. {{ v.ganancia | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- REPORTE DE INVENTARIO EN IMPRESIÓN -->
+  <div *ngIf="pestanaActiva === 'inventario' && reporteInventario">
+    <div class="print-kpi-row">
+      <div class="print-kpi"><strong>Valor al Costo:</strong> Bs. {{ reporteInventario.resumen.valor_total_costo | number:'1.2-2' }}</div>
+      <div class="print-kpi"><strong>Valor Comercial:</strong> Bs. {{ reporteInventario.resumen.valor_total_venta | number:'1.2-2' }}</div>
+      <div class="print-kpi"><strong>Ganancia Potencial:</strong> Bs. {{ reporteInventario.resumen.ganancia_potencial | number:'1.2-2' }}</div>
+      <div class="print-kpi"><strong>Stock Total:</strong> {{ reporteInventario.resumen.total_unidades_stock }} unidades</div>
+    </div>
+
+    <table class="print-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Producto</th>
+          <th>Categoría</th>
+          <th>Stock Actual</th>
+          <th>P. Costo</th>
+          <th>P. Venta</th>
+          <th>Val. Costo</th>
+          <th>Val. Venta</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of reporteInventario.items">
+          <td>{{ item.codigo_barras }}</td>
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.categoria_nombre }}</td>
+          <td>{{ item.stock_actual }}</td>
+          <td>Bs. {{ item.precio_compra | number:'1.2-2' }}</td>
+          <td>Bs. {{ item.precio_venta | number:'1.2-2' }}</td>
+          <td>Bs. {{ item.valor_costo_linea | number:'1.2-2' }}</td>
+          <td>Bs. {{ item.valor_venta_linea | number:'1.2-2' }}</td>
+          <td>{{ item.estado_stock }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- REPORTE MÁS VENDIDOS EN IMPRESIÓN -->
+  <div *ngIf="pestanaActiva === 'top_productos'">
+    <table class="print-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Código</th>
+          <th>Producto</th>
+          <th>Categoría</th>
+          <th>Uds. Vendidas</th>
+          <th>Ingresos Generados</th>
+          <th>Ganancia Generada</th>
+          <th>Stock Restante</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of topProductos">
+          <td>#{{ p.ranking }}</td>
+          <td>{{ p.codigo_barras }}</td>
+          <td>{{ p.nombre }}</td>
+          <td>{{ p.categoria_nombre }}</td>
+          <td>{{ p.unidades_vendidas }}</td>
+          <td>Bs. {{ p.ingresos_generados | number:'1.2-2' }}</td>
+          <td>Bs. {{ p.ganancia_generada | number:'1.2-2' }}</td>
+          <td>{{ p.stock_actual }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="print-footer">
+    <div class="print-sign-box">
+      <div class="line"></div>
+      <p>Firma Administrador General</p>
+    </div>
+    <div class="print-sign-box">
+      <div class="line"></div>
+      <p>Sello de Auditoría Interna</p>
+    </div>
+  </div>
+</div>

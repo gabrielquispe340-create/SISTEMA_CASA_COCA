@@ -1,0 +1,838 @@
+<div class="admin-layout">
+  <!-- BARRA LATERAL PROFESIONAL -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      </div>
+      <div class="brand-title">
+        <h2>CASA COCA</h2>
+        <span>Panel Administrativo</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label">GESTIÓN PRINCIPAL</div>
+    <nav class="sidebar-nav">
+      <a routerLink="/admin/dashboard" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        <span>Dashboard General</span>
+      </a>
+
+      <a routerLink="/admin/reportes" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Reportes y Ganancias</span>
+      </a>
+
+      <a routerLink="/admin/ventas" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Ventas y Cobros (POS)</span>
+      </a>
+
+      <div class="nav-section-label">CATÁLOGO E INVENTARIO</div>
+
+      <a routerLink="/admin/productos" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        <span>Productos y Precios</span>
+      </a>
+
+      <a routerLink="/admin/categorias" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+          <line x1="7" y1="7" x2="7.01" y2="7"></line>
+        </svg>
+        <span>Categorías</span>
+      </a>
+
+      <a routerLink="/admin/inventario" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        <span>Compras y Kardex</span>
+      </a>
+
+      <a routerLink="/admin/proveedores" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        <span>Proveedores</span>
+      </a>
+
+      <div class="nav-section-label">CONTROL INTERNO</div>
+
+      <a routerLink="/admin/usuarios" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        <span>Usuarios y Empleados</span>
+      </a>
+
+      <a routerLink="/admin/bitacora" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Bitácora de Actividades</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button type="button" class="btn-logout-sidebar" (click)="cerrarSesion()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-titles">
+        <div class="breadcrumb">CATÁLOGO Y PRECIOS</div>
+        <h1>Gestión de Productos y Precios</h1>
+        <p>Registra productos, edita su información, actualiza precios de compra/venta y da de baja ítems del POS</p>
+      </div>
+
+      <div class="topbar-actions">
+        <button type="button" class="btn-primary-action" (click)="abrirModalNuevo()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Registrar Producto</span>
+        </button>
+
+        <div class="user-chip">
+          <div class="user-avatar">{{ obtenerIniciales(usuarioSesion?.nombre_completo) }}</div>
+          <div class="user-meta">
+            <span class="user-name">{{ usuarioSesion?.nombre_completo || 'Administrador' }}</span>
+            <span class="user-role">{{ usuarioSesion?.rol?.nombre || 'ADMIN' }}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-body">
+      <!-- Notificación Toast -->
+      <div
+        *ngIf="mensajeNotificacion"
+        class="toast-banner"
+        [ngClass]="tipoNotificacion === 'error' ? 'toast-error' : 'toast-success'"
+      >
+        <div class="toast-icon">
+          <svg
+            *ngIf="tipoNotificacion === 'success'"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <svg
+            *ngIf="tipoNotificacion === 'error'"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <span>{{ mensajeNotificacion }}</span>
+      </div>
+
+      <!-- TARJETAS KPI -->
+      <section class="kpi-grid">
+        <article class="kpi-card">
+          <div class="kpi-icon kpi-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Total Productos</span>
+            <h3 class="kpi-value">{{ totalProductos }}</h3>
+            <span class="kpi-sub">Registrados en catálogo</span>
+          </div>
+        </article>
+
+        <article class="kpi-card">
+          <div class="kpi-icon kpi-emerald">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">En Venta (Activos)</span>
+            <h3 class="kpi-value">{{ totalActivos }}</h3>
+            <span class="kpi-sub">Disponibles en el POS</span>
+          </div>
+        </article>
+
+        <article class="kpi-card">
+          <div class="kpi-icon kpi-amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Stock Crítico</span>
+            <h3 class="kpi-value">{{ totalStockCritico }}</h3>
+            <span class="kpi-sub">En o por debajo del mínimo</span>
+          </div>
+        </article>
+
+        <article class="kpi-card">
+          <div class="kpi-icon kpi-rose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Dados de Baja</span>
+            <h3 class="kpi-value">{{ totalDadosDeBaja }}</h3>
+            <span class="kpi-sub">Inactivos en punto de venta</span>
+          </div>
+        </article>
+      </section>
+
+      <!-- VERIFICADOR RÁPIDO DE PRECIO POR CÓDIGO DE BARRAS -->
+      <section class="scanner-bar">
+        <div class="scanner-left">
+          <span class="scanner-tag">Verificador de Precios</span>
+          <strong>Consulta instantánea por Lector / SKU:</strong>
+        </div>
+        <form (ngSubmit)="verificarPorCodigo()" class="scanner-form">
+          <input
+            type="text"
+            [(ngModel)]="codigoVerificador"
+            name="codigoVerificador"
+            placeholder="Escanea o escribe el código de barras (ej. 7774001)..."
+          />
+          <button type="submit" class="btn-scan-action">Verificar Precio</button>
+          <button
+            type="button"
+            *ngIf="productoVerificado || errorVerificador"
+            class="btn-scan-clear"
+            (click)="limpiarVerificador()"
+          >
+            Limpiar
+          </button>
+        </form>
+        <div *ngIf="errorVerificador" class="scanner-alert-error">
+          {{ errorVerificador }}
+        </div>
+        <div *ngIf="productoVerificado" class="scanner-result-pill">
+          <span class="sku-badge">{{ productoVerificado.codigo_barras }}</span>
+          <strong>{{ productoVerificado.nombre }}</strong>
+          <span class="cat-chip">{{ productoVerificado.categoria?.nombre || 'General' }}</span>
+          <span class="price-highlight">
+            Venta: Bs. {{ productoVerificado.precio_venta | number: '1.2-2' }}
+          </span>
+          <span class="stock-pill stock-ok">
+            Stock: {{ productoVerificado.stock_actual }} uds.
+          </span>
+        </div>
+      </section>
+
+      <!-- BARRA DE FILTROS Y BÚSQUEDA -->
+      <section class="filters-card">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            [(ngModel)]="filtroTexto"
+            placeholder="Buscar por nombre, código de barras / SKU o categoría..."
+          />
+          <button *ngIf="filtroTexto" class="btn-clear-search" (click)="filtroTexto = ''">
+            ✕
+          </button>
+        </div>
+
+        <div class="filter-controls">
+          <div class="filter-group">
+            <label>Categoría:</label>
+            <select [(ngModel)]="filtroCategoriaId">
+              <option [ngValue]="0">Todas las categorías</option>
+              <option *ngFor="let cat of categorias" [ngValue]="cat.id">
+                {{ cat.nombre }}
+              </option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Estado:</label>
+            <select [(ngModel)]="filtroEstado">
+              <option value="TODOS">Todos los productos</option>
+              <option value="ACTIVOS">Solo En Venta (Activos)</option>
+              <option value="BAJA">Dados de Baja (Inactivos)</option>
+              <option value="STOCK_BAJO">Con Stock Crítico</option>
+            </select>
+          </div>
+
+          <div class="view-mode-switch">
+            <button
+              type="button"
+              [class.active]="modoVista === 'TABLA'"
+              (click)="modoVista = 'TABLA'"
+            >
+              Tabla Gestión
+            </button>
+            <button
+              type="button"
+              [class.active]="modoVista === 'TARJETAS'"
+              (click)="modoVista = 'TARJETAS'"
+            >
+              Catálogo Visual
+            </button>
+          </div>
+
+          <button class="btn-refresh" (click)="cargarProductos()" title="Sincronizar catálogo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <polyline points="1 20 1 14 7 14"></polyline>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+            <span>Sincronizar</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- VISTA CATÁLOGO VISUAL DE TARJETAS -->
+      <section *ngIf="modoVista === 'TARJETAS'" class="catalog-cards-grid">
+        <article
+          class="catalog-item-card"
+          *ngFor="let prod of productosFiltrados"
+          [class.row-inactive]="!prod.activo"
+        >
+          <div class="catalog-card-top">
+            <span class="cat-chip">{{ prod.categoria?.nombre || 'General' }}</span>
+            <span class="sku-badge">#{{ prod.codigo_barras }}</span>
+          </div>
+
+          <div class="catalog-card-image-wrapper">
+            <img *ngIf="prod.imagen_url" [src]="obtenerUrlImagen(prod.imagen_url)" [alt]="prod.nombre" class="catalog-card-img" loading="lazy" (error)="prod.imagen_url = null" />
+            <div *ngIf="!prod.imagen_url" class="catalog-card-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="32" height="32">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <div class="catalog-card-main">
+            <h4>{{ prod.nombre }}</h4>
+            <p>{{ prod.descripcion || 'Presentación estándar de tienda' }}</p>
+          </div>
+
+          <div class="catalog-card-prices">
+            <div>
+              <small>Compra</small>
+              <span>Bs. {{ (prod.precio_compra || 0) | number: '1.2-2' }}</span>
+            </div>
+            <div class="sale-highlight">
+              <small>Precio Venta POS</small>
+              <strong>Bs. {{ (prod.precio_venta || 0) | number: '1.2-2' }}</strong>
+            </div>
+          </div>
+
+          <div class="catalog-card-bottom">
+            <span
+              class="stock-pill"
+              [ngClass]="prod.stock_actual <= prod.stock_minimo ? 'stock-low' : 'stock-ok'"
+            >
+              Stock: <strong>{{ prod.stock_actual }}</strong> uds.
+            </span>
+
+            <div class="action-group">
+              <button class="btn-action btn-price" (click)="abrirModalPrecio(prod)">
+                $ Precio
+              </button>
+              <button class="btn-action btn-edit" (click)="abrirModalEditar(prod)">
+                Editar
+              </button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- TABLA DE PRODUCTOS -->
+      <section class="panel-card" *ngIf="modoVista === 'TABLA'">
+        <div class="panel-header">
+          <div>
+            <h3>Inventario Maestro de Productos y Precios</h3>
+            <p>
+              Mostrando <strong>{{ productosFiltrados.length }}</strong> de
+              <strong>{{ productos.length }}</strong> productos registrados en Supabase
+            </p>
+          </div>
+          <button class="btn-add-inline" (click)="abrirModalNuevo()">
+            + Registrar Producto
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 60px; text-align: center;">Foto</th>
+                <th style="width: 115px">SKU / Código</th>
+                <th>Producto</th>
+                <th>Categoría / Proveedor</th>
+                <th style="width: 140px">Precio Compra</th>
+                <th style="width: 165px">Precio Venta / Margen</th>
+                <th style="width: 140px">Stock Actual</th>
+                <th style="width: 135px">Estado</th>
+                <th class="text-right" style="width: 280px">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="cargando">
+                <td colspan="9" class="empty-cell">
+                  Cargando productos desde Supabase...
+                </td>
+              </tr>
+
+              <tr *ngIf="!cargando && productosFiltrados.length === 0">
+                <td colspan="9" class="empty-cell">
+                  No se encontraron productos con los filtros seleccionados.
+                  <button
+                    *ngIf="filtroTexto || filtroCategoriaId !== 0 || filtroEstado !== 'TODOS'"
+                    class="btn-link-reset"
+                    (click)="limpiarFiltros()"
+                  >
+                    Restablecer filtros
+                  </button>
+                </td>
+              </tr>
+
+              <tr
+                *ngFor="let prod of productosFiltrados"
+                [class.row-inactive]="!prod.activo"
+              >
+                <td style="text-align: center;">
+                  <div class="table-product-thumb" *ngIf="prod.imagen_url">
+                    <img [src]="obtenerUrlImagen(prod.imagen_url)" [alt]="prod.nombre" loading="lazy" (error)="prod.imagen_url = null" />
+                  </div>
+                  <div class="table-product-thumb-placeholder" *ngIf="!prod.imagen_url" title="Sin foto">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                  </div>
+                </td>
+
+                <td>
+                  <span class="sku-badge">{{ prod.codigo_barras }}</span>
+                </td>
+
+                <td>
+                  <div class="prod-title">{{ prod.nombre }}</div>
+                  <div class="prod-desc">
+                    {{ prod.descripcion || 'Sin descripción adicional' }}
+                  </div>
+                </td>
+
+                <td>
+                  <span class="cat-chip">
+                    {{ prod.categoria?.nombre || 'General' }}
+                  </span>
+                  <div class="prov-sub" *ngIf="prod.proveedor">
+                    Prov: {{ prod.proveedor.nombre_empresa }}
+                  </div>
+                </td>
+
+                <td class="price-buy">
+                  Bs. {{ (prod.precio_compra || 0) | number: '1.2-2' }}
+                </td>
+
+                <td>
+                  <div class="price-sale">
+                    Bs. {{ (prod.precio_venta || 0) | number: '1.2-2' }}
+                  </div>
+                  <span class="margin-tag">
+                    +{{ calcularMargenPorcentaje(prod.precio_compra, prod.precio_venta) }}% margen
+                  </span>
+                </td>
+
+                <td>
+                  <div
+                    class="stock-pill"
+                    [ngClass]="
+                      prod.stock_actual <= prod.stock_minimo ? 'stock-low' : 'stock-ok'
+                    "
+                  >
+                    <strong>{{ prod.stock_actual }}</strong> uds.
+                    <small>(mín. {{ prod.stock_minimo }})</small>
+                  </div>
+                </td>
+
+                <td>
+                  <span
+                    class="status-badge"
+                    [ngClass]="prod.activo ? 'status-active' : 'status-inactive'"
+                  >
+                    <span class="dot"></span>
+                    {{ prod.activo ? 'En Venta' : 'Dado de Baja' }}
+                  </span>
+                </td>
+
+                <td class="text-right">
+                  <div class="action-group">
+                    <button
+                      class="btn-action btn-price"
+                      (click)="abrirModalPrecio(prod)"
+                      title="Actualizar precio de compra y venta"
+                    >
+                      <span>$ Precio</span>
+                    </button>
+
+                    <button
+                      class="btn-action btn-edit"
+                      (click)="abrirModalEditar(prod)"
+                      title="Editar datos del producto"
+                    >
+                      <span>Editar</span>
+                    </button>
+
+                    <button
+                      class="btn-action"
+                      [ngClass]="prod.activo ? 'btn-baja' : 'btn-alta'"
+                      (click)="cambiarEstadoProducto(prod)"
+                      [title]="prod.activo ? 'Dar de baja del catálogo' : 'Reactivar producto'"
+                    >
+                      <span>{{ prod.activo ? 'Dar de Baja' : 'Reactivar' }}</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ================= MODAL REGISTRAR / EDITAR PRODUCTO ================= -->
+<div class="modal-backdrop" *ngIf="modalProductoAbierto" (click)="cerrarModalProducto()">
+  <div class="modal-card modal-lg" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">
+          {{ modoEdicion ? 'Edición de Producto' : 'Nuevo Producto de Catálogo' }}
+        </span>
+        <h2>{{ modoEdicion ? 'Editar Datos del Producto' : 'Registrar Nuevo Producto' }}</h2>
+      </div>
+      <button class="btn-close-modal" (click)="cerrarModalProducto()">✕</button>
+    </div>
+
+    <form (ngSubmit)="guardarProducto()" class="modal-body">
+      <div *ngIf="errorModal" class="modal-error">
+        {{ errorModal }}
+      </div>
+
+      <!-- SECCIÓN FOTO / IMAGEN DEL PRODUCTO -->
+      <div class="product-image-uploader-section">
+        <label class="field-label-bold">Foto del Producto</label>
+        <div class="uploader-container">
+          <div class="uploader-preview" *ngIf="previewImagen">
+            <img [src]="previewImagen" alt="Vista previa del producto" class="preview-img" />
+            <button type="button" class="btn-remove-preview" (click)="eliminarImagen()" title="Quitar imagen">✕</button>
+          </div>
+          <div class="uploader-placeholder" *ngIf="!previewImagen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="placeholder-icon">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <span>Sin imagen seleccionada</span>
+          </div>
+          <div class="uploader-actions">
+            <label class="btn-file-select">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span>{{ previewImagen ? 'Cambiar Foto' : 'Subir Foto del Producto' }}</span>
+              <input type="file" accept="image/png, image/jpeg, image/jpg, image/webp" (change)="onArchivoSeleccionado($event)" style="display:none;" />
+            </label>
+            <p class="uploader-tip">Formatos soportados: JPG, PNG, WEBP (Máx. 5MB). Se visualizará en el punto de venta (POS) y catálogo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Código de Barras / SKU *</label>
+          <div class="sku-input-group">
+            <input
+              type="text"
+              [(ngModel)]="formulario.codigo_barras"
+              name="codigo_barras"
+              placeholder="Ej. 7774001"
+              required
+            />
+            <button
+              type="button"
+              class="btn-gen-sku"
+              (click)="generarCodigoSKU()"
+              title="Generar código SKU automático"
+            >
+              Generar
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Categoría del Producto *</label>
+          <select [(ngModel)]="formulario.categoria_id" name="categoria_id" required>
+            <option *ngFor="let cat of categorias" [ngValue]="cat.id">
+              {{ cat.nombre }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Nombre Comercial del Producto *</label>
+          <input
+            type="text"
+            [(ngModel)]="formulario.nombre"
+            name="nombre"
+            placeholder="Ej. Cerveza Lager Lata 473ml, Vino Tinto 750ml..."
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Proveedor Asociado</label>
+          <select [(ngModel)]="formulario.proveedor_id" name="proveedor_id">
+            <option [ngValue]="null">-- Sin proveedor específico --</option>
+            <option *ngFor="let prov of proveedores" [ngValue]="prov.id">
+              {{ prov.nombre_empresa }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Descripción / Presentación</label>
+        <input
+          type="text"
+          [(ngModel)]="formulario.descripcion"
+          name="descripcion"
+          placeholder="Ej. Botella retornable, lata individual, paquete de 6 unidades..."
+        />
+      </div>
+
+      <div class="form-row-4">
+        <div class="form-group">
+          <label>Precio Compra (Bs.) *</label>
+          <input
+            type="number"
+            step="0.10"
+            min="0"
+            [(ngModel)]="formulario.precio_compra"
+            name="precio_compra"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Precio Venta POS (Bs.) *</label>
+          <input
+            type="number"
+            step="0.10"
+            min="0.10"
+            [(ngModel)]="formulario.precio_venta"
+            name="precio_venta"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Stock Actual (uds.)</label>
+          <input
+            type="number"
+            min="0"
+            [(ngModel)]="formulario.stock_actual"
+            name="stock_actual"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Stock Mínimo Alerta</label>
+          <input
+            type="number"
+            min="0"
+            [(ngModel)]="formulario.stock_minimo"
+            name="stock_minimo"
+          />
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Fecha de Vencimiento (Alerta FEFO)</label>
+          <input
+            type="date"
+            [(ngModel)]="formulario.fecha_vencimiento"
+            name="fecha_vencimiento"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Código de Lote</label>
+          <input
+            type="text"
+            [(ngModel)]="formulario.lote"
+            name="lote"
+            placeholder="Ej. LT-2026-01"
+          />
+        </div>
+      </div>
+
+      <div class="profit-preview">
+        <span>
+          Ganancia unitaria estimada:
+          <strong>
+            Bs. {{ calcularGananciaUnitaria(formulario.precio_compra, formulario.precio_venta) | number: '1.2-2' }}
+          </strong>
+        </span>
+        <span>
+          Margen sobre costo:
+          <strong>
+            {{ calcularMargenPorcentaje(formulario.precio_compra, formulario.precio_venta) }}%
+          </strong>
+        </span>
+      </div>
+
+      <div class="form-group-inline">
+        <label class="switch-label">
+          <input type="checkbox" [(ngModel)]="formulario.activo" name="activo" />
+          <span>Producto activo y habilitado para la venta en el POS</span>
+        </label>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="cerrarModalProducto()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-save" [disabled]="guardando">
+          {{ guardando ? 'Guardando...' : modoEdicion ? 'Guardar Cambios' : 'Registrar Producto' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ================= MODAL RÁPIDO: ACTUALIZAR PRECIO ================= -->
+<div class="modal-backdrop" *ngIf="modalPrecioAbierto" (click)="cerrarModalPrecio()">
+  <div class="modal-card modal-sm" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">Actualización Directa de Precio</span>
+        <h2>{{ formularioPrecio.nombre }}</h2>
+        <small class="sku-sub">SKU: {{ formularioPrecio.codigo_barras }}</small>
+      </div>
+      <button class="btn-close-modal" (click)="cerrarModalPrecio()">✕</button>
+    </div>
+
+    <form (ngSubmit)="guardarNuevoPrecio()" class="modal-body">
+      <div *ngIf="errorModalPrecio" class="modal-error">
+        {{ errorModalPrecio }}
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Precio de Compra (Bs.) *</label>
+          <input
+            type="number"
+            step="0.10"
+            min="0"
+            [(ngModel)]="formularioPrecio.precio_compra"
+            name="precio_compra_rapido"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Nuevo Precio de Venta (Bs.) *</label>
+          <input
+            type="number"
+            step="0.10"
+            min="0.10"
+            [(ngModel)]="formularioPrecio.precio_venta"
+            name="precio_venta_rapido"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="profit-preview">
+        <span>
+          Ganancia por unidad:
+          <strong>
+            Bs. {{ calcularGananciaUnitaria(formularioPrecio.precio_compra, formularioPrecio.precio_venta) | number: '1.2-2' }}
+          </strong>
+        </span>
+        <span>
+          Margen:
+          <strong>
+            {{ calcularMargenPorcentaje(formularioPrecio.precio_compra, formularioPrecio.precio_venta) }}%
+          </strong>
+        </span>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="cerrarModalPrecio()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-save" [disabled]="guardando">
+          {{ guardando ? 'Actualizando...' : 'Actualizar Precio' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

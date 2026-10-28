@@ -1,0 +1,1633 @@
+<div class="admin-layout">
+  <!-- BARRA LATERAL PROFESIONAL -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      </div>
+      <div class="brand-title">
+        <h2>CASA COCA</h2>
+        <span>Panel Administrativo</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label">GESTIÓN PRINCIPAL</div>
+    <nav class="sidebar-nav">
+      <a routerLink="/admin/dashboard" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        <span>Dashboard General</span>
+      </a>
+
+      <a routerLink="/admin/reportes" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Reportes y Ganancias</span>
+      </a>
+
+      <a routerLink="/admin/ventas" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Ventas y Cobros (POS)</span>
+      </a>
+
+      <div class="nav-section-label">CATÁLOGO E INVENTARIO</div>
+
+      <a routerLink="/admin/productos" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        <span>Productos y Precios</span>
+      </a>
+
+      <a routerLink="/admin/categorias" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+          <line x1="7" y1="7" x2="7.01" y2="7"></line>
+        </svg>
+        <span>Categorías</span>
+      </a>
+
+      <a routerLink="/admin/inventario" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        <span>Compras y Kardex</span>
+      </a>
+
+      <a routerLink="/admin/proveedores" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        <span>Proveedores</span>
+      </a>
+
+      <div class="nav-section-label">CONTROL INTERNO</div>
+
+      <a routerLink="/admin/usuarios" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        <span>Gestión de Empleados</span>
+      </a>
+
+      <a routerLink="/admin/bitacora" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Bitácora del Sistema</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button type="button" class="btn-logout-sidebar" (click)="cerrarSesion()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-titles">
+        <div class="breadcrumb">INVENTARIO Y ABASTECIMIENTO</div>
+        <h1>Compras de Mercadería, Alertas y Kardex</h1>
+        <p>Gestión integral de abastecimiento comercial, compras a proveedores, semáforo de stock y alertas FEFO</p>
+      </div>
+
+      <div class="topbar-actions">
+        <button type="button" class="btn-primary-action" (click)="abrirModalNuevaCompra()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Registrar Compra</span>
+        </button>
+
+        <div class="user-chip">
+          <div class="user-avatar">{{ obtenerIniciales(usuarioSesion?.nombre_completo) }}</div>
+          <div class="user-meta">
+            <span class="user-name">{{ usuarioSesion?.nombre_completo || 'Administrador' }}</span>
+            <span class="user-role">{{ usuarioSesion?.rol?.nombre || 'ADMIN' }}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-body">
+      <!-- NOTIFICACIÓN FLOTANTE (TOAST) -->
+      <div
+        *ngIf="mensajeNotificacion"
+        class="toast-banner"
+        [ngClass]="tipoNotificacion === 'error' ? 'toast-error' : 'toast-success'"
+      >
+        <span>{{ mensajeNotificacion }}</span>
+      </div>
+
+      <!-- TARJETAS KPI DE COMPRAS, ALERTAS E INVENTARIO -->
+      <section class="kpi-grid">
+        <article class="kpi-card clickable" (click)="pestanaActiva = 'COMPRAS'">
+          <div class="kpi-icon kpi-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Compras de Mercadería</span>
+            <h3 class="kpi-value">Bs. {{ totalComprasMonto | number: '1.2-2' }}</h3>
+            <span class="kpi-sub">{{ totalComprasRecibidas }} compras recibidas ({{ totalComprasUnidades }} uds)</span>
+          </div>
+        </article>
+
+        <article class="kpi-card clickable" (click)="pestanaActiva = 'ALERTAS'">
+          <div class="kpi-icon kpi-rose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Total Alertas Activas</span>
+            <h3 class="kpi-value">{{ resumenAlertas.total_alertas_activas }}</h3>
+            <span class="kpi-sub">Stock mínimo + próximos a vencer</span>
+          </div>
+        </article>
+
+        <article class="kpi-card clickable" (click)="pestanaActiva = 'ALERTAS'">
+          <div class="kpi-icon kpi-purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Próximos a Vencer ({{ diasUmbralVencimiento }}d)</span>
+            <h3 class="kpi-value">
+              {{ resumenAlertas.total_vencidos + resumenAlertas.total_proximos_vencer }}
+            </h3>
+            <span class="kpi-sub">
+              Riesgo: Bs. {{ (resumenAlertas.valor_total_riesgo_vencimiento || 0) | number: '1.2-2' }}
+            </span>
+          </div>
+        </article>
+
+        <article class="kpi-card clickable" (click)="filtrarPorCardNivel('TODOS')">
+          <div class="kpi-icon kpi-emerald">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Unidades en Tienda</span>
+            <h3 class="kpi-value">{{ resumenStock.total_unidades_disponibles }}</h3>
+            <span class="kpi-sub">
+              Valorizado: Bs. {{ (resumenStock.valor_total_venta || 0) | number: '1.2-2' }}
+            </span>
+          </div>
+        </article>
+      </section>
+
+      <!-- PESTAÑAS DE NAVEGACIÓN PRINCIPAL -->
+      <section class="tabs-bar">
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="pestanaActiva === 'COMPRAS'"
+          (click)="pestanaActiva = 'COMPRAS'"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+          Compras de Mercadería
+          <span class="tab-badge" *ngIf="compras.length > 0">{{ compras.length }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="pestanaActiva === 'ALERTAS'"
+          (click)="pestanaActiva = 'ALERTAS'"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          Alertas de Stock y Vencimiento
+          <span class="tab-badge">{{ resumenAlertas.total_alertas_activas }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="pestanaActiva === 'STOCK'"
+          (click)="pestanaActiva = 'STOCK'"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          </svg>
+          Semáforo de Stock
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="pestanaActiva === 'KARDEX'"
+          (click)="pestanaActiva = 'KARDEX'"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          Historial Kardex ({{ movimientosKardex.length }})
+        </button>
+      </section>
+
+      <!-- =====================================================================
+           PESTAÑA 1: COMPRAS DE MERCADERÍA (INGRESO A INVENTARIO)
+           ===================================================================== -->
+      <ng-container *ngIf="pestanaActiva === 'COMPRAS'">
+        <!-- TARJETAS KPI DE HISTORIAL DE COMPRAS -->
+        <section class="kpi-grid">
+          <article class="kpi-card">
+            <div class="kpi-icon kpi-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Total Invertido en Compras</span>
+              <h3 class="kpi-value">Bs. {{ totalComprasMonto | number: '1.2-2' }}</h3>
+              <span class="kpi-sub">Compras de mercadería recibidas</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-icon kpi-emerald">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Facturas Recibidas</span>
+              <h3 class="kpi-value">{{ totalComprasRecibidas }}</h3>
+              <span class="kpi-sub">Comprobantes válidos en tienda</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-icon kpi-blue" style="background: #e0f2fe; color: #0284c7;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Unidades Físicas Ingresadas</span>
+              <h3 class="kpi-value">+{{ totalComprasUnidades }} uds.</h3>
+              <span class="kpi-sub">Volumen añadido al inventario</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-icon kpi-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Compras Anuladas</span>
+              <h3 class="kpi-value">{{ totalComprasAnuladas }}</h3>
+              <span class="kpi-sub">Comprobantes revertidos</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- Barra de búsqueda y filtros para compras -->
+        <section class="filters-card">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="text"
+              [(ngModel)]="filtroComprasTexto"
+              placeholder="Buscar compra por N° factura, empresa proveedora o ID..."
+            />
+            <button *ngIf="filtroComprasTexto" class="btn-clear-search" (click)="filtroComprasTexto = ''">✕</button>
+          </div>
+
+          <div class="filter-controls">
+            <div class="filter-group">
+              <label>Proveedor:</label>
+              <select [(ngModel)]="filtroComprasProveedor">
+                <option value="TODOS">Todos los proveedores</option>
+                <option *ngFor="let p of proveedores" [ngValue]="p.id">
+                  {{ p.nombre_empresa }}
+                </option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>Estado:</label>
+              <select [(ngModel)]="filtroComprasEstado">
+                <option value="TODOS">Todos los estados</option>
+                <option value="RECIBIDA">Solo Recibidas</option>
+                <option value="ANULADA">Solo Anuladas</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>Desde:</label>
+              <input type="date" [(ngModel)]="filtroComprasFechaDesde" />
+            </div>
+
+            <div class="filter-group">
+              <label>Hasta:</label>
+              <input type="date" [(ngModel)]="filtroComprasFechaHasta" />
+            </div>
+
+            <button
+              type="button"
+              class="btn-clear-filters"
+              *ngIf="filtroComprasTexto || filtroComprasEstado !== 'TODOS' || filtroComprasProveedor !== 'TODOS' || filtroComprasFechaDesde || filtroComprasFechaHasta"
+              (click)="limpiarFiltrosCompras()"
+              title="Restablecer filtros"
+            >
+              Limpiar
+            </button>
+
+            <button type="button" class="btn-export-csv" (click)="exportarComprasCSV()" title="Exportar historial a CSV">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Exportar</span>
+            </button>
+
+            <button class="btn-refresh" (click)="cargarCompras(filtroComprasTexto)" [disabled]="cargandoCompras">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <polyline points="1 20 1 14 7 14"></polyline>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+              </svg>
+              <span>{{ cargandoCompras ? 'Actualizando...' : 'Actualizar' }}</span>
+            </button>
+
+            <button class="btn-primary-action" (click)="abrirModalNuevaCompra()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>Nueva Compra</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- TABLA DE COMPRAS REGISTRADAS -->
+        <section class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Historial de Compras de Mercadería y Facturas de Proveedor</h3>
+              <p>Registro de comprobantes de compra, costos de adquisición y abastecimiento físico de almacén</p>
+            </div>
+            <span class="count-chip blue-chip">
+              {{ comprasFiltradas.length }} compras listadas
+            </span>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 130px">ID / Factura</th>
+                  <th style="width: 155px">Fecha de Registro</th>
+                  <th>Empresa Proveedora</th>
+                  <th style="width: 160px">Registrado Por</th>
+                  <th style="width: 140px">Volumen</th>
+                  <th style="width: 145px">Total Compra</th>
+                  <th style="width: 130px">Estado</th>
+                  <th class="text-right" style="width: 210px">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="cargandoCompras">
+                  <td colspan="8" class="empty-cell">Cargando comprobantes de compras a proveedores...</td>
+                </tr>
+
+                <tr *ngIf="!cargandoCompras && comprasFiltradas.length === 0">
+                  <td colspan="8" class="empty-cell">
+                    No se encontraron compras de mercadería registradas con esos filtros.
+                    <button class="btn-link-reset" (click)="abrirModalNuevaCompra()">Registrar la primera compra</button>
+                  </td>
+                </tr>
+
+                <tr *ngFor="let c of comprasFiltradas" [class.row-annulled]="c.estado === 'ANULADA'">
+                  <td>
+                    <div class="invoice-badge">
+                      <span class="inv-id">#{{ c.id }}</span>
+                      <span class="inv-fac">{{ c.numero_factura_proveedor || 'S/N' }}</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    <strong>{{ c.fecha_compra | date: 'dd/MM/yyyy' }}</strong>
+                    <div class="sub-time">{{ c.fecha_compra | date: 'HH:mm' }} hrs</div>
+                  </td>
+
+                  <td>
+                    <div class="supplier-pill-cell">
+                      <div class="supp-avatar">{{ obtenerIniciales(c.proveedor_nombre) }}</div>
+                      <div class="supp-details">
+                        <span class="supp-name">{{ c.proveedor_nombre || 'Proveedor Mayorista' }}</span>
+                        <span class="supp-sub">Comprobante comercial recibido</span>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span class="user-registrant">{{ c.usuario_nombre || 'Administrador' }}</span>
+                  </td>
+
+                  <td>
+                    <span class="badge-volume">
+                      {{ c.total_items || (c.detalles?.length || 0) }} productos
+                    </span>
+                    <div class="sub-units">({{ c.total_unidades || 0 }} uds. recibidas)</div>
+                  </td>
+
+                  <td class="amount-cell">
+                    <strong>Bs. {{ c.total_compra | number: '1.2-2' }}</strong>
+                  </td>
+
+                  <td>
+                    <span
+                      class="semaphore-badge"
+                      [ngClass]="c.estado === 'RECIBIDA' ? 'sem-green' : 'sem-red'"
+                    >
+                      <span class="dot"></span>
+                      {{ c.estado }}
+                    </span>
+                  </td>
+
+                  <td class="text-right">
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-action btn-kardex"
+                        (click)="abrirModalDetalleCompra(c)"
+                        title="Ver comprobante detallado de compra"
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                          <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <span>Detalle</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-action btn-anular"
+                        *ngIf="c.estado !== 'ANULADA'"
+                        (click)="anularCompra(c)"
+                        title="Anular compra y descontar stock"
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="15" y1="9" x2="9" y2="15"></line>
+                          <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                        <span>Anular</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </ng-container>
+
+      <!-- =====================================================================
+           PESTAÑA 2: CENTRO DE ALERTAS DE STOCK MÍNIMO Y VENCIMIENTO
+           ===================================================================== -->
+      <ng-container *ngIf="pestanaActiva === 'ALERTAS'">
+        <!-- Barra de Configuración de Umbral de Vencimiento -->
+        <section class="filters-card">
+          <div class="alert-config-info">
+            <span class="alert-pill-tag">Monitor Preventivo FEFO</span>
+            <span>
+              Detectando productos cuyo stock sea igual o menor al mínimo y lotes que venzan en los próximos
+              <strong>{{ diasUmbralVencimiento }} días</strong>.
+            </span>
+          </div>
+
+          <div class="filter-controls">
+            <div class="filter-group">
+              <label>Ventana de alerta de vencimiento:</label>
+              <select [(ngModel)]="diasUmbralVencimiento" (change)="cargarAlertas()">
+                <option [ngValue]="7">Próximos 7 días (Urgente)</option>
+                <option [ngValue]="15">Próximos 15 días</option>
+                <option [ngValue]="30">Próximos 30 días (Estándar)</option>
+                <option [ngValue]="60">Próximos 60 días</option>
+                <option [ngValue]="90">Próximos 90 días</option>
+              </select>
+            </div>
+
+            <label class="checkbox-inline">
+              <input
+                type="checkbox"
+                [(ngModel)]="incluirVigentes"
+                (change)="cargarAlertas()"
+              />
+              <span>Mostrar todos los lotes con fecha</span>
+            </label>
+
+            <button class="btn-refresh" (click)="ejecutarBarridoAlertas()">
+              <span>Auditar y Generar Alertas</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- TABLA 1: ALERTAS DE STOCK MÍNIMO Y AGOTADOS -->
+        <section class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>1. Alertas de Stock Mínimo y Productos por Reabastecer</h3>
+              <p>
+                Productos con existencias iguales o inferiores a su umbral de seguridad configurado
+              </p>
+            </div>
+            <span class="count-chip amber-chip">
+              {{ resumenAlertas.alertas_stock?.length || 0 }} productos en alerta de stock
+            </span>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 110px">SKU</th>
+                  <th>Producto / Proveedor</th>
+                  <th style="width: 135px">Stock Actual</th>
+                  <th style="width: 120px">Stock Mínimo</th>
+                  <th style="width: 155px">Compra Sugerida</th>
+                  <th style="width: 150px">Costo Reposición</th>
+                  <th style="width: 145px">Nivel de Alerta</th>
+                  <th class="text-right" style="width: 270px">Acción Inmediata</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="(resumenAlertas.alertas_stock?.length || 0) === 0">
+                  <td colspan="8" class="empty-cell">
+                    Excelente: Todos los productos superan actualmente su stock mínimo de seguridad.
+                  </td>
+                </tr>
+
+                <tr *ngFor="let alerta of resumenAlertas.alertas_stock">
+                  <td>
+                    <span class="sku-badge">{{ alerta.codigo_barras }}</span>
+                  </td>
+
+                  <td>
+                    <div class="prod-title">{{ alerta.nombre }}</div>
+                    <div class="prod-sub">
+                      <span class="cat-chip">{{ alerta.categoria_nombre }}</span>
+                      <span *ngIf="alerta.proveedor_nombre"> · Prov: {{ alerta.proveedor_nombre }}</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span
+                      class="stock-number"
+                      [ngClass]="alerta.stock_actual <= 0 ? 'num-zero' : 'num-low'"
+                    >
+                      {{ alerta.stock_actual }} uds.
+                    </span>
+                  </td>
+
+                  <td class="min-col">{{ alerta.stock_minimo }} uds.</td>
+
+                  <td>
+                    <span class="sug-badge">
+                      +{{ alerta.cantidad_compra_sugerida }} uds.
+                    </span>
+                  </td>
+
+                  <td class="val-col">
+                    Bs. {{ alerta.costo_reposicion_estimado | number: '1.2-2' }}
+                  </td>
+
+                  <td>
+                    <span
+                      class="semaphore-badge"
+                      [ngClass]="alerta.nivel_alerta === 'AGOTADO' ? 'sem-red' : 'sem-amber'"
+                    >
+                      <span class="dot"></span>
+                      {{ alerta.nivel_alerta === 'AGOTADO' ? 'AGOTADO' : 'STOCK CRÍTICO' }}
+                    </span>
+                  </td>
+
+                  <td class="text-right">
+                    <div class="action-group">
+                      <!-- Integración directa: Comprar mercadería -->
+                      <button
+                        type="button"
+                        class="btn-action btn-compra-directa"
+                        (click)="abrirModalNuevaCompra(alerta, alerta.cantidad_compra_sugerida)"
+                        title="Registrar compra de reposición a proveedor"
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <line x1="12" y1="5" x2="12" y2="19"></line>
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span>Comprar ({{ alerta.cantidad_compra_sugerida }})</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-action btn-replenish"
+                        (click)="abrirModalAjuste(alerta, alerta.cantidad_compra_sugerida)"
+                        title="Ajuste manual de stock"
+                      >
+                        Ajuste
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-action btn-kardex"
+                        (click)="abrirModalVencimiento(alerta)"
+                        title="Configurar umbral mínimo"
+                      >
+                        Umbral
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- TABLA 2: ALERTAS DE PRODUCTOS PRÓXIMOS A VENCER -->
+        <section class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>2. Alertas de Productos Próximos a Vencer y Control de Lotes (FEFO)</h3>
+              <p>
+                Seguimiento cronológico de fechas de caducidad para evitar mermas y priorizar salida en mostrador
+              </p>
+            </div>
+            <span class="count-chip purple-chip">
+              {{ resumenAlertas.total_vencidos + resumenAlertas.total_proximos_vencer }} alertas de vencimiento
+            </span>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 110px">SKU / Lote</th>
+                  <th>Producto / Categoría</th>
+                  <th style="width: 130px">Fecha Vencimiento</th>
+                  <th style="width: 150px">Tiempo Restante</th>
+                  <th style="width: 120px">Stock Lote</th>
+                  <th style="width: 145px">Estado Vencimiento</th>
+                  <th>Acción Comercial Sugerida</th>
+                  <th class="text-right" style="width: 170px">Control Fecha</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="(resumenAlertas.alertas_vencimiento?.length || 0) === 0">
+                  <td colspan="8" class="empty-cell">
+                    No hay productos próximos a vencer dentro del rango de {{ diasUmbralVencimiento }} días.
+                  </td>
+                </tr>
+
+                <tr *ngFor="let venc of resumenAlertas.alertas_vencimiento">
+                  <td>
+                    <span class="sku-badge">{{ venc.codigo_barras }}</span>
+                    <div class="lote-sub">Lote: {{ venc.lote || 'LT-GEN' }}</div>
+                  </td>
+
+                  <td>
+                    <div class="prod-title">{{ venc.nombre }}</div>
+                    <div class="prod-sub">
+                      <span class="cat-chip">{{ venc.categoria_nombre }}</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    <strong>{{ venc.fecha_vencimiento | date: 'dd/MM/yyyy' }}</strong>
+                  </td>
+
+                  <td>
+                    <span
+                      class="days-pill"
+                      [ngClass]="{
+                        'days-expired': venc.dias_restantes < 0,
+                        'days-urgent': venc.dias_restantes >= 0 && venc.dias_restantes <= 7,
+                        'days-warn': venc.dias_restantes > 7 && venc.dias_restantes <= diasUmbralVencimiento,
+                        'days-ok': venc.dias_restantes > diasUmbralVencimiento
+                      }"
+                    >
+                      {{
+                        venc.dias_restantes < 0
+                          ? 'Vencido hace ' + (venc.dias_restantes * -1) + ' días'
+                          : venc.dias_restantes === 0
+                            ? 'Vence HOY'
+                            : 'Vence en ' + venc.dias_restantes + ' días'
+                      }}
+                    </span>
+                  </td>
+
+                  <td>
+                    <strong>{{ venc.stock_actual }} uds.</strong>
+                    <div class="lote-sub">Bs. {{ venc.valor_riesgo_venta | number: '1.2-2' }}</div>
+                  </td>
+
+                  <td>
+                    <span
+                      class="semaphore-badge"
+                      [ngClass]="{
+                        'sem-red': venc.estado_vencimiento === 'VENCIDO' || venc.estado_vencimiento === 'URGENTE',
+                        'sem-amber': venc.estado_vencimiento === 'PREVENTIVO',
+                        'sem-green': venc.estado_vencimiento === 'VIGENTE'
+                      }"
+                    >
+                      <span class="dot"></span>
+                      {{ venc.estado_vencimiento }}
+                    </span>
+                  </td>
+
+                  <td class="recommendation-cell">
+                    {{ venc.accion_sugerida }}
+                  </td>
+
+                  <td class="text-right">
+                    <button
+                      type="button"
+                      class="btn-action btn-adjust"
+                      (click)="abrirModalVencimiento(venc)"
+                    >
+                      Editar Lote / Fecha
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </ng-container>
+
+      <!-- =====================================================================
+           PESTAÑA 3: MONITOR DE STOCK DISPONIBLE (SEMÁFORO)
+           ===================================================================== -->
+      <ng-container *ngIf="pestanaActiva === 'STOCK'">
+        <section class="filters-card">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="text"
+              [(ngModel)]="filtroTexto"
+              placeholder="Buscar producto en stock por nombre, código SKU o categoría..."
+            />
+            <button *ngIf="filtroTexto" class="btn-clear-search" (click)="filtroTexto = ''">✕</button>
+          </div>
+
+          <div class="filter-controls">
+            <div class="filter-group">
+              <label>Categoría:</label>
+              <select [(ngModel)]="filtroCategoriaId">
+                <option [ngValue]="0">Todas las categorías</option>
+                <option *ngFor="let cat of categorias" [ngValue]="cat.id">
+                  {{ cat.nombre }}
+                </option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>Nivel de Stock:</label>
+              <select [(ngModel)]="filtroNivel">
+                <option value="TODOS">Todos los niveles</option>
+                <option value="OPTIMO">Óptimo (Suficiente)</option>
+                <option value="BAJO">Bajo (Alerta de reposición)</option>
+                <option value="AGOTADO">Agotado (0 unidades)</option>
+              </select>
+            </div>
+
+            <button class="btn-refresh" (click)="cargarStockDisponible()">
+              <span>Actualizar Stock</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Existencias Físicas, Cobertura y Fecha de Vencimiento por Producto</h3>
+              <p>
+                Mostrando <strong>{{ itemsStockFiltrados.length }}</strong> productos ordenados por prioridad de reposición
+              </p>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 110px">SKU</th>
+                  <th>Producto / Categoría</th>
+                  <th style="width: 145px">Stock Disponible</th>
+                  <th style="width: 110px">Mínimo</th>
+                  <th style="width: 190px">Nivel de Cobertura</th>
+                  <th style="width: 150px">Vencimiento / Lote</th>
+                  <th style="width: 140px">Estado Semáforo</th>
+                  <th class="text-right" style="width: 250px">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="cargando">
+                  <td colspan="8" class="empty-cell">Consultando stock disponible en Supabase...</td>
+                </tr>
+
+                <tr *ngIf="!cargando && itemsStockFiltrados.length === 0">
+                  <td colspan="8" class="empty-cell">
+                    No se encontraron productos con esos filtros de stock.
+                    <button class="btn-link-reset" (click)="limpiarFiltros()">Ver todo el stock</button>
+                  </td>
+                </tr>
+
+                <tr *ngFor="let item of itemsStockFiltrados">
+                  <td>
+                    <span class="sku-badge">{{ item.codigo_barras }}</span>
+                  </td>
+
+                  <td>
+                    <div class="prod-title">{{ item.nombre }}</div>
+                    <div class="prod-sub">
+                      <span class="cat-chip">{{ item.categoria_nombre }}</span>
+                      <span *ngIf="item.proveedor_nombre"> · {{ item.proveedor_nombre }}</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span
+                      class="stock-number"
+                      [ngClass]="{
+                        'num-zero': item.estado_stock === 'AGOTADO',
+                        'num-low': item.estado_stock === 'BAJO',
+                        'num-ok': item.estado_stock === 'OPTIMO'
+                      }"
+                    >
+                      {{ item.stock_actual }} uds.
+                    </span>
+                  </td>
+
+                  <td class="min-col">{{ item.stock_minimo }} uds.</td>
+
+                  <td>
+                    <div class="progress-track">
+                      <div
+                        class="progress-fill"
+                        [style.width.%]="item.porcentaje_nivel"
+                        [ngClass]="{
+                          'fill-red': item.estado_stock === 'AGOTADO',
+                          'fill-amber': item.estado_stock === 'BAJO',
+                          'fill-green': item.estado_stock === 'OPTIMO'
+                        }"
+                      ></div>
+                    </div>
+                    <small class="progress-caption">
+                      Costo: Bs. {{ item.precio_compra | number: '1.2-2' }} · Venta: Bs. {{ item.valor_stock_venta | number: '1.2-2' }}
+                    </small>
+                  </td>
+
+                  <td>
+                    <div *ngIf="item.fecha_vencimiento">
+                      <strong>{{ item.fecha_vencimiento | date: 'dd/MM/yyyy' }}</strong>
+                      <div class="lote-sub">{{ item.lote || 'LT-GEN' }}</div>
+                    </div>
+                    <span *ngIf="!item.fecha_vencimiento" class="lote-sub">No perecedero</span>
+                  </td>
+
+                  <td>
+                    <span
+                      class="semaphore-badge"
+                      [ngClass]="{
+                        'sem-red': item.estado_stock === 'AGOTADO',
+                        'sem-amber': item.estado_stock === 'BAJO',
+                        'sem-green': item.estado_stock === 'OPTIMO'
+                      }"
+                    >
+                      <span class="dot"></span>
+                      {{
+                        item.estado_stock === 'AGOTADO'
+                          ? 'Agotado'
+                          : item.estado_stock === 'BAJO'
+                            ? 'Stock Bajo'
+                            : 'Stock Óptimo'
+                      }}
+                    </span>
+                  </td>
+
+                  <td class="text-right">
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-action btn-compra-directa"
+                        (click)="abrirModalNuevaCompra(item, 12)"
+                        title="Registrar compra de este producto"
+                      >
+                        + Compra
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-action btn-adjust"
+                        (click)="abrirModalAjuste(item)"
+                        title="Ajuste manual de stock"
+                      >
+                        Ajuste
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-action btn-kardex"
+                        (click)="verKardexProducto(item)"
+                        title="Consultar historial Kardex"
+                      >
+                        Kardex
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </ng-container>
+
+      <!-- =====================================================================
+           PESTAÑA 4: HISTORIAL DE MOVIMIENTOS KARDEX
+           ===================================================================== -->
+      <section class="panel-card" *ngIf="pestanaActiva === 'KARDEX'">
+        <div class="panel-header">
+          <div>
+            <h3>Historial de Movimientos de Inventario (Kardex)</h3>
+            <p>Registro cronológico de entradas por compra, ventas en caja y ajustes de stock</p>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: center;">
+            <button
+              *ngIf="productoKardexFiltroId > 0"
+              class="btn-add-inline"
+              (click)="mostrarTodoKardex()"
+            >
+              Ver Todos los Productos
+            </button>
+            <button
+              class="btn-add-inline"
+              (click)="abrirModalAjuste()"
+              title="Registrar ajuste manual de stock por conteo o merma"
+            >
+              + Nuevo Ajuste de Stock
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Fecha y Hora</th>
+                <th>Producto</th>
+                <th>Tipo de Movimiento</th>
+                <th>Cantidad</th>
+                <th>Stock Anterior</th>
+                <th>Stock Resultante</th>
+                <th>Referencia / Motivo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="movimientosKardex.length === 0">
+                <td colspan="7" class="empty-cell">
+                  No se registran movimientos de Kardex para la selección actual.
+                </td>
+              </tr>
+              <tr *ngFor="let mov of movimientosKardex">
+                <td>{{ mov.fecha_movimiento | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>
+                  <div class="prod-title">{{ mov.producto_nombre }}</div>
+                  <small class="sku-badge">{{ mov.producto_codigo }}</small>
+                </td>
+                <td>
+                  <span
+                    class="semaphore-badge"
+                    [ngClass]="{
+                      'sem-green': mov.tipo_movimiento === 'COMPRA' || mov.tipo_movimiento === 'AJUSTE_ENTRADA',
+                      'sem-amber': mov.tipo_movimiento === 'VENTA' || mov.tipo_movimiento === 'AJUSTE_SALIDA',
+                      'sem-red': mov.tipo_movimiento.includes('ANULACION')
+                    }"
+                  >
+                    {{ mov.tipo_movimiento }}
+                  </span>
+                </td>
+                <td>
+                  <strong>{{ mov.cantidad }} uds.</strong>
+                </td>
+                <td>{{ mov.stock_anterior }} uds.</td>
+                <td>
+                  <strong>{{ mov.stock_resultante }} uds.</strong>
+                </td>
+                <td>{{ mov.referencia || 'Operación de inventario' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- =========================================================================
+     MODAL 1: REGISTRAR COMPRA DE MERCADERÍA (INGRESO A INVENTARIO)
+     ========================================================================= -->
+<div class="modal-backdrop" *ngIf="modalCompraAbierto" (click)="cerrarModalCompra()">
+  <div class="modal-card modal-card-lg" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">Entrada de Mercadería al Almacén</span>
+        <h2>Registrar Compra de Mercadería</h2>
+        <p class="modal-sub">Incremente el stock en almacén, actualice costos y asiente el comprobante del proveedor</p>
+      </div>
+      <button class="btn-close-modal" (click)="cerrarModalCompra()">✕</button>
+    </div>
+
+    <form (ngSubmit)="guardarCompra()" class="modal-body">
+      <div *ngIf="errorModalCompra" class="modal-error">
+        {{ errorModalCompra }}
+      </div>
+
+      <!-- DATOS DE CABECERA DE LA COMPRA -->
+      <div class="form-row-header-compra">
+        <div class="form-group">
+          <label>Empresa Proveedora (Opcional)</label>
+          <select [(ngModel)]="formularioCompra.proveedor_id" name="proveedor_id">
+            <option [ngValue]="null">-- Sin Proveedor / Compra Directa --</option>
+            <option *ngFor="let p of proveedores" [ngValue]="p.id">
+              {{ p.nombre_empresa }} {{ !p.activo ? '(Inactivo)' : '' }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>N° de Factura / Remisión / Nota (Opcional)</label>
+          <input
+            type="text"
+            [(ngModel)]="formularioCompra.numero_factura_proveedor"
+            name="numero_factura_proveedor"
+            placeholder="Ej. FAC-00982 o en blanco (S/N)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Fecha de Recepción *</label>
+          <input
+            type="date"
+            [(ngModel)]="formularioCompra.fecha_compra"
+            name="fecha_compra"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Observaciones de Entrega</label>
+        <input
+          type="text"
+          [(ngModel)]="formularioCompra.observaciones"
+          name="observaciones"
+          placeholder="Ej. Entrega completa en almacén central, lote verificado..."
+        />
+      </div>
+
+      <!-- SECCIÓN DINÁMICA DE PRODUCTOS COMPRADOS (1. Catálogo -> 2. Producto -> 3. Empaque/Multi-Pack) -->
+      <div class="purchase-items-section">
+        <div class="items-header-bar">
+          <div>
+            <h3>Detalle de Productos a Ingresar ({{ formularioCompra.items.length }} productos)</h3>
+            <p class="section-desc">Seleccione primero el catálogo para filtrar productos y configure si compra por unidad o en paquetes/cajas (x6, x12, x24)</p>
+          </div>
+          <button type="button" class="btn-add-line" (click)="agregarLineaCompra()">
+            + Agregar Otro Producto
+          </button>
+        </div>
+
+        <div class="purchase-cards-container">
+          <div class="purchase-card-item" *ngFor="let item of formularioCompra.items; let i = index">
+            <!-- CABECERA DE LA LÍNEA -->
+            <div class="item-card-header">
+              <div class="header-left">
+                <span class="line-badge">Producto #{{ i + 1 }}</span>
+                <span class="selected-sku-tag" *ngIf="item.codigo_barras">SKU: {{ item.codigo_barras }}</span>
+              </div>
+
+              <div class="header-right">
+                <span class="current-stock-pill">
+                  Stock actual en tienda: <strong>{{ item.stock_actual }} uds.</strong>
+                </span>
+                <button
+                  type="button"
+                  class="btn-del-line"
+                  (click)="eliminarLineaCompra(i)"
+                  *ngIf="formularioCompra.items.length > 1"
+                  title="Eliminar esta línea de compra"
+                >
+                  ✕ Quitar
+                </button>
+              </div>
+            </div>
+
+            <!-- FILA 1: 1. CATÁLOGO / CATEGORÍA -> 2. PRODUCTO FILTRADO -->
+            <div class="selection-row-grid">
+              <div class="form-group cat-group">
+                <label>1. Catálogo / Categoría *</label>
+                <select
+                  [(ngModel)]="item.categoria_id"
+                  [name]="'cat_' + i"
+                  (change)="alCambiarCategoriaLinea(i)"
+                  required
+                >
+                  <option [ngValue]="0">-- Todas las Categorías --</option>
+                  <option *ngFor="let cat of categorias" [ngValue]="cat.id">
+                    {{ cat.nombre }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group prod-group">
+                <label>2. Producto a Comprar *</label>
+                <select
+                  [(ngModel)]="item.producto_id"
+                  [name]="'prod_' + i"
+                  (change)="alCambiarProductoLinea(i)"
+                  required
+                >
+                  <option [ngValue]="0" disabled>-- Selecciona el producto a ingresar --</option>
+                  <option *ngFor="let p of productosPorCategoria(item.categoria_id)" [ngValue]="p.id">
+                    {{ p.nombre }} (SKU: {{ p.codigo_barras }})
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- FILA 2: 3. CONFIGURACIÓN DE EMPAQUE / PAQUETES (x6, x12, x24, x1) -->
+            <div class="empaque-box">
+              <div class="empaque-pills-bar">
+                <span class="empaque-title">3. Modalidad de Compra / Empaque:</span>
+                <div class="pills-list">
+                  <button
+                    type="button"
+                    class="empaque-pill"
+                    [class.active]="item.modo_empaque === 'UNIDAD'"
+                    (click)="cambiarModoEmpaque(i, 'UNIDAD')"
+                  >
+                    Unidades Sueltas (x1)
+                  </button>
+                  <button
+                    type="button"
+                    class="empaque-pill"
+                    [class.active]="item.modo_empaque === 'PACK_6'"
+                    (click)="cambiarModoEmpaque(i, 'PACK_6')"
+                  >
+                    Pack x 6 (Coca Cola, gaseosas)
+                  </button>
+                  <button
+                    type="button"
+                    class="empaque-pill"
+                    [class.active]="item.modo_empaque === 'CAJA_12'"
+                    (click)="cambiarModoEmpaque(i, 'CAJA_12')"
+                  >
+                    Caja x 12 (Cervezas, vinos)
+                  </button>
+                  <button
+                    type="button"
+                    class="empaque-pill"
+                    [class.active]="item.modo_empaque === 'FARDO_24'"
+                    (click)="cambiarModoEmpaque(i, 'FARDO_24')"
+                  >
+                    Fardo x 24 (Malta, latas)
+                  </button>
+                  <button
+                    type="button"
+                    class="empaque-pill"
+                    [class.active]="item.modo_empaque === 'PERSONALIZADO'"
+                    (click)="cambiarModoEmpaque(i, 'PERSONALIZADO')"
+                  >
+                    Otro Empaque
+                  </button>
+                </div>
+              </div>
+
+              <!-- CÁLCULO DE UNIDADES Y COSTOS (ORGANIZADO EN 2 FILAS LIMPIAS) -->
+              <div class="math-container">
+                <!-- Fila 1: Cantidad de empaque y conversión física -->
+                <div class="math-units-row" [class.is-single]="item.modo_empaque === 'UNIDAD'">
+                  <div class="calc-field">
+                    <label>
+                      {{ item.modo_empaque === 'UNIDAD' ? 'Cantidad de Unidades *' : 'Cant. Paquetes / Cajas *' }}
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      [(ngModel)]="item.cantidad_paquetes"
+                      [name]="'cant_paq_' + i"
+                      (input)="alCambiarCantidadPaquetes(i)"
+                      required
+                    />
+                  </div>
+
+                  <div class="calc-symbol" *ngIf="item.modo_empaque !== 'UNIDAD'">✕</div>
+
+                  <div class="calc-field" *ngIf="item.modo_empaque !== 'UNIDAD'">
+                    <label>Uds. x Paquete</label>
+                    <input
+                      type="number"
+                      min="1"
+                      [(ngModel)]="item.unidades_por_paquete"
+                      [name]="'u_paq_' + i"
+                      [disabled]="item.modo_empaque !== 'PERSONALIZADO'"
+                      (input)="alCambiarUnidadesPorPaquete(i)"
+                      required
+                    />
+                  </div>
+
+                  <div class="calc-symbol">=</div>
+
+                  <div class="calc-result-box">
+                    <span class="res-sub">Ingreso Físico</span>
+                    <span class="res-value">+{{ item.cantidad }} uds.</span>
+                  </div>
+                </div>
+
+                <!-- Fila 2: Costos, precio unitario y total -->
+                <div class="math-costs-row" [class.is-single]="item.modo_empaque === 'UNIDAD'">
+                  <div class="calc-field">
+                    <label>
+                      {{ item.modo_empaque === 'UNIDAD' ? 'Costo Unitario (Bs.) *' : 'Costo x Paquete / Caja (Bs.) *' }}
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      [(ngModel)]="item.costo_paquete"
+                      [name]="'costo_paq_' + i"
+                      (input)="alCambiarCostoPaquete(i)"
+                      required
+                    />
+                  </div>
+
+                  <div class="calc-unit-preview" *ngIf="item.modo_empaque !== 'UNIDAD'">
+                    <span class="res-sub">Costo x Unidad</span>
+                    <span class="res-unit">Bs. {{ item.costo_unitario_compra | number: '1.2-2' }}</span>
+                  </div>
+
+                  <div class="calc-subtotal-box">
+                    <span class="res-sub">Subtotal Línea</span>
+                    <span class="res-total">Bs. {{ item.subtotal | number: '1.2-2' }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- FILA 3: CADUCIDAD, LOTE Y PRECIO DE VENTA (OPCIONAL) -->
+            <div class="card-footer-fields">
+              <div class="field-item">
+                <label>Vencimiento Lote (FEFO):</label>
+                <input type="date" [(ngModel)]="item.fecha_vencimiento" [name]="'venc_' + i" />
+              </div>
+              <div class="field-item">
+                <label>Código de Lote:</label>
+                <input type="text" [(ngModel)]="item.lote" [name]="'lote_' + i" placeholder="Ej. LT-2026-X" />
+              </div>
+              <div class="field-item">
+                <label>Nuevo Precio Venta Unitario (Opcional):</label>
+                <input type="number" step="0.01" [(ngModel)]="item.nuevo_precio_venta" [name]="'pventa_' + i" placeholder="Bs." />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-add-line-footer" (click)="agregarLineaCompra()">
+          + Agregar Otro Producto a la Compra
+        </button>
+      </div>
+
+      <!-- RESUMEN FINAL DE LA COMPRA -->
+      <div class="purchase-summary-banner">
+        <div class="summary-stat">
+          <span class="lbl">Líneas de Compra:</span>
+          <span class="val">{{ formularioCompra.items.length }} productos</span>
+        </div>
+        <div class="summary-stat">
+          <span class="lbl">Total Paquetes/Cajas:</span>
+          <span class="val">{{ totalPaquetesCompraCalculado }} bultos</span>
+        </div>
+        <div class="summary-stat">
+          <span class="lbl">Unidades Físicas Ingresando:</span>
+          <span class="val text-emerald">+{{ totalUnidadesCompraCalculado }} uds.</span>
+        </div>
+        <div class="summary-stat highlight-stat">
+          <span class="lbl">TOTAL A PAGAR AL PROVEEDOR:</span>
+          <span class="val-big">Bs. {{ totalCompraCalculado | number: '1.2-2' }}</span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="cerrarModalCompra()" [disabled]="guardando">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-save btn-confirm-purchase" [disabled]="guardando">
+          {{ guardando ? 'Registrando ingreso en inventario...' : 'Confirmar e Ingresar a Inventario' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- =========================================================================
+     MODAL 2: VER COMPROBANTE DE COMPRA / VOUCHER
+     ========================================================================= -->
+<div class="modal-backdrop" *ngIf="modalDetalleCompraAbierto" (click)="cerrarModalDetalleCompra()">
+  <div class="modal-card modal-card-voucher" (click)="$event.stopPropagation()">
+    <div class="voucher-header">
+      <div class="brand-voucher">
+        <h2>CASA COCA</h2>
+        <span>COMPROBANTE DE INGRESO DE MERCADERÍA</span>
+      </div>
+      <button class="btn-close-modal" (click)="cerrarModalDetalleCompra()">✕</button>
+    </div>
+
+    <div class="voucher-body" *ngIf="compraSeleccionada">
+      <div class="voucher-meta-grid">
+        <div class="meta-col">
+          <span class="meta-label">N° de Compra:</span>
+          <strong class="meta-val">#{{ compraSeleccionada.id }}</strong>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">N° Factura Proveedor:</span>
+          <strong class="meta-val">{{ compraSeleccionada.numero_factura_proveedor || 'Sin Factura (S/N)' }}</strong>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Fecha y Hora:</span>
+          <span class="meta-val">{{ compraSeleccionada.fecha_compra | date: 'dd/MM/yyyy HH:mm' }} hrs</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Estado:</span>
+          <span
+            class="semaphore-badge"
+            [ngClass]="compraSeleccionada.estado === 'RECIBIDA' ? 'sem-green' : 'sem-red'"
+          >
+            {{ compraSeleccionada.estado }}
+          </span>
+        </div>
+        <div class="meta-col col-span-2">
+          <span class="meta-label">Proveedor / Distribuidora:</span>
+          <strong class="meta-val">{{ compraSeleccionada.proveedor_nombre || 'Distribuidora Central' }}</strong>
+        </div>
+        <div class="meta-col col-span-2">
+          <span class="meta-label">Registrado por:</span>
+          <span class="meta-val">{{ compraSeleccionada.usuario_nombre || 'Administrador' }}</span>
+        </div>
+      </div>
+
+      <div class="voucher-table-wrapper">
+        <table class="voucher-table">
+          <thead>
+            <tr>
+              <th>SKU</th>
+              <th>Descripción del Producto</th>
+              <th style="width: 100px" class="text-right">Cantidad</th>
+              <th style="width: 120px" class="text-right">Costo Unit.</th>
+              <th style="width: 130px" class="text-right">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let det of compraSeleccionada.detalles">
+              <td><span class="sku-badge">{{ det.producto_codigo || '-' }}</span></td>
+              <td><strong>{{ det.producto_nombre || 'Producto' }}</strong></td>
+              <td class="text-right">{{ det.cantidad }} uds.</td>
+              <td class="text-right">Bs. {{ det.costo_unitario_compra | number: '1.2-2' }}</td>
+              <td class="text-right"><strong>Bs. {{ det.subtotal_linea | number: '1.2-2' }}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="voucher-total-card">
+        <div class="voucher-total-row">
+          <span>Total Unidades Recibidas:</span>
+          <strong>{{ compraSeleccionada.total_unidades }} uds.</strong>
+        </div>
+        <div class="voucher-total-row final-total">
+          <span>MONTO TOTAL DE LA COMPRA:</span>
+          <h2>Bs. {{ compraSeleccionada.total_compra | number: '1.2-2' }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="cerrarModalDetalleCompra()">Cerrar</button>
+      <button type="button" class="btn-print-voucher" (click)="imprimirComprobante()" title="Imprimir o guardar PDF del comprobante">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        <span>Imprimir Comprobante</span>
+      </button>
+      <button
+        type="button"
+        class="btn-action btn-anular"
+        *ngIf="compraSeleccionada && compraSeleccionada.estado !== 'ANULADA'"
+        (click)="anularCompra(compraSeleccionada); cerrarModalDetalleCompra()"
+      >
+        Anular Compra
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================================
+     MODAL 3: AJUSTE RÁPIDO DE STOCK
+     ========================================================================= -->
+<div class="modal-backdrop" *ngIf="modalAjusteAbierto" (click)="cerrarModalAjuste()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">Control Físico de Existencias</span>
+        <h2>Ajuste / Reposición de Stock</h2>
+      </div>
+      <button class="btn-close-modal" (click)="cerrarModalAjuste()">✕</button>
+    </div>
+
+    <form (ngSubmit)="guardarAjuste()" class="modal-body">
+      <div *ngIf="errorModalAjuste" class="modal-error">
+        {{ errorModalAjuste }}
+      </div>
+
+      <div class="form-group">
+        <label>Producto *</label>
+        <select
+          [(ngModel)]="formularioAjuste.producto_id"
+          name="producto_id"
+          (change)="alCambiarProductoAjuste()"
+        >
+          <option *ngFor="let p of resumenStock.items" [ngValue]="p.id">
+            {{ p.nombre }} (Stock actual: {{ p.stock_actual }} uds.)
+          </option>
+        </select>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Tipo de Ajuste *</label>
+          <select [(ngModel)]="formularioAjuste.tipo_movimiento" name="tipo_movimiento">
+            <option value="AJUSTE_ENTRADA">Entrada (+ Sumar Stock)</option>
+            <option value="AJUSTE_SALIDA">Salida / Merma (- Restar Stock)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Cantidad de Unidades *</label>
+          <input
+            type="number"
+            min="1"
+            [(ngModel)]="formularioAjuste.cantidad"
+            name="cantidad"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Motivo / Referencia para Kardex *</label>
+        <input
+          type="text"
+          [(ngModel)]="formularioAjuste.referencia"
+          name="referencia"
+          placeholder="Ej. Reposición por conteo físico de almacén..."
+          required
+        />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="cerrarModalAjuste()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-save" [disabled]="guardando">
+          {{ guardando ? 'Aplicando...' : 'Confirmar Ajuste de Stock' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- =========================================================================
+     MODAL 4: CONFIGURAR FECHA DE VENCIMIENTO, LOTE Y STOCK MÍNIMO
+     ========================================================================= -->
+<div class="modal-backdrop" *ngIf="modalVencimientoAbierto" (click)="cerrarModalVencimiento()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">Control de Caducidad y Umbral</span>
+        <h2>{{ formularioVencimiento.producto_nombre }}</h2>
+      </div>
+      <button class="btn-close-modal" (click)="cerrarModalVencimiento()">✕</button>
+    </div>
+
+    <form (ngSubmit)="guardarVencimiento()" class="modal-body">
+      <div *ngIf="errorModalVencimiento" class="modal-error">
+        {{ errorModalVencimiento }}
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Fecha de Vencimiento del Lote</label>
+          <input
+            type="date"
+            [(ngModel)]="formularioVencimiento.fecha_vencimiento"
+            name="fecha_vencimiento"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Código de Lote</label>
+          <input
+            type="text"
+            [(ngModel)]="formularioVencimiento.lote"
+            name="lote"
+            placeholder="Ej. LT-2026-A1"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Umbral de Stock Mínimo (Unidades para disparar alerta) *</label>
+        <input
+          type="number"
+          min="1"
+          [(ngModel)]="formularioVencimiento.stock_minimo"
+          name="stock_minimo"
+          required
+        />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="cerrarModalVencimiento()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-save" [disabled]="guardando">
+          {{ guardando ? 'Guardando...' : 'Guardar Configuración de Alerta' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

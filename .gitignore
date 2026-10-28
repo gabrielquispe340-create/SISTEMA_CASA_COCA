@@ -1,0 +1,33 @@
+# Python / Backend
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+*.db
+*.sqlite3
+.env
+backend/.env
+backend/uploads/productos/*
+!backend/uploads/productos/.gitkeep
+
+# Frontend / Angular
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+build/
+.vite/
+.angular/
+frontend/.angular/
+.sass-cache/
+
+# IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+*.log

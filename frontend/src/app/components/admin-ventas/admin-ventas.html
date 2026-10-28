@@ -1,0 +1,1477 @@
+<div class="admin-layout">
+  <!-- BARRA LATERAL ADMINISTRATIVA -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      </div>
+      <div class="brand-title">
+        <h2>CASA COCA</h2>
+        <span>Panel Administrativo</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label">GESTIÓN PRINCIPAL</div>
+    <nav class="sidebar-nav">
+      <a routerLink="/admin/dashboard" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        <span>Dashboard General</span>
+      </a>
+
+      <a routerLink="/admin/reportes" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Reportes y Ganancias</span>
+      </a>
+
+      <a routerLink="/admin/ventas" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Ventas y Cobros (POS)</span>
+      </a>
+
+      <div class="nav-section-label">CATÁLOGO E INVENTARIO</div>
+
+      <a routerLink="/admin/productos" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        <span>Productos y Precios</span>
+      </a>
+
+      <a routerLink="/admin/categorias" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+          <line x1="7" y1="7" x2="7.01" y2="7"></line>
+        </svg>
+        <span>Categorías</span>
+      </a>
+
+      <a routerLink="/admin/inventario" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        <span>Compras y Kardex</span>
+      </a>
+
+      <a routerLink="/admin/proveedores" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        <span>Proveedores</span>
+      </a>
+
+
+      <div class="nav-section-label">CONTROL INTERNO</div>
+
+      <a routerLink="/admin/usuarios" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        <span>Usuarios y Empleados</span>
+      </a>
+
+      <a routerLink="/admin/bitacora" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Bitácora de Actividades</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button type="button" class="btn-logout-sidebar" (click)="cerrarSesion()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-titles">
+        <div class="breadcrumb">VENTAS Y SUPERVISIÓN</div>
+        <h1>Gestión de Ventas y Cobros</h1>
+        <p>Punto de Venta POS directo para administración y supervisión de transacciones</p>
+      </div>
+
+      <div class="topbar-actions">
+        <!-- SELECTOR DE PESTAÑAS (POS vs HISTORIAL) -->
+        <div class="topbar-tab-switch">
+          <button
+            type="button"
+            class="tab-btn"
+            [class.active]="pestanaActiva === 'pos'"
+            (click)="cambiarPestana('pos')"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span>Punto de Venta (POS)</span>
+          </button>
+          <button
+            type="button"
+            class="tab-btn"
+            [class.active]="pestanaActiva === 'historial'"
+            (click)="cambiarPestana('historial')"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>Historial y Supervisión</span>
+          </button>
+          <button
+            type="button"
+            class="tab-btn"
+            [class.active]="pestanaActiva === 'movimientos'"
+            (click)="cambiarPestana('movimientos')"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <polyline points="17 1 21 5 17 9"></polyline>
+              <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+              <polyline points="7 23 3 19 7 15"></polyline>
+              <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+            </svg>
+            <span>Movimientos de Caja</span>
+          </button>
+        </div>
+
+        <div class="user-chip">
+          <div class="user-avatar">{{ obtenerIniciales() }}</div>
+          <div class="user-meta">
+            <span class="user-name">{{ usuario?.nombre_completo || 'Administrador' }}</span>
+            <span class="user-role">{{ usuario?.rol?.nombre || 'ADMIN' }}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- VISTA 1: PUNTO DE VENTA (POS) -->
+    <main *ngIf="pestanaActiva === 'pos'" class="pos-workspace">
+      <!-- COLUMNA IZQUIERDA: CATÁLOGO Y ESCÁNER (60%) -->
+      <section class="pos-catalog-column">
+        <div class="scanner-card">
+          <div class="scanner-input-wrapper">
+            <span class="scanner-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+                <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+                <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+                <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                <line x1="7" y1="8" x2="7" y2="16"></line>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="17" y1="8" x2="17" y2="16"></line>
+              </svg>
+            </span>
+            <input
+              type="text"
+              class="scanner-input"
+              [(ngModel)]="busquedaTexto"
+              (input)="filtrarProductos()"
+              (keydown.enter)="onEscanearEnter()"
+              placeholder="Escanear código de barras o buscar por nombre... (Enter para agregar)"
+              autofocus
+            />
+            <button
+              *ngIf="busquedaTexto"
+              type="button"
+              class="btn-clear-search"
+              (click)="busquedaTexto = ''; filtrarProductos()"
+            >
+              ✕
+            </button>
+          </div>
+
+          <!-- PESTAÑAS DE CATEGORÍAS -->
+          <div class="category-tabs-scroll">
+            <button
+              type="button"
+              class="cat-tab"
+              [class.active]="categoriaSeleccionadaId === 0"
+              (click)="seleccionarCategoria(0)"
+            >
+              Todos ({{ productos.length }})
+            </button>
+            <button
+              *ngFor="let cat of categorias"
+              type="button"
+              class="cat-tab"
+              [class.active]="categoriaSeleccionadaId === cat.id"
+              (click)="seleccionarCategoria(cat.id)"
+            >
+              {{ cat.nombre }}
+            </button>
+          </div>
+        </div>
+
+        <!-- GRILLA DE PRODUCTOS -->
+        <div class="products-scroll-area">
+          <div *ngIf="cargando" class="loading-state">
+            <div class="spinner"></div>
+            <p>Cargando catálogo de productos...</p>
+          </div>
+
+          <div *ngIf="!cargando && productosFiltrados.length === 0" class="empty-products-state">
+            <div class="empty-icon">🔍</div>
+            <h3>No se encontraron productos</h3>
+            <p>Intente con otro término o seleccione otra categoría.</p>
+          </div>
+
+          <div *ngIf="!cargando && productosFiltrados.length > 0" class="product-cards-grid">
+            <div
+              *ngFor="let p of productosFiltrados"
+              class="pos-product-card"
+              [class.out-of-stock]="p.stock_actual <= 0"
+              (click)="p.stock_actual > 0 ? agregarAlCarrito(p) : null"
+            >
+              <div class="card-header-meta">
+                <span class="cat-chip">{{ p.categoria?.nombre || 'General' }}</span>
+                <span
+                  class="stock-badge"
+                  [class.badge-in-stock]="p.stock_actual > 5"
+                  [class.badge-low-stock]="p.stock_actual > 0 && p.stock_actual <= 5"
+                  [class.badge-out-stock]="p.stock_actual <= 0"
+                >
+                  {{ p.stock_actual > 0 ? p.stock_actual + ' unid.' : 'Agotado' }}
+                </span>
+              </div>
+
+              <h4 class="product-name" [title]="p.nombre">{{ p.nombre }}</h4>
+              <div class="product-code">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                  <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                </svg>
+                <span>{{ p.codigo_barras || 'S/C' }}</span>
+              </div>
+
+              <div class="card-footer-action">
+                <div class="price-tag">
+                  <span class="currency">Bs.</span>
+                  <span class="amount">{{ p.precio_venta | number:'1.2-2' }}</span>
+                </div>
+
+                <div class="btn-add-action">
+                  <span *ngIf="getCantidadEnCarrito(p.id) > 0" class="in-cart-indicator">
+                    {{ getCantidadEnCarrito(p.id) }} en carrito
+                  </span>
+                  <button
+                    type="button"
+                    class="btn-quick-add"
+                    [disabled]="p.stock_actual <= 0"
+                    (click)="$event.stopPropagation(); agregarAlCarrito(p)"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>Agregar</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMNA DERECHA: CARRITO REACTIVO Y COBRO (40%) -->
+      <aside class="pos-cart-column">
+        <div class="cart-card">
+          <!-- CABECERA DEL CARRITO -->
+          <div class="cart-header">
+            <div class="cart-title-info">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span>Carrito de Venta</span>
+              </h3>
+              <span class="cart-count-badge">
+                {{ carrito.length }} {{ carrito.length === 1 ? 'producto' : 'productos' }} ({{ getTotalUnidades() }} unid.)
+              </span>
+            </div>
+
+            <button
+              type="button"
+              class="btn-clear-cart"
+              [disabled]="carrito.length === 0"
+              (click)="vaciarCarrito()"
+              title="Vaciar todo el carrito"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+              <span>Vaciar</span>
+            </button>
+          </div>
+
+          <!-- SELECCIÓN RÁPIDA DE CLIENTE -->
+          <div class="cart-customer-bar">
+            <div class="customer-select-wrapper">
+              <label for="adminClienteSelect">Cliente:</label>
+              <select
+                id="adminClienteSelect"
+                [(ngModel)]="clienteSeleccionadoId"
+                (change)="onClienteChange()"
+                class="customer-select"
+              >
+                <option [ngValue]="0">Cliente Mostrador (S/N)</option>
+                <option *ngFor="let c of clientes" [ngValue]="c.id">
+                  {{ c.nombre_completo }} — NIT/CI: {{ c.documento_identidad }}
+                </option>
+              </select>
+            </div>
+            <button
+              type="button"
+              class="btn-new-customer-quick"
+              (click)="abrirModalNuevoCliente()"
+              title="Registrar nuevo cliente"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14" height="14">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>Nuevo</span>
+            </button>
+          </div>
+
+          <!-- LISTADO DE ÍTEMS EN EL CARRITO -->
+          <div class="cart-items-container">
+            <div *ngIf="carrito.length === 0" class="empty-cart-state">
+              <div class="cart-empty-art">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+              </div>
+              <p class="empty-lead">El carrito está vacío</p>
+              <p class="empty-sub">Escanee un código de barras o haga clic en los productos para comenzar a vender.</p>
+            </div>
+
+            <div *ngIf="carrito.length > 0" class="cart-items-list">
+              <div *ngFor="let item of carrito; let i = index" class="cart-item-row">
+                <div class="item-main-details">
+                  <div class="item-name-code">
+                    <span class="item-name">{{ item.producto.nombre }}</span>
+                    <span class="item-code">SKU: {{ item.producto.codigo_barras || 'S/C' }}</span>
+                  </div>
+                  <div class="item-unit-price">
+                    Bs. {{ item.precio_unitario | number:'1.2-2' }} c/u
+                  </div>
+                </div>
+
+                <!-- CONTROLES DE CANTIDAD Y SUB-DESCUENTO -->
+                <div class="item-controls-row">
+                  <div class="qty-stepper">
+                    <button
+                      type="button"
+                      class="btn-qty minus"
+                      (click)="modificarCantidad(item, -1)"
+                      title="Reducir cantidad"
+                    >
+                      −
+                    </button>
+                    <input
+                      type="number"
+                      class="qty-input"
+                      [value]="item.cantidad"
+                      min="1"
+                      [max]="item.producto.stock_actual"
+                      (change)="onCantidadManualChange(item, $any($event.target).value)"
+                    />
+                    <button
+                      type="button"
+                      class="btn-qty plus"
+                      [disabled]="item.cantidad >= item.producto.stock_actual"
+                      (click)="modificarCantidad(item, 1)"
+                      title="Aumentar cantidad"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <div class="item-discount-wrap">
+                    <label>Desc:</label>
+                    <input
+                      type="number"
+                      step="0.5"
+                      min="0"
+                      class="item-discount-input"
+                      [value]="item.descuento_linea"
+                      (change)="onDescuentoLineaChange(item, $any($event.target).value)"
+                      placeholder="0.00"
+                    />
+                  </div>
+
+                  <div class="item-subtotal-block">
+                    <span class="subtotal-val">Bs. {{ item.subtotal_linea | number:'1.2-2' }}</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    class="btn-remove-item"
+                    (click)="eliminarDelCarrito(item)"
+                    title="Quitar producto"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RESUMEN FINANCIERO Y FORMAS DE PAGO -->
+          <div class="cart-checkout-footer">
+            <div class="summary-lines">
+              <div class="summary-row">
+                <span>Subtotal:</span>
+                <span class="value">Bs. {{ getSubtotal() | number:'1.2-2' }}</span>
+              </div>
+              <div class="summary-row discount-row">
+                <span class="label-with-input">
+                  <span>Descuento Global (Bs.):</span>
+                </span>
+                <input
+                  type="number"
+                  step="0.5"
+                  min="0"
+                  class="global-discount-input"
+                  [value]="descuentoGlobal"
+                  (input)="onDescuentoGlobalChange($any($event.target).value)"
+                  placeholder="0.00"
+                />
+              </div>
+              <div class="summary-row total-highlight-row">
+                <span class="total-label">TOTAL A COBRAR:</span>
+                <span class="total-amount">Bs. {{ getTotal() | number:'1.2-2' }}</span>
+              </div>
+            </div>
+
+            <!-- FORMA DE PAGO -->
+            <div class="payment-methods-selector">
+              <span class="section-tag">Método de Pago:</span>
+              <div class="payment-tabs">
+                <button
+                  type="button"
+                  class="btn-pay-method"
+                  [class.active]="metodoPago === 'EFECTIVO'"
+                  (click)="seleccionarMetodoPago('EFECTIVO')"
+                >
+                  💵 Efectivo
+                </button>
+                <button
+                  type="button"
+                  class="btn-pay-method"
+                  [class.active]="metodoPago === 'QR'"
+                  (click)="seleccionarMetodoPago('QR')"
+                >
+                  📱 QR
+                </button>
+              </div>
+            </div>
+
+            <!-- CÁLCULO DE EFECTIVO Y VUELTO -->
+            <div *ngIf="metodoPago === 'EFECTIVO'" class="cash-calc-panel">
+              <div class="cash-input-row">
+                <label for="adminMontoRecibidoInput">Monto Recibido:</label>
+                <div class="input-bs-wrapper">
+                  <span class="prefix">Bs.</span>
+                  <input
+                    id="adminMontoRecibidoInput"
+                    type="number"
+                    step="0.50"
+                    min="0"
+                    class="cash-input"
+                    [value]="montoRecibido"
+                    (input)="onMontoRecibidoChange($any($event.target).value)"
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
+
+              <!-- DENOMINACIONES RÁPIDAS BOLIVIANOS -->
+              <div class="denominations-chips">
+                <button
+                  *ngFor="let d of denominacionesBs"
+                  type="button"
+                  class="btn-denom"
+                  (click)="sumarDenominacion(d)"
+                >
+                  +{{ d }}
+                </button>
+                <button
+                  type="button"
+                  class="btn-denom exact"
+                  (click)="establecerMontoExacto()"
+                >
+                  Exacto
+                </button>
+              </div>
+
+              <!-- ESTADO DEL VUELTO O FALTANTE -->
+              <div
+                *ngIf="carrito.length > 0 && montoRecibido >= getTotal()"
+                class="vuelto-badge-box positive"
+              >
+                <span class="vuelto-label">Cambio / Vuelto a Entregar:</span>
+                <span class="vuelto-amount">Bs. {{ vuelto | number:'1.2-2' }}</span>
+              </div>
+
+              <div
+                *ngIf="carrito.length > 0 && montoRecibido > 0 && montoRecibido < getTotal()"
+                class="vuelto-badge-box negative"
+              >
+                <span class="vuelto-label">Falta por Cobrar:</span>
+                <span class="vuelto-amount">Bs. {{ faltaPorPagar | number:'1.2-2' }}</span>
+              </div>
+            </div>
+
+            <!-- MENSAJES QR -->
+            <div *ngIf="metodoPago === 'QR'" class="info-payment-box qr-box">
+              <div class="info-icon">📲</div>
+              <div class="info-desc">
+                <strong>Cobro mediante Código QR Simple</strong>
+                <p>Presente el QR al cliente. Monto total a transferir: <strong>Bs. {{ getTotal() | number:'1.2-2' }}</strong></p>
+              </div>
+            </div>
+
+            <!-- BOTÓN PRINCIPAL -->
+            <button
+              type="button"
+              class="btn-submit-sale"
+              [disabled]="!puedeFinalizarVenta"
+              (click)="finalizarVenta()"
+            >
+              <span *ngIf="!guardandoVenta">
+                COMPLETAR VENTA (Bs. {{ getTotal() | number:'1.2-2' }})
+              </span>
+              <span *ngIf="guardandoVenta" class="submitting-spinner">
+                <div class="mini-spinner"></div>
+                <span>Procesando venta...</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- VISTA 2: HISTORIAL Y SUPERVISIÓN DE VENTAS -->
+    <main *ngIf="pestanaActiva === 'historial'" class="historial-workspace">
+      <!-- TARJETAS DE INDICADORES (KPIs) -->
+      <section class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Ventas Registradas</span>
+            <h3 class="kpi-value">{{ totalVentasCount }}</h3>
+            <span class="kpi-sub">Transacciones filtradas</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon emerald">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Total Facturado</span>
+            <h3 class="kpi-value">Bs. {{ totalFacturadoBs | number:'1.2-2' }}</h3>
+            <span class="kpi-sub">Solo ventas completadas</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+              <circle cx="12" cy="12" r="2"></circle>
+              <path d="M6 12h.01M18 12h.01"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Cobros en Efectivo</span>
+            <h3 class="kpi-value">Bs. {{ totalEfectivoBs | number:'1.2-2' }}</h3>
+            <span class="kpi-sub">Ingresos en billetes/monedas</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Cobros con QR</span>
+            <h3 class="kpi-value">Bs. {{ totalOtrosMetodosBs | number:'1.2-2' }}</h3>
+            <span class="kpi-sub">Pagos digitales y transferencias QR</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- BARRA DE FILTROS DEL HISTORIAL -->
+      <section class="filters-card">
+        <div class="filters-row">
+          <div class="search-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="text"
+              [(ngModel)]="filtroHistorialTexto"
+              (input)="filtrarHistorial()"
+              placeholder="Buscar por comprobante, cliente, documento o cajero..."
+              class="filter-input-search"
+            />
+          </div>
+
+          <div class="date-filter-wrap">
+            <label>Desde:</label>
+            <input
+              type="date"
+              [(ngModel)]="filtroHistorialFechaDesde"
+              (change)="filtrarHistorial()"
+              class="filter-input-date"
+            />
+          </div>
+
+          <div class="date-filter-wrap">
+            <label>Hasta:</label>
+            <input
+              type="date"
+              [(ngModel)]="filtroHistorialFechaHasta"
+              (change)="filtrarHistorial()"
+              class="filter-input-date"
+            />
+          </div>
+
+          <div class="select-filter-wrap">
+            <label>Estado:</label>
+            <select
+              [(ngModel)]="filtroHistorialEstado"
+              (change)="filtrarHistorial()"
+              class="filter-select"
+            >
+              <option value="TODAS">Todas las ventas</option>
+              <option value="COMPLETADA">Solo Completadas</option>
+              <option value="ANULADA">Solo Anuladas</option>
+            </select>
+          </div>
+
+          <div class="filters-actions">
+            <button type="button" class="btn-clear-filters" (click)="limpiarFiltrosHistorial()" title="Limpiar filtros">
+              Limpiar
+            </button>
+            <button type="button" class="btn-export-csv" (click)="exportarCSV()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Exportar CSV</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TABLA DE SUPERVISIÓN DE VENTAS -->
+      <section class="table-card">
+        <div *ngIf="cargandoHistorial" class="loading-state">
+          <div class="spinner"></div>
+          <p>Cargando transacciones de ventas...</p>
+        </div>
+
+        <div *ngIf="!cargandoHistorial && ventasFiltradas.length === 0" class="empty-products-state">
+          <div class="empty-icon">🧾</div>
+          <h3>No se encontraron registros de ventas</h3>
+          <p>Ajuste los filtros de fecha o búsqueda para ver transacciones.</p>
+        </div>
+
+        <div *ngIf="!cargandoHistorial && ventasFiltradas.length > 0" class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>N° Comprobante</th>
+                <th>Fecha y Hora</th>
+                <th>Cajero / Usuario</th>
+                <th>Cliente</th>
+                <th>Método de Pago</th>
+                <th class="text-right">Subtotal</th>
+                <th class="text-right">Descuento</th>
+                <th class="text-right">Total (Bs.)</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let v of ventasFiltradas" [class.row-anulada]="v.estado === 'ANULADA'">
+                <td class="cell-comprobante">
+                  <strong>{{ v.numero_comprobante }}</strong>
+                </td>
+                <td class="cell-date">
+                  {{ v.fecha_venta | date:'dd/MM/yyyy HH:mm' }}
+                </td>
+                <td>
+                  <span class="user-badge">{{ v.usuario_nombre || 'Usuario #' + v.usuario_id }}</span>
+                </td>
+                <td>
+                  <div class="client-meta">
+                    <strong>{{ v.cliente_nombre || 'Cliente Mostrador' }}</strong>
+                    <span class="doc-text">NIT/CI: {{ v.cliente_documento || 'S/N' }}</span>
+                  </div>
+                </td>
+                <td>
+                  <span
+                    class="pay-method-badge"
+                    [class.cash]="v.metodo_pago === 'EFECTIVO'"
+                    [class.qr]="v.metodo_pago === 'QR'"
+                    [class.card]="v.metodo_pago === 'TARJETA'"
+                  >
+                    {{ v.metodo_pago }}
+                  </span>
+                </td>
+                <td class="text-right">Bs. {{ v.subtotal | number:'1.2-2' }}</td>
+                <td class="text-right text-muted">-Bs. {{ v.descuento | number:'1.2-2' }}</td>
+                <td class="text-right cell-total">
+                  <strong>Bs. {{ v.total | number:'1.2-2' }}</strong>
+                </td>
+                <td class="text-center">
+                  <span
+                    class="status-pill"
+                    [class.status-completada]="v.estado === 'COMPLETADA'"
+                    [class.status-anulada]="v.estado === 'ANULADA'"
+                  >
+                    {{ v.estado }}
+                  </span>
+                </td>
+                <td class="text-center">
+                  <div class="row-actions">
+                    <button
+                      type="button"
+                      class="btn-row-action btn-view-ticket"
+                      (click)="verTicketHistorico(v)"
+                      title="Ver e imprimir comprobante"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                      </svg>
+                    </button>
+                    <button
+                      *ngIf="v.estado === 'COMPLETADA'"
+                      type="button"
+                      class="btn-row-action btn-void-sale"
+                      (click)="solicitarAnulacion(v)"
+                      title="Anular venta y reingresar productos al stock"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- VISTA 3: MOVIMIENTOS DE CAJA (SUPERVISIÓN ADMIN) -->
+    <main *ngIf="pestanaActiva === 'movimientos'" class="movimientos-admin-workspace">
+      <!-- PANEL SUPERIOR DE ACCIONES Y KPIS -->
+      <section class="movimientos-header-card">
+        <div class="header-titles-box">
+          <div class="icon-circle-admin emerald">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+              <polyline points="17 1 21 5 17 9"></polyline>
+              <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+              <polyline points="7 23 3 19 7 15"></polyline>
+              <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+            </svg>
+          </div>
+          <div>
+            <h2>Movimientos de Efectivo de Caja</h2>
+            <p>Registro y auditoría de entradas y salidas de dinero de todos los turnos</p>
+          </div>
+        </div>
+
+        <div class="header-action-btns">
+          <button
+            type="button"
+            class="btn-action-movimiento ingreso"
+            (click)="abrirModalMovimientoAdmin('INGRESO')"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Registrar Ingreso</span>
+          </button>
+
+          <button
+            type="button"
+            class="btn-action-movimiento egreso"
+            (click)="abrirModalMovimientoAdmin('EGRESO')"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Registrar Egreso</span>
+          </button>
+
+          <button
+            type="button"
+            class="btn-refresh-movs"
+            (click)="cargarMovimientosCaja()"
+            title="Actualizar movimientos"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span>Actualizar</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- BARRA DE FILTROS -->
+      <section class="filters-card">
+        <div class="filters-grid">
+          <div class="filter-item search-grow">
+            <label>Buscar movimiento</label>
+            <div class="search-input-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input
+                type="text"
+                [(ngModel)]="filtroMovimientoTexto"
+                placeholder="Buscar por motivo, comprobante o cajero..."
+              />
+            </div>
+          </div>
+
+          <div class="filter-item">
+            <label>Tipo de movimiento</label>
+            <select class="filter-select" [(ngModel)]="filtroMovimientoTipo">
+              <option value="TODOS">Todos los tipos</option>
+              <option value="INGRESO">Solo Ingresos (+)</option>
+              <option value="EGRESO">Solo Egresos (-)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- TABLA DE MOVIMIENTOS -->
+      <section class="table-card">
+        <div *ngIf="cargandoMovimientos" class="loading-state">
+          <div class="spinner"></div>
+          <p>Cargando movimientos de efectivo...</p>
+        </div>
+
+        <div *ngIf="!cargandoMovimientos && movimientosFiltrados.length === 0" class="empty-products-state">
+          <div class="empty-icon">💸</div>
+          <h3>No se encontraron movimientos registrados</h3>
+          <p>Utiliza los botones de la parte superior para registrar un nuevo ingreso o egreso de caja.</p>
+        </div>
+
+        <div *ngIf="!cargandoMovimientos && movimientosFiltrados.length > 0" class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Fecha y Hora</th>
+                <th>Turno N°</th>
+                <th>Tipo</th>
+                <th>Concepto / Motivo</th>
+                <th>N° Comprobante</th>
+                <th>Usuario / Cajero</th>
+                <th class="text-right">Monto</th>
+                <th class="text-center">Recibo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let m of movimientosFiltrados">
+                <td>
+                  <strong>{{ m.fecha | date:'HH:mm:ss' }}</strong>
+                  <span class="sub-date" style="display:block; font-size: 0.74rem; color: #64748b;">{{ m.fecha | date:'dd/MM/yyyy' }}</span>
+                </td>
+                <td>
+                  <span class="badge-turno">Turno #{{ m.sesion_caja_id }}</span>
+                </td>
+                <td>
+                  <span
+                    class="badge-movimiento"
+                    [class.badge-ingreso]="m.tipo === 'INGRESO'"
+                    [class.badge-egreso]="m.tipo === 'EGRESO'"
+                  >
+                    <span *ngIf="m.tipo === 'INGRESO'">➕ INGRESO</span>
+                    <span *ngIf="m.tipo === 'EGRESO'">➖ EGRESO</span>
+                  </span>
+                </td>
+                <td>
+                  <strong>{{ m.motivo }}</strong>
+                </td>
+                <td>
+                  <span *ngIf="m.numero_comprobante" class="badge-comprobante-num">
+                    {{ m.numero_comprobante }}
+                  </span>
+                  <span *ngIf="!m.numero_comprobante" style="color: #94a3b8; font-size: 0.75rem; font-style: italic;">
+                    Sin comp.
+                  </span>
+                </td>
+                <td>{{ m.usuario_nombre || 'Usuario' }}</td>
+                <td class="text-right">
+                  <strong
+                    style="font-size: 0.95rem; font-weight: 800;"
+                    [class.text-emerald]="m.tipo === 'INGRESO'"
+                    [class.text-rose]="m.tipo === 'EGRESO'"
+                  >
+                    {{ m.tipo === 'INGRESO' ? '+' : '-' }} Bs. {{ m.monto | number:'1.2-2' }}
+                  </strong>
+                </td>
+                <td class="text-center">
+                  <button
+                    type="button"
+                    class="btn-row-action"
+                    (click)="abrirComprobanteMovimientoAdmin(m)"
+                    title="Imprimir comprobante térmico"
+                  >
+                    🧾
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- MODAL: REGISTRO RÁPIDO DE CLIENTE (POS)                                   -->
+<div *ngIf="modalNuevoCliente" class="modal-backdrop">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <h3>Registrar Nuevo Cliente</h3>
+        <p>Alta inmediata de cliente desde el Punto de Venta</p>
+      </div>
+      <button type="button" class="btn-close-modal" (click)="cerrarModalNuevoCliente()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Documento de Identidad (NIT / CI) *</label>
+        <input
+          type="text"
+          [(ngModel)]="nuevoCliente.documento_identidad"
+          placeholder="Ej. 1024589018 ó 6894521 LP"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Nombre Completo o Razón Social *</label>
+        <input
+          type="text"
+          [(ngModel)]="nuevoCliente.nombre_completo"
+          placeholder="Ej. Juan Pérez Gómez o Distribuidora Andina"
+          required
+        />
+      </div>
+
+      <div class="form-group-row">
+        <div class="form-group">
+          <label>Teléfono / Celular</label>
+          <input
+            type="text"
+            [(ngModel)]="nuevoCliente.telefono"
+            placeholder="Ej. 70012345"
+          />
+        </div>
+        <div class="form-group">
+          <label>Correo Electrónico</label>
+          <input
+            type="email"
+            [(ngModel)]="nuevoCliente.email"
+            placeholder="cliente@correo.com"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="cerrarModalNuevoCliente()">
+        Cancelar
+      </button>
+      <button
+        type="button"
+        class="btn-save"
+        [disabled]="guardandoCliente || !nuevoCliente.documento_identidad.trim() || !nuevoCliente.nombre_completo.trim()"
+        (click)="guardarNuevoCliente()"
+      >
+        <span *ngIf="!guardandoCliente">Guardar y Seleccionar</span>
+        <span *ngIf="guardandoCliente">Guardando...</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- MODAL: CONFIRMAR ANULACIÓN DE VENTA (SOLO ADMIN)                          -->
+<!-- ========================================================================= -->
+<div *ngIf="modalAnular && ventaAAnular" class="modal-backdrop">
+  <div class="modal-card modal-confirm-void">
+    <div class="modal-header header-danger">
+      <div class="modal-title-wrap">
+        <h3>¿Anular Venta {{ ventaAAnular.numero_comprobante }}?</h3>
+        <p>Esta acción revertirá la transacción e incrementará el stock</p>
+      </div>
+      <button type="button" class="btn-close-modal" (click)="cerrarModalAnular()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="void-warning-box">
+        <div class="warning-icon">⚠️</div>
+        <div class="warning-text">
+          <p>
+            Se reintegrarán automáticamente al inventario todas las unidades vendidas en este comprobante
+            por un total de <strong>Bs. {{ ventaAAnular.total | number:'1.2-2' }}</strong>.
+          </p>
+          <p class="sub-alert">Se registrará una entrada de tipo ANULACION en el Kardex y un evento crítico en la Bitácora.</p>
+        </div>
+      </div>
+
+      <div class="void-details-summary">
+        <div class="summary-line">
+          <span>Cliente:</span>
+          <strong>{{ ventaAAnular.cliente_nombre || 'Cliente Mostrador' }}</strong>
+        </div>
+        <div class="summary-line">
+          <span>Fecha Original:</span>
+          <span>{{ ventaAAnular.fecha_venta | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+        <div class="summary-line">
+          <span>Método de Pago:</span>
+          <span>{{ ventaAAnular.metodo_pago }}</span>
+        </div>
+        <div class="summary-line total">
+          <span>Total a Revertir:</span>
+          <strong class="text-danger">Bs. {{ ventaAAnular.total | number:'1.2-2' }}</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="cerrarModalAnular()">
+        Volver
+      </button>
+      <button
+        type="button"
+        class="btn-confirm-void"
+        [disabled]="anulandoVenta"
+        (click)="confirmarAnulacion()"
+      >
+        <span *ngIf="!anulandoVenta">Sí, Anular y Reintegrar Stock</span>
+        <span *ngIf="anulandoVenta">Anulando...</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- MODAL: COMPROBANTE DE VENTA / TICKET DE CAJA IMPRIMIBLE                   -->
+<!-- ========================================================================= -->
+<div *ngIf="modalTicket && datosTicket" class="modal-backdrop modal-ticket-backdrop">
+  <div class="modal-ticket-card">
+    <div class="ticket-actions-bar no-print">
+      <div class="ticket-status-heading">
+        <span class="success-icon">✓</span>
+        <h4>Comprobante de Venta</h4>
+      </div>
+      <div class="actions-group">
+        <button type="button" class="btn-print-ticket" (click)="imprimirTicket()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>Imprimir Ticket</span>
+        </button>
+        <button type="button" class="btn-done-ticket" (click)="cerrarTicket()">
+          Cerrar
+        </button>
+      </div>
+    </div>
+
+    <!-- FORMATO TÉRMICO DE TICKET DE VENTA (IMPRIMIBLE) -->
+    <div id="thermal-receipt" class="thermal-receipt-paper">
+      <div class="receipt-header">
+        <img src="/logo.png" alt="CASA COCA" class="receipt-logo-img">
+        <h2 class="receipt-brand">CASA COCA</h2>
+        <p class="receipt-sub">COCA MACHUCADA · VENTA DE MOSTRADOR</p>
+        <p class="receipt-nit">NIT: 1028475019 · La Paz, Bolivia</p>
+        <div class="dotted-divider"></div>
+        <div class="receipt-meta">
+          <p><strong>N° COMPROBANTE:</strong> {{ datosTicket.comprobante }}</p>
+          <p><strong>FECHA:</strong> {{ datosTicket.fecha | date:'dd/MM/yyyy HH:mm' }}</p>
+          <p><strong>CAJERO:</strong> {{ datosTicket.cajero }}</p>
+          <p><strong>CLIENTE:</strong> {{ datosTicket.cliente.nombre_completo }}</p>
+          <p><strong>NIT/CI:</strong> {{ datosTicket.cliente.documento_identidad }}</p>
+        </div>
+        <div class="dotted-divider"></div>
+      </div>
+
+      <!-- TABLA DE ARTÍCULOS -->
+      <table class="receipt-items-table">
+        <thead>
+          <tr>
+            <th class="col-cant">CANT</th>
+            <th class="col-desc">PRODUCTO</th>
+            <th class="col-unit">P.UNIT</th>
+            <th class="col-tot">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let it of datosTicket.items">
+            <td class="col-cant">{{ it.cantidad }}</td>
+            <td class="col-desc">
+              {{ it.producto.nombre }}
+              <span *ngIf="it.descuento_linea > 0" class="line-desc-note">
+                (-Bs. {{ it.descuento_linea | number:'1.2-2' }})
+              </span>
+            </td>
+            <td class="col-unit">{{ it.precio_unitario | number:'1.2-2' }}</td>
+            <td class="col-tot">{{ it.subtotal_linea | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="dotted-divider"></div>
+
+      <!-- TOTALES DEL RECIBO -->
+      <div class="receipt-totals-block">
+        <div class="receipt-row">
+          <span>SUBTOTAL:</span>
+          <span>Bs. {{ datosTicket.subtotal | number:'1.2-2' }}</span>
+        </div>
+        <div *ngIf="datosTicket.descuento > 0" class="receipt-row">
+          <span>DESCUENTO:</span>
+          <span>-Bs. {{ datosTicket.descuento | number:'1.2-2' }}</span>
+        </div>
+        <div class="receipt-row bold-total">
+          <span>TOTAL A PAGAR:</span>
+          <span>Bs. {{ datosTicket.total | number:'1.2-2' }}</span>
+        </div>
+        <div class="dotted-divider"></div>
+        <div class="receipt-row">
+          <span>FORMA DE PAGO:</span>
+          <span>{{ datosTicket.metodo_pago }}</span>
+        </div>
+        <div *ngIf="datosTicket.metodo_pago === 'EFECTIVO'" class="receipt-row">
+          <span>RECIBIDO:</span>
+          <span>Bs. {{ datosTicket.recibido | number:'1.2-2' }}</span>
+        </div>
+        <div *ngIf="datosTicket.metodo_pago === 'EFECTIVO'" class="receipt-row bold-vuelto">
+          <span>CAMBIO / VUELTO:</span>
+          <span>Bs. {{ datosTicket.vuelto | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <div class="dotted-divider"></div>
+
+      <div class="receipt-footer">
+        <p class="greeting">¡GRACIAS POR SU PREFERENCIA!</p>
+        <p class="policy">Conserve su comprobante para cualquier cambio o reclamo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- MODAL: REGISTRAR INGRESO O EGRESO DE CAJA (ADMIN)                         -->
+<!-- ========================================================================= -->
+<div *ngIf="modalMovimientoAdmin" class="modal-backdrop" (click)="cerrarModalMovimientoAdmin()">
+  <div class="modal-card modal-movimiento-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <h3>Registrar Movimiento de Efectivo</h3>
+        <p>Registro de entrada o salida de dinero de caja con auditoría inmediata</p>
+      </div>
+      <button type="button" class="btn-close-modal" (click)="cerrarModalMovimientoAdmin()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <!-- SELECTOR DE TIPO (INGRESO / EGRESO) -->
+      <div class="tipo-movimiento-switch">
+        <button
+          type="button"
+          class="switch-tab-btn"
+          [class.active-ingreso]="tipoMovimientoAdmin === 'INGRESO'"
+          (click)="tipoMovimientoAdmin = 'INGRESO'"
+        >
+          <span class="tab-icon">➕</span>
+          <div class="tab-text">
+            <strong>Ingreso de Efectivo</strong>
+            <small>Aportes, cambio, sobrantes</small>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="switch-tab-btn"
+          [class.active-egreso]="tipoMovimientoAdmin === 'EGRESO'"
+          (click)="tipoMovimientoAdmin = 'EGRESO'"
+        >
+          <span class="tab-icon">➖</span>
+          <div class="tab-text">
+            <strong>Egreso de Efectivo</strong>
+            <small>Gastos, fletes, sangría</small>
+          </div>
+        </button>
+      </div>
+
+      <!-- INPUT MONTO -->
+      <div class="form-group">
+        <label for="montoMovAdminInput">Monto del Movimiento (Bs.): *</label>
+        <div class="monto-input-wrap">
+          <span class="currency-prefix">Bs.</span>
+          <input
+            id="montoMovAdminInput"
+            type="number"
+            step="0.50"
+            min="0.50"
+            class="form-control-lg"
+            [(ngModel)]="montoMovimientoAdmin"
+            placeholder="0.00"
+            autofocus
+          />
+        </div>
+      </div>
+
+      <!-- CHIPS DE MOTIVOS SUGERIDOS -->
+      <div class="motivos-chips-wrap">
+        <span class="chips-title">Motivos frecuentes para {{ tipoMovimientoAdmin === 'INGRESO' ? 'Ingreso' : 'Egreso' }}:</span>
+        <div class="chips-group">
+          <button
+            *ngFor="let chip of (tipoMovimientoAdmin === 'INGRESO' ? chipsIngresoAdmin : chipsEgresoAdmin)"
+            type="button"
+            class="chip-motivo-btn"
+            [class.selected]="motivoMovimientoAdmin === chip"
+            (click)="seleccionarChipMotivoAdmin(chip)"
+          >
+            {{ chip }}
+          </button>
+        </div>
+      </div>
+
+      <!-- INPUT MOTIVO / CONCEPTO -->
+      <div class="form-group">
+        <label for="motivoMovAdminInput">Concepto / Motivo Detallado: *</label>
+        <textarea
+          id="motivoMovAdminInput"
+          rows="2"
+          class="form-control"
+          [(ngModel)]="motivoMovimientoAdmin"
+          placeholder="Escribe el motivo del movimiento (ej. Reposición de monedas, pago de transporte)..."
+        ></textarea>
+      </div>
+
+      <!-- INPUT COMPROBANTE -->
+      <div class="form-group">
+        <label for="compMovAdminInput">N° de Comprobante / Recibo de Respaldo (Opcional):</label>
+        <input
+          id="compMovAdminInput"
+          type="text"
+          class="form-control"
+          [(ngModel)]="comprobanteMovimientoAdmin"
+          placeholder="Ej. REC-4091, FAC-00129"
+        />
+      </div>
+
+      <!-- LIVE RESUMEN DE SALDO SI HAY CAJA ABIERTA -->
+      <div class="resumen-movimiento-box" *ngIf="sesionCaja">
+        <div class="resumen-item">
+          <span>Saldo Actual:</span>
+          <strong>Bs. {{ (sesionCaja.monto_final_esperado || 0) | number:'1.2-2' }}</strong>
+        </div>
+        <div class="resumen-item">
+          <span>Movimiento:</span>
+          <strong [class.text-emerald]="tipoMovimientoAdmin === 'INGRESO'" [class.text-rose]="tipoMovimientoAdmin === 'EGRESO'">
+            {{ tipoMovimientoAdmin === 'INGRESO' ? '+' : '-' }} Bs. {{ (montoMovimientoAdmin || 0) | number:'1.2-2' }}
+          </strong>
+        </div>
+        <div class="resumen-item total-final">
+          <span>Saldo Proyectado:</span>
+          <strong>
+            Bs. {{ (tipoMovimientoAdmin === 'INGRESO' ? ((sesionCaja.monto_final_esperado || 0) + (montoMovimientoAdmin || 0)) : ((sesionCaja.monto_final_esperado || 0) - (montoMovimientoAdmin || 0))) | number:'1.2-2' }}
+          </strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="cerrarModalMovimientoAdmin()">Cancelar</button>
+      <button
+        type="button"
+        class="btn-confirm-movimiento"
+        [class.btn-ingreso]="tipoMovimientoAdmin === 'INGRESO'"
+        [class.btn-egreso]="tipoMovimientoAdmin === 'EGRESO'"
+        [disabled]="guardandoMovimientoAdmin || !montoMovimientoAdmin || montoMovimientoAdmin <= 0 || !motivoMovimientoAdmin || motivoMovimientoAdmin.trim().length < 3"
+        (click)="guardarMovimientoAdmin()"
+      >
+        <span *ngIf="!guardandoMovimientoAdmin">
+          {{ tipoMovimientoAdmin === 'INGRESO' ? 'CONFIRMAR INGRESO (+)' : 'CONFIRMAR EGRESO (-)' }}
+        </span>
+        <span *ngIf="guardandoMovimientoAdmin" class="btn-spinner-wrap">
+          <div class="mini-spinner"></div>
+          <span>Guardando movimiento...</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- MODAL: COMPROBANTE TÉRMICO DE MOVIMIENTO (ADMIN)                          -->
+<!-- ========================================================================= -->
+<div *ngIf="modalComprobanteMovimientoAdmin" class="modal-backdrop" (click)="cerrarComprobanteMovimientoAdmin()">
+  <div class="modal-card modal-ticket-card" (click)="$event.stopPropagation()">
+    <div class="ticket-actions-bar">
+      <div class="ticket-status-heading">
+        <div class="success-icon">✓</div>
+        <h4>Comprobante de {{ movimientoImprimirAdmin?.tipo === 'INGRESO' ? 'Ingreso de Efectivo' : 'Egreso de Efectivo' }}</h4>
+      </div>
+      <div class="actions-group">
+        <button type="button" class="btn-print-ticket" (click)="imprimirTicketMovimientoAdmin()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>Imprimir</span>
+        </button>
+        <button type="button" class="btn-done-ticket" (click)="cerrarComprobanteMovimientoAdmin()">Cerrar</button>
+      </div>
+    </div>
+
+    <!-- PAPEL TÉRMICO IMPRIMIBLE -->
+    <div id="thermal-receipt-movimiento-admin" class="thermal-receipt-paper">
+      <div class="receipt-header">
+        <h2 class="receipt-brand">CASA COCA</h2>
+        <p class="receipt-sub">COMPROBANTE DE MOVIMIENTO DE CAJA</p>
+        <p class="receipt-nit">NIT: 1028475019 · La Paz, Bolivia</p>
+        <div class="dotted-divider"></div>
+
+        <div class="receipt-meta">
+          <p><strong>OPERACIÓN:</strong> {{ movimientoImprimirAdmin?.tipo === 'INGRESO' ? 'INGRESO EXTRA DE EFECTIVO' : 'EGRESO / SALIDA DE EFECTIVO' }}</p>
+          <p><strong>FOLIO:</strong> MOV-{{ movimientoImprimirAdmin?.id }}</p>
+          <p><strong>N° TURNO:</strong> #{{ movimientoImprimirAdmin?.turnoId }}</p>
+          <p><strong>FECHA:</strong> {{ movimientoImprimirAdmin?.fecha | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+          <p><strong>REGISTRADO POR:</strong> {{ movimientoImprimirAdmin?.cajero }}</p>
+          <p *ngIf="movimientoImprimirAdmin?.numero_comprobante">
+            <strong>COMPROBANTE:</strong> {{ movimientoImprimirAdmin?.numero_comprobante }}
+          </p>
+        </div>
+        <div class="dotted-divider"></div>
+      </div>
+
+      <div class="receipt-financial-details">
+        <div class="receipt-concept-box">
+          <span class="label">CONCEPTO / MOTIVO:</span>
+          <p class="receipt-concept-text">{{ movimientoImprimirAdmin?.motivo }}</p>
+        </div>
+
+        <div class="dotted-divider"></div>
+
+        <div class="receipt-line highlight">
+          <span>MONTO TOTAL:</span>
+          <strong>Bs. {{ (movimientoImprimirAdmin?.monto || 0) | number:'1.2-2' }}</strong>
+        </div>
+      </div>
+
+      <div class="dotted-divider"></div>
+
+      <div class="receipt-footer">
+        <div class="signatures-wrap">
+          <div class="sign-box">
+            <div class="sign-line"></div>
+            <span>Entregué Conforme</span>
+          </div>
+          <div class="sign-box">
+            <div class="sign-line"></div>
+            <span>Recibí Conforme</span>
+          </div>
+        </div>
+        <p class="receipt-thanks">CASA COCA · Control Interno de Caja</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- TOAST DE NOTIFICACIONES                                                   -->
+<!-- ========================================================================= -->
+<div *ngIf="toast.visible" class="toast-notification" [ngClass]="toast.tipo">
+  <div class="toast-content">
+    <span class="toast-icon" *ngIf="toast.tipo === 'success'">✓</span>
+    <span class="toast-icon" *ngIf="toast.tipo === 'error'">✕</span>
+    <span class="toast-icon" *ngIf="toast.tipo === 'warning'">⚠️</span>
+    <span class="toast-icon" *ngIf="toast.tipo === 'info'">ℹ️</span>
+    <span class="toast-text">{{ toast.mensaje }}</span>
+  </div>
+  <button type="button" class="btn-toast-close" (click)="cerrarToast()">✕</button>
+</div>
