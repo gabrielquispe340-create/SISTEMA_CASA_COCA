@@ -2,12 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export function obtenerBaseUrl(): string {
+  if (typeof window !== 'undefined') {
+    const host = window.location.host;
+    // Si se accede a través de un túnel público de desarrollo (Dev Tunnels / Codespaces)
+    if (host.includes('-4200.')) {
+      return `${window.location.protocol}//${host.replace('-4200.', '-8000.')}`;
+    }
+  }
+  return 'http://127.0.0.1:8000';
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://127.0.0.1:8000';
-  private authUrl = `${this.baseUrl}/api/auth`;
+  private get baseUrl(): string {
+    return obtenerBaseUrl();
+  }
+  private get authUrl(): string {
+    return `${this.baseUrl}/api/auth`;
+  }
   private TOKEN_KEY = 'sistema_tienda_token';
   private USER_KEY = 'sistema_tienda_usuario';
   private REMEMBER_KEY = 'sistema_tienda_recordar_username';
