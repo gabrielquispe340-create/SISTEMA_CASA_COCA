@@ -11,6 +11,9 @@ export interface CartItem {
   precio_unitario: number;
   descuento_linea: number;
   subtotal_linea: number;
+  tipo_empaque?: 'UNIDAD' | 'PAQUETE';
+  nombre_presentacion?: string;
+  unidades_empaque?: number;
 }
 
 @Component({
@@ -131,6 +134,10 @@ export class AdminVentas implements OnInit {
     this.cargarDatosPOS();
   }
 
+  obtenerUrlImagen(url: string | null | undefined): string {
+    return this.apiService.obtenerUrlImagen(url);
+  }
+
   cambiarPestana(pestana: 'pos' | 'historial' | 'movimientos'): void {
     this.pestanaActiva = pestana;
     this.cdr.detectChanges();
@@ -234,23 +241,61 @@ export class AdminVentas implements OnInit {
     this.filtrarProductos();
   }
 
+  getUnidadesRealesEnCarrito(productoId: number): number {
+    return this.carrito
+      .filter((it) => it.producto.id === productoId)
+      .reduce((acc, it) => acc + (it.cantidad * (it.unidades_empaque || 1)), 0);
+  }
+
+  formatearStockDual(p: any): { paquetes: number; sueltas: number; total: number; tienePack: boolean; texto: string; corto: string } {
+    const stock = Number(p.stock_actual) || 0;
+    const uPack = Number(p.unidades_por_paquete) || 1;
+    const tienePack = !!p.tiene_paquete && uPack > 1;
+    if (!tienePack) {
+      return { paquetes: 0, sueltas: stock, total: stock, tienePack: false, texto: `${stock} uds.`, corto: `${stock} uds` };
+    }
+    const paq = Math.floor(stock / uPack);
+    const sueltas = stock % uPack;
+    const nomPack = p.nombre_paquete || 'Paq';
+    return {
+      paquetes: paq,
+      sueltas: sueltas,
+      total: stock,
+      tienePack: true,
+      texto: `${paq} ${nomPack}(s) + ${sueltas} uds.`,
+      corto: `${paq} ${nomPack} + ${sueltas} u`,
+    };
+  }
+
   onEscanearEnter(): void {
     const term = this.busquedaTexto.trim();
     if (!term) return;
 
+    // 1. Coincidencia por código de paquete
+    const prodPaquete = this.productos.find(
+      (p) => p.codigo_barra_paquete && p.codigo_barra_paquete.toLowerCase() === term.toLowerCase()
+    );
+    if (prodPaquete) {
+      this.agregarAlCarrito(prodPaquete, 'PAQUETE');
+      this.busquedaTexto = '';
+      this.filtrarProductos();
+      return;
+    }
+
+    // 2. Coincidencia por código individual
     const productoExacto = this.productos.find(
       (p) => p.codigo_barras && p.codigo_barras.toLowerCase() === term.toLowerCase()
     );
 
     if (productoExacto) {
-      this.agregarAlCarrito(productoExacto);
+      this.agregarAlCarrito(productoExacto, 'UNIDAD');
       this.busquedaTexto = '';
       this.filtrarProductos();
       return;
     }
 
     if (this.productosFiltrados.length === 1) {
-      this.agregarAlCarrito(this.productosFiltrados[0]);
+      this.agregarAlCarrito(this.productosFiltrados[0], 'UNIDAD');
       this.busquedaTexto = '';
       this.filtrarProductos();
       return;
@@ -262,60 +307,76 @@ export class AdminVentas implements OnInit {
   // =========================================================================
   // POS: OPERACIONES DEL CARRITO
   // =========================================================================
-  agregarAlCarrito(producto: any, cantidad: number = 1): void {
-    if (producto.stock_actual <= 0) {
-      this.mostrarToast(`El producto "${producto.nombre}" está agotado.`, 'warning');
+  agregarAlCarrito(producto: any, tipoEmpaque: 'UNIDAD' | 'PAQUETE' = 'UNIDAD', cantidad: number = 1): void {
+    const isPaquete = tipoEmpaque === 'PAQUETE' && !!producto.tiene_paquete && (Number(producto.unidades_por_paquete) || 1) > 1;
+    const factor = isPaquete ? Math.max(1, Number(producto.unidades_por_paquete) || 1) : 1;
+    const unidadesRequeridas = cantidad * factor;
+
+    if (producto.stock_actual < unidadesRequeridas) {
+      const descPack = isPaquete ? `${cantidad} ${producto.nombre_paquete || 'paquete(s)'} (${unidadesRequeridas} uds)` : `${cantidad} uds`;
+      this.mostrarToast(`Stock insuficiente para "${producto.nombre}". Requiere: ${descPack}, Disponible: ${producto.stock_actual} uds.`, 'warning');
       return;
     }
 
+    const unidadesYaEnCarrito = this.getUnidadesRealesEnCarrito(producto.id);
+    if ((unidadesYaEnCarrito + unidadesRequeridas) > producto.stock_actual) {
+      this.mostrarToast(
+        `Stock máximo alcanzado para "${producto.nombre}". En stock: ${producto.stock_actual} uds. (ya tienes ${unidadesYaEnCarrito} uds en carrito).`,
+        'warning'
+      );
+      return;
+    }
+
+    const precioUnit = isPaquete && producto.precio_paquete_venta && Number(producto.precio_paquete_venta) > 0
+      ? Number(producto.precio_paquete_venta)
+      : Number(producto.precio_venta);
+
+    const nomPresentacion = isPaquete
+      ? `${producto.nombre} (${producto.nombre_paquete || 'Paquete'} x${factor})`
+      : producto.nombre;
+
+    const tipoActual = isPaquete ? 'PAQUETE' : 'UNIDAD';
     const itemExistente = this.carrito.find(
-      (item) => item.producto.id === producto.id
+      (item) => item.producto.id === producto.id && (item.tipo_empaque || 'UNIDAD') === tipoActual
     );
 
     if (itemExistente) {
-      const nuevaCantidad = itemExistente.cantidad + cantidad;
-      if (nuevaCantidad > producto.stock_actual) {
-        this.mostrarToast(
-          `Stock máximo alcanzado para "${producto.nombre}". Disponible: ${producto.stock_actual}.`,
-          'warning'
-        );
-        return;
-      }
-      itemExistente.cantidad = nuevaCantidad;
+      itemExistente.cantidad += cantidad;
       this.actualizarSubtotalItem(itemExistente);
-      this.mostrarToast(`Cantidad actualizada: ${producto.nombre} (${itemExistente.cantidad})`, 'info');
+      this.mostrarToast(`Cantidad actualizada: ${nomPresentacion} (${itemExistente.cantidad})`, 'info');
     } else {
-      if (cantidad > producto.stock_actual) {
-        this.mostrarToast(
-          `Stock insuficiente para "${producto.nombre}". Disponible: ${producto.stock_actual}.`,
-          'warning'
-        );
-        return;
-      }
       const nuevoItem: CartItem = {
         producto,
         cantidad,
-        precio_unitario: producto.precio_venta,
+        precio_unitario: precioUnit,
         descuento_linea: 0,
-        subtotal_linea: producto.precio_venta * cantidad,
+        subtotal_linea: precioUnit * cantidad,
+        tipo_empaque: tipoActual,
+        nombre_presentacion: nomPresentacion,
+        unidades_empaque: factor,
       };
       this.carrito.push(nuevoItem);
-      this.mostrarToast(`Agregado al carrito: ${producto.nombre}`, 'success');
+      this.mostrarToast(`Agregado al carrito: ${nomPresentacion}`, 'success');
     }
 
     this.recalcularTotales();
   }
 
   modificarCantidad(item: CartItem, delta: number): void {
+    const factor = item.unidades_empaque || 1;
     const nuevaCantidad = item.cantidad + delta;
     if (nuevaCantidad <= 0) {
       this.eliminarDelCarrito(item);
       return;
     }
 
-    if (nuevaCantidad > item.producto.stock_actual) {
+    const unidadesOtras = this.carrito
+      .filter((it) => it !== item && it.producto.id === item.producto.id)
+      .reduce((acc, it) => acc + (it.cantidad * (it.unidades_empaque || 1)), 0);
+
+    if ((unidadesOtras + (nuevaCantidad * factor)) > item.producto.stock_actual) {
       this.mostrarToast(
-        `No hay más existencias para "${item.producto.nombre}". Stock: ${item.producto.stock_actual}`,
+        `No hay más existencias para "${item.nombre_presentacion || item.producto.nombre}". Stock: ${item.producto.stock_actual}`,
         'warning'
       );
       return;
@@ -329,12 +390,18 @@ export class AdminVentas implements OnInit {
   onCantidadManualChange(item: CartItem, valorRaw: any): void {
     let cant = parseInt(valorRaw, 10);
     if (isNaN(cant) || cant < 1) cant = 1;
-    if (cant > item.producto.stock_actual) {
+    const factor = item.unidades_empaque || 1;
+    const unidadesOtras = this.carrito
+      .filter((it) => it !== item && it.producto.id === item.producto.id)
+      .reduce((acc, it) => acc + (it.cantidad * (it.unidades_empaque || 1)), 0);
+
+    const maxPermitido = Math.floor((item.producto.stock_actual - unidadesOtras) / factor);
+    if (cant > maxPermitido) {
+      cant = Math.max(1, maxPermitido);
       this.mostrarToast(
-        `Stock insuficiente para "${item.producto.nombre}". Ajustado a ${item.producto.stock_actual}.`,
+        `Stock insuficiente para "${item.nombre_presentacion || item.producto.nombre}". Ajustado a ${cant}.`,
         'warning'
       );
-      cant = item.producto.stock_actual;
     }
     item.cantidad = cant;
     this.actualizarSubtotalItem(item);
@@ -397,6 +464,13 @@ export class AdminVentas implements OnInit {
     const subtotal = this.getSubtotal();
     const desc = Math.max(0, Number(this.descuentoGlobal) || 0);
     return Math.max(0, subtotal - desc);
+  }
+
+  hacerScrollAlCarrito(): void {
+    const el = document.getElementById('admin-pos-cart-column');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   onDescuentoGlobalChange(valorRaw: any): void {
@@ -572,10 +646,15 @@ export class AdminVentas implements OnInit {
         producto_id: item.producto.id,
         cantidad: item.cantidad,
         descuento_linea: Number(item.descuento_linea) || 0,
+        tipo_empaque: item.tipo_empaque || 'UNIDAD',
+        precio_unitario: item.precio_unitario,
       })),
     };
 
-    const snapshotCarrito = [...this.carrito];
+    const snapshotCarrito: CartItem[] = this.carrito.map((it) => ({
+      ...it,
+      producto: { ...it.producto },
+    }));
     const snapshotSubtotal = this.getSubtotal();
     const snapshotDescuento = Number(this.descuentoGlobal) || 0;
     const snapshotTotal = this.getTotal();
@@ -614,7 +693,8 @@ export class AdminVentas implements OnInit {
         snapshotCarrito.forEach((item) => {
           const prod = this.productos.find((p) => p.id === item.producto.id);
           if (prod) {
-            prod.stock_actual = Math.max(0, prod.stock_actual - item.cantidad);
+            const factor = item.unidades_empaque || 1;
+            prod.stock_actual = Math.max(0, prod.stock_actual - (item.cantidad * factor));
           }
         });
         this.filtrarProductos();

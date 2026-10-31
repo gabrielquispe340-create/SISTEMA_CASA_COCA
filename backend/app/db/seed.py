@@ -21,6 +21,42 @@ def seed_initial_data(db: Session) -> None:
         db.execute(
             text("ALTER TABLE productos ADD COLUMN IF NOT EXISTS lote VARCHAR(60)")
         )
+        db.execute(
+            text("ALTER TABLE productos ADD COLUMN IF NOT EXISTS tiene_paquete BOOLEAN DEFAULT FALSE")
+        )
+        db.execute(
+            text("ALTER TABLE productos ADD COLUMN IF NOT EXISTS nombre_paquete VARCHAR(60) DEFAULT 'Paquete'")
+        )
+        db.execute(
+            text("ALTER TABLE productos ADD COLUMN IF NOT EXISTS unidades_por_paquete INTEGER DEFAULT 1")
+        )
+        db.execute(
+            text("ALTER TABLE productos ADD COLUMN IF NOT EXISTS precio_paquete_venta NUMERIC(12, 2) DEFAULT NULL")
+        )
+        db.execute(
+            text("ALTER TABLE productos ADD COLUMN IF NOT EXISTS precio_paquete_compra NUMERIC(12, 2) DEFAULT NULL")
+        )
+        db.execute(
+            text("ALTER TABLE productos ADD COLUMN IF NOT EXISTS codigo_barra_paquete VARCHAR(60) DEFAULT NULL")
+        )
+        db.execute(
+            text("ALTER TABLE detalle_ventas ADD COLUMN IF NOT EXISTS tipo_empaque VARCHAR(20) DEFAULT 'UNIDAD'")
+        )
+        db.execute(
+            text("ALTER TABLE detalle_ventas ADD COLUMN IF NOT EXISTS unidades_empaque INTEGER DEFAULT 1")
+        )
+        db.execute(
+            text("ALTER TABLE detalle_ventas ADD COLUMN IF NOT EXISTS cantidad_empaque INTEGER DEFAULT 1")
+        )
+        db.execute(
+            text("ALTER TABLE detalle_compras ADD COLUMN IF NOT EXISTS tipo_empaque VARCHAR(20) DEFAULT 'UNIDAD'")
+        )
+        db.execute(
+            text("ALTER TABLE detalle_compras ADD COLUMN IF NOT EXISTS unidades_empaque INTEGER DEFAULT 1")
+        )
+        db.execute(
+            text("ALTER TABLE detalle_compras ADD COLUMN IF NOT EXISTS cantidad_empaque INTEGER DEFAULT 1")
+        )
         db.commit()
     except Exception:
         db.rollback()

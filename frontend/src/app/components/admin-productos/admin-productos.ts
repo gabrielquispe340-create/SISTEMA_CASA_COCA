@@ -54,9 +54,19 @@ export class AdminProductos implements OnInit {
     stock_minimo: 5,
     fecha_vencimiento: '',
     lote: '',
+    tiene_paquete: false,
+    nombre_paquete: 'Paquete',
+    unidades_por_paquete: 1,
+    precio_paquete_venta: null as number | null,
+    precio_paquete_compra: null as number | null,
+    codigo_barra_paquete: '',
     activo: true,
     imagen_url: '' as string | null,
   };
+
+  // Asistente de cálculo para stock dual inicial (Paquetes + Unidades sueltas)
+  stock_paquetes_input = 0;
+  stock_unidades_input = 0;
 
   archivoImagenSeleccionado: File | null = null;
   previewImagen: string | null = null;
@@ -207,9 +217,17 @@ export class AdminProductos implements OnInit {
       stock_minimo: 5,
       fecha_vencimiento: '',
       lote: 'LT-2026-01',
+      tiene_paquete: false,
+      nombre_paquete: 'Paquete',
+      unidades_por_paquete: 1,
+      precio_paquete_venta: null,
+      precio_paquete_compra: null,
+      codigo_barra_paquete: '',
       activo: true,
       imagen_url: null,
     };
+    this.stock_paquetes_input = 0;
+    this.stock_unidades_input = 10;
     this.archivoImagenSeleccionado = null;
     this.previewImagen = null;
     this.modalProductoAbierto = true;
@@ -219,6 +237,9 @@ export class AdminProductos implements OnInit {
   abrirModalEditar(producto: any): void {
     this.modoEdicion = true;
     this.errorModal = '';
+    const uPack = Number(producto.unidades_por_paquete) || 1;
+    const stockTotal = Number(producto.stock_actual) || 0;
+
     this.formulario = {
       id: producto.id,
       codigo_barras: producto.codigo_barras || '',
@@ -228,17 +249,76 @@ export class AdminProductos implements OnInit {
       proveedor_id: producto.proveedor_id || producto.proveedor?.id || null,
       precio_compra: Number(producto.precio_compra) || 0,
       precio_venta: Number(producto.precio_venta) || 0,
-      stock_actual: Number(producto.stock_actual) || 0,
+      stock_actual: stockTotal,
       stock_minimo: Number(producto.stock_minimo) || 5,
       fecha_vencimiento: producto.fecha_vencimiento || '',
       lote: producto.lote || '',
+      tiene_paquete: !!producto.tiene_paquete,
+      nombre_paquete: producto.nombre_paquete || 'Paquete',
+      unidades_por_paquete: uPack,
+      precio_paquete_venta: producto.precio_paquete_venta ? Number(producto.precio_paquete_venta) : null,
+      precio_paquete_compra: producto.precio_paquete_compra ? Number(producto.precio_paquete_compra) : null,
+      codigo_barra_paquete: producto.codigo_barra_paquete || '',
       activo: producto.activo !== false,
       imagen_url: producto.imagen_url || null,
     };
+
+    if (this.formulario.tiene_paquete && uPack > 1) {
+      this.stock_paquetes_input = Math.floor(stockTotal / uPack);
+      this.stock_unidades_input = stockTotal % uPack;
+    } else {
+      this.stock_paquetes_input = 0;
+      this.stock_unidades_input = stockTotal;
+    }
+
     this.archivoImagenSeleccionado = null;
     this.previewImagen = producto.imagen_url ? this.obtenerUrlImagen(producto.imagen_url) : null;
     this.modalProductoAbierto = true;
     this.cdr.detectChanges();
+  }
+
+  onToggleTienePaquete(): void {
+    if (this.formulario.tiene_paquete) {
+      if (!this.formulario.unidades_por_paquete || this.formulario.unidades_por_paquete <= 1) {
+        this.formulario.unidades_por_paquete = 6;
+      }
+      if (!this.formulario.nombre_paquete) {
+        this.formulario.nombre_paquete = 'Paquete';
+      }
+      this.recalcularStockDesdeDual();
+    } else {
+      this.stock_paquetes_input = 0;
+      this.stock_unidades_input = this.formulario.stock_actual;
+    }
+    this.cdr.detectChanges();
+  }
+
+  recalcularStockDesdeDual(): void {
+    if (this.formulario.tiene_paquete && Number(this.formulario.unidades_por_paquete) > 1) {
+      const paqs = Math.max(0, Number(this.stock_paquetes_input) || 0);
+      const uds = Math.max(0, Number(this.stock_unidades_input) || 0);
+      const uPack = Number(this.formulario.unidades_por_paquete) || 1;
+      this.formulario.stock_actual = (paqs * uPack) + uds;
+    }
+  }
+
+  formatearStockDual(p: any): { paquetes: number; sueltas: number; total: number; tienePack: boolean; texto: string } {
+    const stock = Number(p.stock_actual) || 0;
+    const uPack = Number(p.unidades_por_paquete) || 1;
+    const tienePack = !!p.tiene_paquete && uPack > 1;
+    if (!tienePack) {
+      return { paquetes: 0, sueltas: stock, total: stock, tienePack: false, texto: `${stock} uds.` };
+    }
+    const paq = Math.floor(stock / uPack);
+    const sueltas = stock % uPack;
+    const nomPack = p.nombre_paquete || 'Paquete';
+    return {
+      paquetes: paq,
+      sueltas: sueltas,
+      total: stock,
+      tienePack: true,
+      texto: `${paq} ${nomPack}(s) y ${sueltas} uds. (Total: ${stock} uds.)`,
+    };
   }
 
   onArchivoSeleccionado(event: any): void {
@@ -339,6 +419,12 @@ export class AdminProductos implements OnInit {
       stock_minimo: Math.max(0, Number(this.formulario.stock_minimo) || 0),
       fecha_vencimiento: this.formulario.fecha_vencimiento || null,
       lote: this.formulario.lote ? this.formulario.lote.trim() : null,
+      tiene_paquete: !!this.formulario.tiene_paquete,
+      nombre_paquete: this.formulario.tiene_paquete ? (this.formulario.nombre_paquete?.trim() || 'Paquete') : 'Paquete',
+      unidades_por_paquete: this.formulario.tiene_paquete ? Math.max(1, Number(this.formulario.unidades_por_paquete) || 1) : 1,
+      precio_paquete_venta: (this.formulario.tiene_paquete && this.formulario.precio_paquete_venta) ? Number(this.formulario.precio_paquete_venta) : null,
+      precio_paquete_compra: (this.formulario.tiene_paquete && this.formulario.precio_paquete_compra) ? Number(this.formulario.precio_paquete_compra) : null,
+      codigo_barra_paquete: this.formulario.tiene_paquete ? (this.formulario.codigo_barra_paquete?.trim() || null) : null,
       activo: this.formulario.activo,
       imagen_url: this.formulario.imagen_url,
     };

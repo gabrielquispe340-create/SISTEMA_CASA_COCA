@@ -123,17 +123,34 @@ def registrar_venta(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"El producto con ID {item.producto_id} no existe o está inactivo.",
             )
-        if producto.stock_actual < item.cantidad:
+        is_paquete = (item.tipo_empaque or "").upper() == "PAQUETE" and (
+            producto.tiene_paquete or (producto.unidades_por_paquete and producto.unidades_por_paquete > 1)
+        )
+        factor = max(1, producto.unidades_por_paquete or 1) if is_paquete else 1
+        unidades_reales = item.cantidad * factor
+
+        if producto.stock_actual < unidades_reales:
+            tipo_desc = f"{item.cantidad} {producto.nombre_paquete or 'paquete(s)'} ({unidades_reales} uds)" if is_paquete else f"{item.cantidad} uds"
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=(
                     f"Stock insuficiente para '{producto.nombre}'. "
-                    f"Disponible: {producto.stock_actual}, Solicitado: {item.cantidad}."
+                    f"Disponible: {producto.stock_actual} uds., Solicitado: {tipo_desc}."
                 ),
             )
 
-        precio_unit = Decimal(str(producto.precio_venta))
-        costo_unit = Decimal(str(producto.precio_compra))
+        if item.precio_unitario is not None and item.precio_unitario > Decimal("0.00"):
+            precio_unit = Decimal(str(item.precio_unitario))
+        elif is_paquete and producto.precio_paquete_venta:
+            precio_unit = Decimal(str(producto.precio_paquete_venta))
+        else:
+            precio_unit = Decimal(str(producto.precio_venta))
+
+        if is_paquete and producto.precio_paquete_compra:
+            costo_unit = Decimal(str(producto.precio_paquete_compra))
+        else:
+            costo_unit = Decimal(str(producto.precio_compra or 0)) * factor
+
         desc_linea = Decimal(str(item.descuento_linea))
         subtotal_linea = (precio_unit * item.cantidad) - desc_linea
 
@@ -144,7 +161,7 @@ def registrar_venta(
             )
 
         stock_anterior = producto.stock_actual
-        producto.stock_actual -= item.cantidad
+        producto.stock_actual -= unidades_reales
 
         subtotal_acumulado += subtotal_linea
 
@@ -156,18 +173,22 @@ def registrar_venta(
                 costo_unitario=costo_unit,
                 descuento_linea=desc_linea,
                 subtotal_linea=subtotal_linea,
+                tipo_empaque="PAQUETE" if is_paquete else "UNIDAD",
+                unidades_empaque=factor,
+                cantidad_empaque=item.cantidad,
             )
         )
 
+        ref_empaque = f" ({item.cantidad} {producto.nombre_paquete or 'paq.'} x{factor} uds)" if is_paquete else ""
         movimientos_a_crear.append(
             MovimientoInventario(
                 producto_id=producto.id,
                 usuario_id=current_user.id,
                 tipo_movimiento="VENTA",
-                cantidad=item.cantidad,
+                cantidad=unidades_reales,
                 stock_anterior=stock_anterior,
                 stock_resultante=producto.stock_actual,
-                referencia=f"Venta {numero_comprobante}",
+                referencia=f"Venta {numero_comprobante}{ref_empaque}",
             )
         )
 

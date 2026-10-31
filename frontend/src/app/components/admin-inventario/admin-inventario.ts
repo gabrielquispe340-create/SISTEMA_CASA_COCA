@@ -363,38 +363,49 @@ export class AdminInventario implements OnInit {
     let cantPaqAuto = cantidadSugerida && cantidadSugerida > 0 ? cantidadSugerida : 1;
 
     if (p) {
-      const n = (p.nombre || '').toLowerCase();
-      const cat = (p.categoria_nombre || '').toLowerCase();
+      if (p.tiene_paquete && Number(p.unidades_por_paquete) > 1) {
+        modoAuto = 'PERSONALIZADO';
+        uAuto = Number(p.unidades_por_paquete);
+        cantPaqAuto = cantidadSugerida && cantidadSugerida > 0 ? Math.ceil(cantidadSugerida / uAuto) : 1;
+      } else {
+        const n = (p.nombre || '').toLowerCase();
+        const cat = (p.categoria_nombre || '').toLowerCase();
 
-      if (
-        n.includes('coca') ||
-        n.includes('gaseosa') ||
-        n.includes('pepsi') ||
-        n.includes('jugo') ||
-        n.includes('agua') ||
-        cat.includes('gaseosa')
-      ) {
-        modoAuto = 'PACK_6';
-        uAuto = 6;
-        cantPaqAuto = cantidadSugerida && cantidadSugerida > 0 ? Math.ceil(cantidadSugerida / 6) : 2;
-      } else if (n.includes('malta') || n.includes('lata') || n.includes('energetica')) {
-        modoAuto = 'FARDO_24';
-        uAuto = 24;
-        cantPaqAuto = cantidadSugerida && cantidadSugerida > 0 ? Math.ceil(cantidadSugerida / 24) : 1;
-      } else if (
-        n.includes('cerveza') ||
-        n.includes('vino') ||
-        cat.includes('cerveza') ||
-        cat.includes('vino')
-      ) {
-        modoAuto = 'CAJA_12';
-        uAuto = 12;
-        cantPaqAuto = cantidadSugerida && cantidadSugerida > 0 ? Math.ceil(cantidadSugerida / 12) : 2;
+        if (
+          n.includes('coca') ||
+          n.includes('gaseosa') ||
+          n.includes('pepsi') ||
+          n.includes('jugo') ||
+          n.includes('agua') ||
+          cat.includes('gaseosa')
+        ) {
+          modoAuto = 'PACK_6';
+          uAuto = 6;
+          cantPaqAuto = cantidadSugerida && cantidadSugerida > 0 ? Math.ceil(cantidadSugerida / 6) : 2;
+        } else if (n.includes('malta') || n.includes('lata') || n.includes('energetica')) {
+          modoAuto = 'FARDO_24';
+          uAuto = 24;
+          cantPaqAuto = cantidadSugerida && cantidadSugerida > 0 ? Math.ceil(cantidadSugerida / 24) : 1;
+        } else if (
+          n.includes('cerveza') ||
+          n.includes('vino') ||
+          cat.includes('cerveza') ||
+          cat.includes('vino')
+        ) {
+          modoAuto = 'CAJA_12';
+          uAuto = 12;
+          cantPaqAuto = cantidadSugerida && cantidadSugerida > 0 ? Math.ceil(cantidadSugerida / 12) : 2;
+        }
       }
     }
 
-    const costoUnit = p ? Number(p.precio_compra || 0) : 0;
-    const costoPaq = Number((costoUnit * uAuto).toFixed(2));
+    let costoUnit = p ? Number(p.precio_compra || 0) : 0;
+    let costoPaq = p && p.precio_paquete_compra && Number(p.precio_paquete_compra) > 0
+      ? Number(p.precio_paquete_compra)
+      : Number((costoUnit * uAuto).toFixed(2));
+    if (costoPaq > 0 && uAuto > 1 && (!costoUnit || costoUnit <= 0)) {
+      costoUnit = Number((costoPaq / uAuto).toFixed(2));
+    }
     const totalUds = cantPaqAuto * uAuto;
     const subtotal = Number((cantPaqAuto * costoPaq).toFixed(2));
 
@@ -476,8 +487,22 @@ export class AdminInventario implements OnInit {
       if (prod.lote) {
         linea.lote = prod.lote;
       }
+
+      if (prod.tiene_paquete && Number(prod.unidades_por_paquete) > 1) {
+        linea.modo_empaque = 'PERSONALIZADO';
+        linea.unidades_por_paquete = Number(prod.unidades_por_paquete);
+        if (prod.precio_paquete_compra && Number(prod.precio_paquete_compra) > 0) {
+          linea.costo_paquete = Number(prod.precio_paquete_compra);
+          linea.costo_unitario_compra = Number((linea.costo_paquete / linea.unidades_por_paquete).toFixed(2));
+        } else {
+          linea.costo_paquete = Number((linea.costo_unitario_compra * linea.unidades_por_paquete).toFixed(2));
+        }
+      }
+
       const u = Math.max(1, Number(linea.unidades_por_paquete) || 1);
-      linea.costo_paquete = Number((linea.costo_unitario_compra * u).toFixed(2));
+      if (!linea.costo_paquete || linea.costo_paquete <= 0) {
+        linea.costo_paquete = Number((linea.costo_unitario_compra * u).toFixed(2));
+      }
       linea.cantidad = (Number(linea.cantidad_paquetes) || 1) * u;
       linea.subtotal = Number(
         ((Number(linea.cantidad_paquetes) || 1) * linea.costo_paquete).toFixed(2),
@@ -653,6 +678,7 @@ export class AdminInventario implements OnInit {
         lote: it.lote ? it.lote.trim() : null,
         cantidad_paquetes: Number(it.cantidad_paquetes) || null,
         unidades_por_paquete: Number(it.unidades_por_paquete) || null,
+        tipo_empaque: (it.modo_empaque && it.modo_empaque !== 'UNIDAD') ? 'PAQUETE' : 'UNIDAD',
       })),
     };
 

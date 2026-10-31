@@ -107,6 +107,17 @@ def consultar_stock_disponible(
         valor_costo += costo_u * max(0, stock_act)
         valor_venta += val_venta_item
 
+        u_pack = max(1, int(p.unidades_por_paquete or 1))
+        tiene_pack = bool(p.tiene_paquete and u_pack > 1)
+        p_cajas = (stock_act // u_pack) if tiene_pack else 0
+        p_sueltas = (stock_act % u_pack) if tiene_pack else stock_act
+
+        if tiene_pack:
+            nom_pack = p.nombre_paquete or "Paquete"
+            dual_txt = f"{p_cajas} {nom_pack}(s) + {p_sueltas} uds."
+        else:
+            dual_txt = f"{stock_act} uds."
+
         items_out.append(
             ItemStockDisponibleOut(
                 id=p.id,
@@ -125,6 +136,15 @@ def consultar_stock_disponible(
                 valor_stock_venta=val_venta_item,
                 fecha_vencimiento=p.fecha_vencimiento,
                 lote=p.lote,
+                tiene_paquete=bool(p.tiene_paquete),
+                nombre_paquete=p.nombre_paquete or "Paquete",
+                unidades_por_paquete=u_pack,
+                precio_paquete_venta=p.precio_paquete_venta,
+                precio_paquete_compra=p.precio_paquete_compra,
+                codigo_barra_paquete=p.codigo_barra_paquete,
+                stock_paquetes=p_cajas,
+                stock_unidades_sueltas=p_sueltas,
+                stock_formato_dual=dual_txt,
                 activo=p.activo,
                 fecha_actualizacion=p.fecha_actualizacion,
             )
@@ -380,16 +400,28 @@ def _formatear_compra_out(compra: Compra) -> CompraOut:
     total_unidades = 0
     for d in (compra.detalles or []):
         total_unidades += int(d.cantidad or 0)
+        tipo_emp = getattr(d, "tipo_empaque", "UNIDAD") or "UNIDAD"
+        uds_emp = getattr(d, "unidades_empaque", 1) or 1
+        cant_emp = getattr(d, "cantidad_empaque", 1) or 1
+
+        prod_nom = d.producto.nombre if d.producto else f"Producto #{d.producto_id}"
+        if tipo_emp == "PAQUETE" and d.producto:
+            nom_p = d.producto.nombre_paquete or "Paquete"
+            prod_nom = f"{prod_nom} ({nom_p} x{uds_emp})"
+
         detalles_out.append(
             DetalleCompraOut(
                 id=d.id,
                 compra_id=d.compra_id,
                 producto_id=d.producto_id,
-                producto_nombre=d.producto.nombre if d.producto else f"Producto #{d.producto_id}",
+                producto_nombre=prod_nom,
                 producto_codigo=d.producto.codigo_barras if d.producto else "-",
                 cantidad=d.cantidad,
                 costo_unitario_compra=d.costo_unitario_compra,
                 subtotal_linea=d.subtotal_linea,
+                tipo_empaque=tipo_emp,
+                unidades_empaque=uds_emp,
+                cantidad_empaque=cant_emp,
             )
         )
     return CompraOut(
@@ -417,7 +449,8 @@ def registrar_compra(
     """
     CU13: Registrar compra de mercadería (ingreso a inventario) - Solo ADMIN:
     - Valida proveedor e ítems ingresados.
-    - Incrementa el stock_actual de cada producto.
+    - Incrementa el stock_actual de cada producto en unidades base.
+    - Soporta compras por paquete/caja multiplicando las unidades automáticamente.
     - Actualiza el precio_compra (costo unitario de adquisición).
     - Opcionalmente actualiza precio_venta, fecha_vencimiento y lote (integración FEFO CU11).
     - Registra el comprobante de compra (Compra y DetalleCompra).
@@ -452,16 +485,54 @@ def registrar_compra(
                 detail=f"Producto con ID {item.producto_id} no encontrado.",
             )
 
-        costo_unit = Decimal(str(item.costo_unitario_compra))
-        subtotal_linea = costo_unit * item.cantidad
-        total_compra += subtotal_linea
+        is_paquete = (item.tipo_empaque or "").upper() == "PAQUETE" or bool(item.cantidad_paquetes and item.cantidad_paquetes > 0 and item.unidades_por_paquete and item.unidades_por_paquete > 1)
+        factor = item.unidades_por_paquete or producto.unidades_por_paquete or 1
+        if factor < 1:
+            factor = 1
 
-        stock_anterior = producto.stock_actual
-        producto.stock_actual += item.cantidad
-        producto.precio_compra = costo_unit
+        costo_input = Decimal(str(item.costo_unitario_compra))
+
+        # Soporte inteligente para compras por paquete o unidad
+        if item.cantidad_paquetes and item.cantidad_paquetes > 0 and item.unidades_por_paquete and item.unidades_por_paquete > 1:
+            cant_paquetes = item.cantidad_paquetes
+            factor = item.unidades_por_paquete
+            # Si item.cantidad ya viene multiplicado desde el frontend
+            if item.cantidad >= (cant_paquetes * factor):
+                unidades_a_sumar = item.cantidad
+            else:
+                unidades_a_sumar = cant_paquetes * factor
+            costo_unit = costo_input # costo unitario base
+            subtotal_linea = costo_unit * Decimal(str(unidades_a_sumar))
+            total_compra += subtotal_linea
+            producto.precio_compra = costo_unit
+            producto.precio_paquete_compra = costo_unit * Decimal(str(factor))
+        elif is_paquete and factor > 1:
+            cant_paquetes = item.cantidad
+            unidades_a_sumar = cant_paquetes * factor
+            costo_paquete = costo_input
+            subtotal_linea = costo_paquete * Decimal(str(cant_paquetes))
+            total_compra += subtotal_linea
+            costo_unit = costo_paquete / Decimal(str(factor))
+            producto.precio_compra = costo_unit
+            producto.precio_paquete_compra = costo_paquete
+        else:
+            cant_paquetes = item.cantidad
+            factor = 1
+            unidades_a_sumar = item.cantidad
+            costo_unit = costo_input
+            subtotal_linea = costo_unit * Decimal(str(item.cantidad))
+            total_compra += subtotal_linea
+            producto.precio_compra = costo_unit
 
         if item.nuevo_precio_venta is not None and item.nuevo_precio_venta > 0:
-            producto.precio_venta = Decimal(str(item.nuevo_precio_venta))
+            if is_paquete and factor > 1 and producto.precio_paquete_venta:
+                producto.precio_paquete_venta = Decimal(str(item.nuevo_precio_venta))
+            else:
+                producto.precio_venta = Decimal(str(item.nuevo_precio_venta))
+
+        stock_anterior = producto.stock_actual
+        producto.stock_actual += unidades_a_sumar
+
         if item.fecha_vencimiento:
             producto.fecha_vencimiento = item.fecha_vencimiento
         if item.lote and item.lote.strip():
@@ -472,9 +543,12 @@ def registrar_compra(
         detalles_compra.append(
             DetalleCompra(
                 producto_id=producto.id,
-                cantidad=item.cantidad,
+                cantidad=unidades_a_sumar,
                 costo_unitario_compra=costo_unit,
                 subtotal_linea=subtotal_linea,
+                tipo_empaque="PAQUETE" if is_paquete and factor > 1 else "UNIDAD",
+                unidades_empaque=factor if is_paquete and factor > 1 else 1,
+                cantidad_empaque=cant_paquetes,
             )
         )
 
@@ -483,8 +557,9 @@ def registrar_compra(
             ref_fac += f" ({datos.observaciones.strip()})"
 
         empaque_txt = ""
-        if item.cantidad_paquetes and item.unidades_por_paquete and item.unidades_por_paquete > 1:
-            empaque_txt = f" [{item.cantidad_paquetes} bultos/packs x {item.unidades_por_paquete} uds]"
+        if is_paquete and factor > 1:
+            nom_pkg = producto.nombre_paquete or "paquete"
+            empaque_txt = f" [{cant_paquetes} {nom_pkg}(s) x {factor} uds]"
 
         prov_referencia = f"al proveedor '{proveedor.nombre_empresa}'" if proveedor else "(Proveedor no especificado)"
         movimientos.append(
@@ -492,13 +567,13 @@ def registrar_compra(
                 producto_id=producto.id,
                 usuario_id=current_user.id,
                 tipo_movimiento="COMPRA",
-                cantidad=item.cantidad,
+                cantidad=unidades_a_sumar,
                 stock_anterior=stock_anterior,
                 stock_resultante=producto.stock_actual,
                 referencia=f"Ingreso por Compra {prov_referencia} - {ref_fac}{empaque_txt}",
             )
         )
-        nombres_productos.append(f"{producto.nombre} (+{item.cantidad} uds{empaque_txt})")
+        nombres_productos.append(f"{producto.nombre} (+{unidades_a_sumar} uds{empaque_txt})")
 
     compra = Compra(
         proveedor_id=proveedor.id if proveedor else None,

@@ -5,6 +5,12 @@
   padding: 0;
 }
 
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: #f8fafc;
@@ -61,3 +67,651 @@ body {
   align-items: center;
   gap: 12px;
 }
+
+/* Elementos móviles ocultos por defecto en pantallas de escritorio */
+.btn-mobile-hamburger,
+.sidebar-backdrop,
+.drawer-header-mobile {
+  display: none !important;
+}
+
+.brand-info-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* =========================================================================
+   SISTEMA DE RESPONSIVIDAD TOTAL PARA MÓVILES (SMARTPHONES Y TABLETS)
+   ========================================================================= */
+
+/* 1. TABLETS Y PANTALLAS MENORES A 992px */
+@media (max-width: 992px) {
+  /* Conversión de layouts escritorio a vertical */
+  .admin-layout,
+  .empleado-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Barra lateral transformada en barra superior compacta con botón 3 rayitas */
+  .sidebar {
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 60px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 990 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 14px !important;
+    background: #0f172a !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .sidebar-brand {
+    width: 100% !important;
+    padding: 0 !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin: 0 !important;
+  }
+
+  .brand-info-wrap {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .sidebar-brand .brand-title h2 {
+    font-size: 1.05rem !important;
+    margin: 0 !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+  }
+
+  .sidebar-brand .brand-title span {
+    font-size: 0.68rem !important;
+    color: #94a3b8 !important;
+    display: block !important;
+  }
+
+  /* BOTÓN DE 3 RAYITAS (HAMBURGUESA) */
+  .btn-mobile-hamburger {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+    transition: background 0.2s ease, transform 0.15s ease !important;
+  }
+
+  .btn-mobile-hamburger:active {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: scale(0.95);
+  }
+
+  .btn-mobile-hamburger .bar {
+    width: 20px !important;
+    height: 2.2px !important;
+    background: #ffffff !important;
+    border-radius: 2px !important;
+    display: block !important;
+    transition: transform 0.25s ease, opacity 0.25s ease !important;
+  }
+
+  /* FONDO OSCURO TÁCTIL (BACKDROP) */
+  .sidebar-backdrop {
+    display: block !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(15, 23, 42, 0.7) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    z-index: 1050 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.3s ease !important;
+  }
+
+  body.menu-movil-abierto .sidebar-backdrop {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* CAJÓN DESPLEGABLE OFF-CANVAS (DRAWER) */
+  .sidebar-drawer-body {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 285px !important;
+    max-width: 82vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: #0f172a !important;
+    z-index: 1060 !important;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 16px 14px 20px 14px !important;
+    transform: translateX(-105%) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  body.menu-movil-abierto .sidebar-drawer-body {
+    transform: translateX(0) !important;
+  }
+
+  /* Cabecera interna del cajón con botón cerrar X */
+  .drawer-header-mobile {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .drawer-title {
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.6px !important;
+    color: #94a3b8 !important;
+    text-transform: uppercase !important;
+  }
+
+  .btn-close-drawer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    color: #ffffff !important;
+    font-size: 1.1rem !important;
+    cursor: pointer !important;
+  }
+
+  .btn-close-drawer:active {
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Secciones y enlaces de navegación vertical dentro del cajón */
+  .nav-section-label {
+    display: block !important;
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    color: #64748b !important;
+    letter-spacing: 0.8px !important;
+    padding: 10px 8px 4px 8px !important;
+    text-transform: uppercase !important;
+  }
+
+  .sidebar-nav {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  .nav-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 10px 12px !important;
+    font-size: 0.88rem !important;
+    color: #cbd5e1 !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+    transition: background 0.15s ease, color 0.15s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .nav-item.active {
+    background: #2563eb !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+
+  .nav-item svg {
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Pie del cajón móvil con Cerrar Sesión */
+  .sidebar-footer {
+    display: block !important;
+    margin-top: auto !important;
+    padding-top: 16px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    width: 100% !important;
+  }
+
+  .btn-logout-sidebar {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 11px 14px !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    background: rgba(239, 68, 68, 0.15) !important;
+    color: #f87171 !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    cursor: pointer !important;
+  }
+
+  /* Bloqueo de scroll cuando el menú está abierto */
+  body.menu-movil-abierto {
+    overflow: hidden !important;
+  }
+
+  /* Contenido principal */
+  .main-content,
+  .caja-content-scroll,
+  .catalogo-content-scroll {
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 12px 10px !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Encabezados superiores */
+  .topbar {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    padding: 12px 14px !important;
+  }
+
+  .topbar-titles h1 {
+    font-size: 1.25rem !important;
+  }
+
+  .topbar-actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+
+  /* ESPACIO DE TRABAJO DEL POS (VENTAS) */
+  .pos-workspace {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 8px 6px !important;
+    gap: 16px !important;
+  }
+
+  .pos-catalog-column {
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+  }
+
+  .products-scroll-area {
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+  }
+
+  .pos-cart-column {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+  }
+
+  .cart-card {
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .cart-items-container {
+    max-height: 340px !important;
+    overflow-y: auto !important;
+  }
+
+  /* Grilla de productos en POS móvil */
+  .product-cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .pos-product-card {
+    padding: 8px !important;
+  }
+
+  .pos-card-media {
+    height: 95px !important;
+  }
+
+  .product-title {
+    font-size: 0.8rem !important;
+    height: 2.4em !important;
+  }
+
+  .pos-pricing-box {
+    padding: 4px 6px !important;
+    min-height: 42px !important;
+  }
+
+  .btn-pos-action {
+    height: 32px !important;
+    font-size: 0.72rem !important;
+  }
+}
+
+/* 2. CELULARES Y PANTALLAS PEQUEÑAS (<= 768px) */
+@media (max-width: 768px) {
+  /* Evitar auto-zoom en iOS Safari */
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Cuadrículas de KPI / Estadísticas a columna única */
+  .kpi-grid,
+  .stats-grid,
+  .summary-cards,
+  .dashboard-cards,
+  .dashboard-kpis {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* Formularios en una sola columna */
+  .form-row-2,
+  .form-row-3,
+  .form-row-4,
+  .form-row-header-compra,
+  .scanner-bar,
+  .filter-bar,
+  .filters-row,
+  .reports-filter-bar {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  /* Tablas adaptables con scroll horizontal táctil suave */
+  .table-wrapper,
+  .table-container,
+  .data-table-container,
+  .products-table-container,
+  .kardex-table-container,
+  .sales-table-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 10px !important;
+    margin-bottom: 12px !important;
+    display: block !important;
+  }
+
+  .data-table,
+  .table-custom {
+    min-width: 640px !important;
+  }
+
+  /* Modales optimizados para móvil */
+  .modal-backdrop {
+    padding: 10px !important;
+    align-items: flex-end !important;
+  }
+
+  .modal-card,
+  .modal-dialog,
+  .modal-card-lg,
+  .modal-lg,
+  .modal-sm,
+  .modal-card-voucher {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 92vh !important;
+    border-radius: 16px 16px 0 0 !important;
+    margin: 0 !important;
+  }
+
+  .modal-header {
+    padding: 14px 16px !important;
+  }
+
+  .modal-body {
+    padding: 14px 16px !important;
+    gap: 12px !important;
+  }
+
+  .modal-footer {
+    padding: 12px 16px !important;
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    gap: 8px !important;
+  }
+
+  .modal-footer button {
+    width: 100% !important;
+    height: 44px !important;
+    justify-content: center !important;
+  }
+
+  /* PANTALLA DE LOGIN EN CELULAR */
+  .login-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    width: 100% !important;
+  }
+
+  .brand-panel {
+    padding: 1.25rem 1rem !important;
+    border-radius: 0 0 20px 20px !important;
+  }
+
+  .brand-hero p,
+  .role-cards,
+  .brand-footer {
+    display: none !important;
+  }
+
+  .brand-hero h2 {
+    font-size: 1.15rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .auth-panel {
+    padding: 1.2rem 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .auth-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 1.5rem 1.2rem !important;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08) !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .btn-submit {
+    height: 48px !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* 3. CELULARES PEQUEÑOS (<= 480px) */
+@media (max-width: 480px) {
+  .product-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .pos-card-media {
+    height: 85px !important;
+  }
+
+  .cat-chip,
+  .media-badge-cat {
+    display: none !important;
+  }
+
+  .media-badge-stock {
+    font-size: 0.62rem !important;
+    padding: 2px 5px !important;
+  }
+
+  .pos-pricing-box {
+    min-height: 38px !important;
+    padding: 3px 5px !important;
+  }
+
+  .pricing-val .amt {
+    font-size: 0.92rem !important;
+  }
+
+  .btn-pos-action {
+    height: 30px !important;
+    font-size: 0.68rem !important;
+    padding: 0 4px !important;
+  }
+
+  .quick-role-bar {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+  }
+
+  .quick-role-btn {
+    width: 100% !important;
+  }
+}
+
+/* Barra flotante de cobro rápido para POS en móvil */
+.mobile-floating-cart-bar {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .mobile-floating-cart-bar {
+    display: flex !important;
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: #ffffff;
+    border-radius: 14px;
+    padding: 10px 16px;
+    box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    z-index: 998;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: slideUpCart 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .admin-floating-cart-bar {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  @keyframes slideUpCart {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .cart-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cart-bar-icon {
+    font-size: 1.3rem;
+  }
+
+  .cart-bar-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-bar-count {
+    font-size: 0.72rem;
+    opacity: 0.9;
+    font-weight: 500;
+  }
+
+  .cart-bar-total {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+
+  .btn-cart-bar-pay {
+    background: #ffffff;
+    color: #0f172a;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+}
+
+

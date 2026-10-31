@@ -12,5 +12,115 @@
 </head>
 <body>
   <app-root></app-root>
+  <script>
+    (function () {
+      // 1. Delegación global de clics para abrir/cerrar el menú móvil
+      document.addEventListener('click', function (e) {
+        // Clic en botón 3 rayitas (hamburguesa)
+        var btnHamb = e.target.closest('.btn-mobile-hamburger');
+        if (btnHamb) {
+          e.preventDefault();
+          e.stopPropagation();
+          document.body.classList.toggle('menu-movil-abierto');
+          return;
+        }
+
+        // Clic en fondo oscuro (backdrop) o botón cerrar (X)
+        if (e.target.closest('.sidebar-backdrop') || e.target.closest('.btn-close-drawer')) {
+          e.preventDefault();
+          document.body.classList.remove('menu-movil-abierto');
+          return;
+        }
+
+        // Clic en un enlace del menú de navegación o cerrar sesión
+        if (e.target.closest('.sidebar-nav .nav-item') || e.target.closest('.btn-logout-sidebar')) {
+          document.body.classList.remove('menu-movil-abierto');
+        }
+      });
+
+      // 2. Cerrar con tecla Escape
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          document.body.classList.remove('menu-movil-abierto');
+        }
+      });
+
+      // 3. Ajuste automático para cualquier vista con sidebar
+      function inicializarSidebarMovil() {
+        var sidebars = document.querySelectorAll('.sidebar');
+        sidebars.forEach(function (sidebar) {
+          var brand = sidebar.querySelector('.sidebar-brand');
+          if (!brand) return;
+
+          // Agrupar logo y título en brand-info-wrap si aún no lo están
+          if (!brand.querySelector('.brand-info-wrap')) {
+            var icon = brand.querySelector('.brand-icon');
+            var title = brand.querySelector('.brand-title');
+            if (icon && title) {
+              var wrap = document.createElement('div');
+              wrap.className = 'brand-info-wrap';
+              brand.insertBefore(wrap, icon);
+              wrap.appendChild(icon);
+              wrap.appendChild(title);
+            }
+          }
+
+          // Crear botón 3 rayitas si no existe
+          if (!brand.querySelector('.btn-mobile-hamburger')) {
+            var hambBtn = document.createElement('button');
+            hambBtn.type = 'button';
+            hambBtn.className = 'btn-mobile-hamburger';
+            hambBtn.setAttribute('aria-label', 'Abrir Menú de Navegación');
+            hambBtn.innerHTML = '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
+            brand.appendChild(hambBtn);
+          }
+
+          // Crear backdrop si no existe
+          if (!sidebar.querySelector('.sidebar-backdrop')) {
+            var backdrop = document.createElement('div');
+            backdrop.className = 'sidebar-backdrop';
+            sidebar.insertBefore(backdrop, brand.nextSibling);
+          }
+
+          // Crear sidebar-drawer-body si aún no está estructurado
+          if (!sidebar.querySelector('.sidebar-drawer-body')) {
+            var drawer = document.createElement('div');
+            drawer.className = 'sidebar-drawer-body';
+
+            var drawerHeader = document.createElement('div');
+            drawerHeader.className = 'drawer-header-mobile';
+            drawerHeader.innerHTML = '<span class="drawer-title">MENÚ DE NAVEGACIÓN</span><button type="button" class="btn-close-drawer" aria-label="Cerrar Menú">✕</button>';
+            drawer.appendChild(drawerHeader);
+
+            var nodesToMove = [];
+            sidebar.childNodes.forEach(function (node) {
+              if (node !== brand && !node.classList?.contains('sidebar-backdrop') && !node.classList?.contains('btn-mobile-hamburger')) {
+                nodesToMove.push(node);
+              }
+            });
+
+            nodesToMove.forEach(function (node) {
+              drawer.appendChild(node);
+            });
+
+            sidebar.appendChild(drawer);
+          }
+        });
+      }
+
+      // Observador de cambios en el DOM para SPAs de Angular
+      var obs = new MutationObserver(function () {
+        inicializarSidebarMovil();
+      });
+      obs.observe(document.body, { childList: true, subtree: true });
+
+      // Ejecutar una vez al cargar
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', inicializarSidebarMovil);
+      } else {
+        inicializarSidebarMovil();
+      }
+    })();
+  </script>
 </body>
 </html>

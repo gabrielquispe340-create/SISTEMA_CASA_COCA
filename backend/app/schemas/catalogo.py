@@ -68,6 +68,12 @@ class ProductoBase(BaseModel):
     stock_minimo: int = Field(default=5, ge=0)
     fecha_vencimiento: Optional[date] = None
     lote: Optional[str] = None
+    tiene_paquete: bool = False
+    nombre_paquete: Optional[str] = "Paquete"
+    unidades_por_paquete: int = Field(default=1, ge=1)
+    precio_paquete_venta: Optional[Decimal] = Field(default=None, ge=0)
+    precio_paquete_compra: Optional[Decimal] = Field(default=None, ge=0)
+    codigo_barra_paquete: Optional[str] = None
     activo: bool = True
 
 
@@ -88,6 +94,12 @@ class ProductoUpdate(BaseModel):
     stock_minimo: Optional[int] = Field(default=None, ge=0)
     fecha_vencimiento: Optional[date] = None
     lote: Optional[str] = None
+    tiene_paquete: Optional[bool] = None
+    nombre_paquete: Optional[str] = None
+    unidades_por_paquete: Optional[int] = Field(default=None, ge=1)
+    precio_paquete_venta: Optional[Decimal] = Field(default=None, ge=0)
+    precio_paquete_compra: Optional[Decimal] = Field(default=None, ge=0)
+    codigo_barra_paquete: Optional[str] = None
     activo: Optional[bool] = None
 
 

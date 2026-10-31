@@ -2,17 +2,36 @@
   <!-- BARRA LATERAL PROFESIONAL -->
   <aside class="sidebar">
     <div class="sidebar-brand">
-      <div class="brand-icon">
-        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      <div class="brand-info-wrap">
+        <div class="brand-icon">
+          <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+        </div>
+        <div class="brand-title">
+          <h2>CASA COCA</h2>
+          <span>Panel Administrativo</span>
+        </div>
       </div>
-      <div class="brand-title">
-        <h2>CASA COCA</h2>
-        <span>Panel Administrativo</span>
-      </div>
+
+      <!-- BOTÓN 3 RAYITAS PARA MÓVIL -->
+      <button type="button" class="btn-mobile-hamburger" aria-label="Abrir Menú de Navegación">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
 
-    <div class="nav-section-label">GESTIÓN PRINCIPAL</div>
-    <nav class="sidebar-nav">
+    <!-- FONDO OSCURO PARA CERRAR EL MENÚ -->
+    <div class="sidebar-backdrop"></div>
+
+    <!-- CAJÓN DESPLEGABLE MÓVIL (DRAWER) -->
+    <div class="sidebar-drawer-body">
+      <div class="drawer-header-mobile">
+        <span class="drawer-title">MENÚ DE NAVEGACIÓN</span>
+        <button type="button" class="btn-close-drawer" aria-label="Cerrar Menú">✕</button>
+      </div>
+
+      <div class="nav-section-label">GESTIÓN PRINCIPAL</div>
+      <nav class="sidebar-nav">
       <a routerLink="/admin/dashboard" class="nav-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="3" width="7" height="7" rx="1"></rect>
@@ -107,7 +126,8 @@
         <span>Cerrar Sesión</span>
       </button>
     </div>
-  </aside>
+  </div>
+</aside>
 
   <!-- CONTENIDO PRINCIPAL -->
   <div class="main-wrapper">
@@ -364,12 +384,18 @@
 
           <div class="catalog-card-prices">
             <div>
-              <small>Compra</small>
+              <small>Compra (Ud)</small>
               <span>Bs. {{ (prod.precio_compra || 0) | number: '1.2-2' }}</span>
+              <small *ngIf="prod.tiene_paquete && prod.precio_paquete_compra" class="pkg-price-sub">
+                Bs. {{ prod.precio_paquete_compra | number: '1.2-2' }}/{{ prod.nombre_paquete || 'paq' }}
+              </small>
             </div>
             <div class="sale-highlight">
               <small>Precio Venta POS</small>
-              <strong>Bs. {{ (prod.precio_venta || 0) | number: '1.2-2' }}</strong>
+              <strong>Bs. {{ (prod.precio_venta || 0) | number: '1.2-2' }} <span style="font-size: 0.72rem; font-weight: normal;">/ud</span></strong>
+              <div *ngIf="prod.tiene_paquete && prod.precio_paquete_venta" class="pkg-sale-pill">
+                Bs. {{ prod.precio_paquete_venta | number: '1.2-2' }} / {{ prod.nombre_paquete || 'paquete' }} (x{{ prod.unidades_por_paquete }})
+              </div>
             </div>
           </div>
 
@@ -378,7 +404,12 @@
               class="stock-pill"
               [ngClass]="prod.stock_actual <= prod.stock_minimo ? 'stock-low' : 'stock-ok'"
             >
-              Stock: <strong>{{ prod.stock_actual }}</strong> uds.
+              <ng-container *ngIf="prod.tiene_paquete && prod.unidades_por_paquete > 1">
+                <strong>{{ formatearStockDual(prod).paquetes }}</strong> {{ prod.nombre_paquete || 'paq' }} + <strong>{{ formatearStockDual(prod).sueltas }}</strong> uds (Total: {{ prod.stock_actual }})
+              </ng-container>
+              <ng-container *ngIf="!prod.tiene_paquete || prod.unidades_por_paquete <= 1">
+                Stock: <strong>{{ prod.stock_actual }}</strong> uds.
+              </ng-container>
             </span>
 
             <div class="action-group">
@@ -481,12 +512,18 @@
                 </td>
 
                 <td class="price-buy">
-                  Bs. {{ (prod.precio_compra || 0) | number: '1.2-2' }}
+                  <div>Bs. {{ (prod.precio_compra || 0) | number: '1.2-2' }}</div>
+                  <div *ngIf="prod.tiene_paquete && prod.precio_paquete_compra" class="pkg-compra-tag">
+                    Bs. {{ prod.precio_paquete_compra | number: '1.2-2' }}/{{ prod.nombre_paquete || 'paq' }}
+                  </div>
                 </td>
 
                 <td>
                   <div class="price-sale">
-                    Bs. {{ (prod.precio_venta || 0) | number: '1.2-2' }}
+                    Bs. {{ (prod.precio_venta || 0) | number: '1.2-2' }} <small style="font-size: 0.75rem; color: #64748b;">/ud</small>
+                  </div>
+                  <div *ngIf="prod.tiene_paquete && prod.precio_paquete_venta" class="pkg-venta-tag">
+                    <strong>Bs. {{ prod.precio_paquete_venta | number: '1.2-2' }}</strong> / {{ prod.nombre_paquete || 'paquete' }} (x{{ prod.unidades_por_paquete }})
                   </div>
                   <span class="margin-tag">
                     +{{ calcularMargenPorcentaje(prod.precio_compra, prod.precio_venta) }}% margen
@@ -500,8 +537,16 @@
                       prod.stock_actual <= prod.stock_minimo ? 'stock-low' : 'stock-ok'
                     "
                   >
-                    <strong>{{ prod.stock_actual }}</strong> uds.
-                    <small>(mín. {{ prod.stock_minimo }})</small>
+                    <ng-container *ngIf="prod.tiene_paquete && prod.unidades_por_paquete > 1">
+                      <div style="font-weight: 700; color: #1e293b;">
+                        {{ formatearStockDual(prod).paquetes }} {{ prod.nombre_paquete || 'paq' }} + {{ formatearStockDual(prod).sueltas }} uds
+                      </div>
+                      <small style="font-size: 0.73rem; color: #64748b;">(Total: {{ prod.stock_actual }} uds. | mín. {{ prod.stock_minimo }})</small>
+                    </ng-container>
+                    <ng-container *ngIf="!prod.tiene_paquete || prod.unidades_por_paquete <= 1">
+                      <strong>{{ prod.stock_actual }}</strong> uds.
+                      <small>(mín. {{ prod.stock_minimo }})</small>
+                    </ng-container>
                   </div>
                 </td>
 
@@ -733,6 +778,121 @@
         </div>
       </div>
 
+      <!-- SECCIÓN CONFIGURACIÓN DE PAQUETE / CAJA / DUAL -->
+      <div class="package-config-box">
+        <div class="package-config-header">
+          <label class="switch-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="formulario.tiene_paquete"
+              name="tiene_paquete"
+              (change)="onToggleTienePaquete()"
+            />
+            <span class="package-checkbox-title">
+              📦 Habilitar Venta y Compra por Paquete / Caja / Fardo (Venta Dual)
+            </span>
+          </label>
+          <small class="package-help-text">
+            Permite vender o comprar por caja completa (ej. Six-pack, Caja x12 o x24) y automáticamente descontar o sumar al stock de unidades individuales.
+          </small>
+        </div>
+
+        <div *ngIf="formulario.tiene_paquete" class="package-fields-grid">
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Nombre del Empaque *</label>
+              <input
+                type="text"
+                [(ngModel)]="formulario.nombre_paquete"
+                name="nombre_paquete"
+                placeholder="Ej. Paquete, Caja, Six-pack, Fardo..."
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Unidades por {{ formulario.nombre_paquete || 'Paquete' }} *</label>
+              <input
+                type="number"
+                min="2"
+                [(ngModel)]="formulario.unidades_por_paquete"
+                name="unidades_por_paquete"
+                (input)="recalcularStockDesdeDual()"
+                placeholder="Ej. 6, 12, 24"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Precio Venta por {{ formulario.nombre_paquete || 'Paquete' }} (Bs.) *</label>
+              <input
+                type="number"
+                step="0.10"
+                min="0"
+                [(ngModel)]="formulario.precio_paquete_venta"
+                name="precio_paquete_venta"
+                placeholder="Ej. 110.00"
+              />
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Precio Compra por {{ formulario.nombre_paquete || 'Paquete' }} (Bs. Opcional)</label>
+              <input
+                type="number"
+                step="0.10"
+                min="0"
+                [(ngModel)]="formulario.precio_paquete_compra"
+                name="precio_paquete_compra"
+                placeholder="Costo mayorista de la caja"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Código de Barras del Paquete (Opcional)</label>
+              <input
+                type="text"
+                [(ngModel)]="formulario.codigo_barra_paquete"
+                name="codigo_barra_paquete"
+                placeholder="Escanear código exterior de la caja"
+              />
+            </div>
+          </div>
+
+          <!-- ASISTENTE DE CÁLCULO DE STOCK COMBINADO -->
+          <div class="dual-calc-card">
+            <label class="field-label-bold">Asistente de Stock Inicial:</label>
+            <div class="dual-calc-row">
+              <div class="dual-calc-item">
+                <span>{{ formulario.nombre_paquete || 'Paquetes' }} completos:</span>
+                <input
+                  type="number"
+                  min="0"
+                  [(ngModel)]="stock_paquetes_input"
+                  name="stock_paquetes_input"
+                  (input)="recalcularStockDesdeDual()"
+                />
+              </div>
+              <div class="dual-calc-op">+</div>
+              <div class="dual-calc-item">
+                <span>Unidades sueltas:</span>
+                <input
+                  type="number"
+                  min="0"
+                  [(ngModel)]="stock_unidades_input"
+                  name="stock_unidades_input"
+                  (input)="recalcularStockDesdeDual()"
+                />
+              </div>
+              <div class="dual-calc-op">=</div>
+              <div class="dual-calc-total">
+                <span class="total-number">{{ formulario.stock_actual }}</span>
+                <span class="total-label">unidades base en inventario</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="profit-preview">
         <span>
           Ganancia unitaria estimada:
@@ -807,6 +967,121 @@
             name="precio_venta_rapido"
             required
           />
+        </div>
+      </div>
+
+      <!-- SECCIÓN CONFIGURACIÓN DE PAQUETE / CAJA / DUAL -->
+      <div class="package-config-box">
+        <div class="package-config-header">
+          <label class="switch-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="formulario.tiene_paquete"
+              name="tiene_paquete"
+              (change)="onToggleTienePaquete()"
+            />
+            <span class="package-checkbox-title">
+              📦 Habilitar Venta y Compra por Paquete / Caja / Fardo (Venta Dual)
+            </span>
+          </label>
+          <small class="package-help-text">
+            Permite vender o comprar por caja completa (ej. Six-pack, Caja x12 o x24) y automáticamente descontar o sumar al stock de unidades individuales.
+          </small>
+        </div>
+
+        <div *ngIf="formulario.tiene_paquete" class="package-fields-grid">
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Nombre del Empaque *</label>
+              <input
+                type="text"
+                [(ngModel)]="formulario.nombre_paquete"
+                name="nombre_paquete"
+                placeholder="Ej. Paquete, Caja, Six-pack, Fardo..."
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Unidades por {{ formulario.nombre_paquete || 'Paquete' }} *</label>
+              <input
+                type="number"
+                min="2"
+                [(ngModel)]="formulario.unidades_por_paquete"
+                name="unidades_por_paquete"
+                (input)="recalcularStockDesdeDual()"
+                placeholder="Ej. 6, 12, 24"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Precio Venta por {{ formulario.nombre_paquete || 'Paquete' }} (Bs.) *</label>
+              <input
+                type="number"
+                step="0.10"
+                min="0"
+                [(ngModel)]="formulario.precio_paquete_venta"
+                name="precio_paquete_venta"
+                placeholder="Ej. 110.00"
+              />
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Precio Compra por {{ formulario.nombre_paquete || 'Paquete' }} (Bs. Opcional)</label>
+              <input
+                type="number"
+                step="0.10"
+                min="0"
+                [(ngModel)]="formulario.precio_paquete_compra"
+                name="precio_paquete_compra"
+                placeholder="Costo mayorista de la caja"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Código de Barras del Paquete (Opcional)</label>
+              <input
+                type="text"
+                [(ngModel)]="formulario.codigo_barra_paquete"
+                name="codigo_barra_paquete"
+                placeholder="Escanear código exterior de la caja"
+              />
+            </div>
+          </div>
+
+          <!-- ASISTENTE DE CÁLCULO DE STOCK COMBINADO -->
+          <div class="dual-calc-card">
+            <label class="field-label-bold">Asistente de Stock Inicial:</label>
+            <div class="dual-calc-row">
+              <div class="dual-calc-item">
+                <span>{{ formulario.nombre_paquete || 'Paquetes' }} completos:</span>
+                <input
+                  type="number"
+                  min="0"
+                  [(ngModel)]="stock_paquetes_input"
+                  name="stock_paquetes_input"
+                  (input)="recalcularStockDesdeDual()"
+                />
+              </div>
+              <div class="dual-calc-op">+</div>
+              <div class="dual-calc-item">
+                <span>Unidades sueltas:</span>
+                <input
+                  type="number"
+                  min="0"
+                  [(ngModel)]="stock_unidades_input"
+                  name="stock_unidades_input"
+                  (input)="recalcularStockDesdeDual()"
+                />
+              </div>
+              <div class="dual-calc-op">=</div>
+              <div class="dual-calc-total">
+                <span class="total-number">{{ formulario.stock_actual }}</span>
+                <span class="total-label">unidades base en inventario</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

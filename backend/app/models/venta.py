@@ -121,13 +121,22 @@ class DetalleVenta(Base):
     costo_unitario = Column(Numeric(12, 2), default=0.00, nullable=False)
     descuento_linea = Column(Numeric(12, 2), default=0.00, nullable=False)
     subtotal_linea = Column(Numeric(12, 2), nullable=False)
+    tipo_empaque = Column(String(20), default="UNIDAD", nullable=False)
+    unidades_empaque = Column(Integer, default=1, nullable=False)
+    cantidad_empaque = Column(Integer, default=1, nullable=False)
 
     venta = relationship("Venta", back_populates="detalles")
     producto = relationship("Producto", back_populates="detalles_venta")
 
     @property
     def producto_nombre(self):
-        return self.producto.nombre if self.producto else None
+        if not self.producto:
+            return None
+        if getattr(self, "tipo_empaque", "UNIDAD") == "PAQUETE":
+            pkg = getattr(self.producto, "nombre_paquete", "Paquete") or "Paquete"
+            uds = getattr(self, "unidades_empaque", 1) or 1
+            return f"{self.producto.nombre} ({pkg} x{uds})"
+        return self.producto.nombre
 
     @property
     def producto_codigo(self):

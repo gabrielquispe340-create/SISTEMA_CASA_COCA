@@ -128,6 +128,25 @@ export class EmpleadoCatalogo implements OnInit {
     });
   }
 
+  formatearStockDual(p: any): { paquetes: number; sueltas: number; total: number; tienePack: boolean; texto: string } {
+    const stock = Number(p.stock_actual) || 0;
+    const uPack = Number(p.unidades_por_paquete) || 1;
+    const tienePack = !!p.tiene_paquete && uPack > 1;
+    if (!tienePack) {
+      return { paquetes: 0, sueltas: stock, total: stock, tienePack: false, texto: `${stock} uds.` };
+    }
+    const paq = Math.floor(stock / uPack);
+    const sueltas = stock % uPack;
+    const nomPack = p.nombre_paquete || 'Paquete';
+    return {
+      paquetes: paq,
+      sueltas: sueltas,
+      total: stock,
+      tienePack: true,
+      texto: `${paq} ${nomPack}(s) + ${sueltas} uds.`,
+    };
+  }
+
   // KPIs de consulta rápida
   get totalCatalogoActivo(): number {
     return this.productos.length;

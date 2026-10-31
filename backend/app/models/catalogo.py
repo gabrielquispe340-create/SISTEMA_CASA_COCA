@@ -46,6 +46,12 @@ class Producto(Base):
     stock_minimo = Column(Integer, default=5, nullable=False)
     fecha_vencimiento = Column(Date, nullable=True)
     lote = Column(String(60), nullable=True)
+    tiene_paquete = Column(Boolean, default=False, nullable=False)
+    nombre_paquete = Column(String(60), default="Paquete", nullable=True)
+    unidades_por_paquete = Column(Integer, default=1, nullable=False)
+    precio_paquete_venta = Column(Numeric(12, 2), nullable=True)
+    precio_paquete_compra = Column(Numeric(12, 2), nullable=True)
+    codigo_barra_paquete = Column(String(60), nullable=True)
     activo = Column(Boolean, default=True, nullable=False)
     fecha_actualizacion = Column(
         DateTime(timezone=True),

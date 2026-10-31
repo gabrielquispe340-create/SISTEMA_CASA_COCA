@@ -2,17 +2,36 @@
   <!-- BARRA LATERAL ADMINISTRATIVA -->
   <aside class="sidebar">
     <div class="sidebar-brand">
-      <div class="brand-icon">
-        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      <div class="brand-info-wrap">
+        <div class="brand-icon">
+          <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+        </div>
+        <div class="brand-title">
+          <h2>CASA COCA</h2>
+          <span>Panel Administrativo</span>
+        </div>
       </div>
-      <div class="brand-title">
-        <h2>CASA COCA</h2>
-        <span>Panel Administrativo</span>
-      </div>
+
+      <!-- BOTÓN 3 RAYITAS PARA MÓVIL -->
+      <button type="button" class="btn-mobile-hamburger" aria-label="Abrir Menú de Navegación">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
 
-    <div class="nav-section-label">GESTIÓN PRINCIPAL</div>
-    <nav class="sidebar-nav">
+    <!-- FONDO OSCURO PARA CERRAR EL MENÚ -->
+    <div class="sidebar-backdrop"></div>
+
+    <!-- CAJÓN DESPLEGABLE MÓVIL (DRAWER) -->
+    <div class="sidebar-drawer-body">
+      <div class="drawer-header-mobile">
+        <span class="drawer-title">MENÚ DE NAVEGACIÓN</span>
+        <button type="button" class="btn-close-drawer" aria-label="Cerrar Menú">✕</button>
+      </div>
+
+      <div class="nav-section-label">GESTIÓN PRINCIPAL</div>
+      <nav class="sidebar-nav">
       <a routerLink="/admin/dashboard" class="nav-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="3" width="7" height="7" rx="1"></rect>
@@ -108,7 +127,8 @@
         <span>Cerrar Sesión</span>
       </button>
     </div>
-  </aside>
+  </div>
+</aside>
 
   <!-- CONTENIDO PRINCIPAL -->
   <div class="main-wrapper">
@@ -253,59 +273,154 @@
               *ngFor="let p of productosFiltrados"
               class="pos-product-card"
               [class.out-of-stock]="p.stock_actual <= 0"
-              (click)="p.stock_actual > 0 ? agregarAlCarrito(p) : null"
             >
-              <div class="card-header-meta">
-                <span class="cat-chip">{{ p.categoria?.nombre || 'General' }}</span>
+              <!-- 1. BLOQUE SUPERIOR DE MEDIOS (IMAGEN + INSIGNIAS FLOTANTES) -->
+              <div class="pos-card-media" (click)="p.stock_actual > 0 ? agregarAlCarrito(p, 'UNIDAD') : null">
+                <img
+                  *ngIf="p.imagen_url"
+                  [src]="obtenerUrlImagen(p.imagen_url)"
+                  [alt]="p.nombre"
+                  class="pos-card-img"
+                  loading="lazy"
+                  (error)="p.imagen_url = null"
+                />
+                <div *ngIf="!p.imagen_url" class="pos-card-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                </div>
+
+                <!-- Insignia Categoría Flotante -->
+                <span class="media-badge-cat">{{ p.categoria?.nombre || 'General' }}</span>
+
+                <!-- Insignia Stock Flotante -->
                 <span
-                  class="stock-badge"
+                  class="media-badge-stock"
                   [class.badge-in-stock]="p.stock_actual > 5"
                   [class.badge-low-stock]="p.stock_actual > 0 && p.stock_actual <= 5"
                   [class.badge-out-stock]="p.stock_actual <= 0"
+                  [title]="formatearStockDual(p).texto"
                 >
-                  {{ p.stock_actual > 0 ? p.stock_actual + ' unid.' : 'Agotado' }}
+                  <ng-container *ngIf="p.stock_actual <= 0">Agotado</ng-container>
+                  <ng-container *ngIf="p.stock_actual > 0">
+                    <span *ngIf="p.tiene_paquete && p.unidades_por_paquete > 1">
+                      {{ formatearStockDual(p).corto }}
+                    </span>
+                    <span *ngIf="!p.tiene_paquete || p.unidades_por_paquete <= 1">
+                      {{ p.stock_actual }} ud.
+                    </span>
+                  </ng-container>
+                </span>
+
+                <!-- Insignia En Carrito -->
+                <span *ngIf="getCantidadEnCarrito(p.id) > 0" class="media-badge-cart">
+                  🛒 {{ getCantidadEnCarrito(p.id) }} en carrito
                 </span>
               </div>
 
-              <h4 class="product-name" [title]="p.nombre">{{ p.nombre }}</h4>
-              <div class="product-code">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
-                  <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path>
-                </svg>
-                <span>{{ p.codigo_barras || 'S/C' }}</span>
+              <!-- 2. CUERPO: TÍTULO Y CÓDIGOS -->
+              <div class="pos-card-body">
+                <h4 class="product-title" [title]="p.nombre">{{ p.nombre }}</h4>
+                <div class="product-sku-row">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+                    <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                  </svg>
+                  <span class="sku-text">{{ p.codigo_barras || 'S/C' }}</span>
+                  <span *ngIf="p.tiene_paquete && p.codigo_barra_paquete" class="sku-pkg-pill" [title]="'Caja: ' + p.codigo_barra_paquete">
+                    📦 {{ p.codigo_barra_paquete }}
+                  </span>
+                </div>
               </div>
 
-              <div class="card-footer-action">
-                <div class="price-tag">
-                  <span class="currency">Bs.</span>
-                  <span class="amount">{{ p.precio_venta | number:'1.2-2' }}</span>
+              <!-- 3. CAJA DE PRECIOS UNIFORME -->
+              <div class="pos-pricing-box">
+                <div class="pricing-unit-row">
+                  <span class="pricing-label">Unidad:</span>
+                  <div class="pricing-val">
+                    <span class="cur">Bs.</span>
+                    <span class="amt">{{ p.precio_venta | number:'1.2-2' }}</span>
+                  </div>
                 </div>
 
-                <div class="btn-add-action">
-                  <span *ngIf="getCantidadEnCarrito(p.id) > 0" class="in-cart-indicator">
-                    {{ getCantidadEnCarrito(p.id) }} en carrito
-                  </span>
+                <div *ngIf="p.tiene_paquete && p.precio_paquete_venta" class="pricing-pkg-row">
+                  <span class="pricing-label-pkg">📦 {{ p.nombre_paquete || 'Paq.' }} (x{{ p.unidades_por_paquete }}):</span>
+                  <div class="pricing-val-pkg">
+                    <span class="cur">Bs.</span>
+                    <span class="amt">{{ p.precio_paquete_venta | number:'1.2-2' }}</span>
+                  </div>
+                </div>
+
+                <div *ngIf="!p.tiene_paquete || !p.precio_paquete_venta" class="pricing-pkg-row pricing-placeholder">
+                  <span class="placeholder-text">Venta individual</span>
+                </div>
+              </div>
+
+              <!-- 4. BOTONES DE ACCIÓN (NIVELADOS) -->
+              <div class="pos-card-actions">
+                <ng-container *ngIf="p.tiene_paquete && p.precio_paquete_venta">
                   <button
                     type="button"
-                    class="btn-quick-add"
+                    class="btn-pos-action btn-pos-unit"
                     [disabled]="p.stock_actual <= 0"
-                    (click)="$event.stopPropagation(); agregarAlCarrito(p)"
+                    (click)="$event.stopPropagation(); agregarAlCarrito(p, 'UNIDAD')"
+                    title="Agregar 1 unidad a la venta"
                   >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                    + 1 Ud
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-pos-action btn-pos-pkg"
+                    [disabled]="p.stock_actual < (p.unidades_por_paquete || 1)"
+                    (click)="$event.stopPropagation(); agregarAlCarrito(p, 'PAQUETE')"
+                    title="Agregar 1 {{ p.nombre_paquete || 'paquete' }} completo ({{ p.unidades_por_paquete }} uds)"
+                  >
+                    📦 + 1 {{ p.nombre_paquete || 'Paq.' }}
+                  </button>
+                </ng-container>
+
+                <ng-container *ngIf="!p.tiene_paquete || !p.precio_paquete_venta">
+                  <button
+                    type="button"
+                    class="btn-pos-action btn-pos-single"
+                    [disabled]="p.stock_actual <= 0"
+                    (click)="$event.stopPropagation(); agregarAlCarrito(p, 'UNIDAD')"
+                    title="Agregar al carrito"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
                       <line x1="12" y1="5" x2="12" y2="19"></line>
                       <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
                     <span>Agregar</span>
                   </button>
-                </div>
+                </ng-container>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- BARRA FLOTANTE MÓVIL PARA VER CARRITO / COBRAR -->
+      <div
+        class="mobile-floating-cart-bar admin-floating-cart-bar"
+        *ngIf="carrito.length > 0"
+        (click)="hacerScrollAlCarrito()"
+      >
+        <div class="cart-bar-left">
+          <span class="cart-bar-icon">🛒</span>
+          <div class="cart-bar-info">
+            <span class="cart-bar-count">{{ getTotalUnidades() }} unid. en carrito</span>
+            <span class="cart-bar-total">Bs. {{ getTotal() | number:'1.2-2' }}</span>
+          </div>
+        </div>
+        <button type="button" class="btn-cart-bar-pay">
+          Cobrar →
+        </button>
+      </div>
+
       <!-- COLUMNA DERECHA: CARRITO REACTIVO Y COBRO (40%) -->
-      <aside class="pos-cart-column">
+      <aside class="pos-cart-column" id="admin-pos-cart-column">
         <div class="cart-card">
           <!-- CABECERA DEL CARRITO -->
           <div class="cart-header">
@@ -386,8 +501,13 @@
               <div *ngFor="let item of carrito; let i = index" class="cart-item-row">
                 <div class="item-main-details">
                   <div class="item-name-code">
-                    <span class="item-name">{{ item.producto.nombre }}</span>
-                    <span class="item-code">SKU: {{ item.producto.codigo_barras || 'S/C' }}</span>
+                    <span class="item-name">{{ item.nombre_presentacion || item.producto.nombre }}</span>
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 2px;">
+                      <span class="item-code">SKU: {{ item.producto.codigo_barras || 'S/C' }}</span>
+                      <span *ngIf="item.tipo_empaque === 'PAQUETE'" class="item-pkg-chip">
+                        📦 {{ item.producto.nombre_paquete || 'Paquete' }} (x{{ item.unidades_empaque }} uds)
+                      </span>
+                    </div>
                   </div>
                   <div class="item-unit-price">
                     Bs. {{ item.precio_unitario | number:'1.2-2' }} c/u
@@ -1189,7 +1309,7 @@
           <tr *ngFor="let it of datosTicket.items">
             <td class="col-cant">{{ it.cantidad }}</td>
             <td class="col-desc">
-              {{ it.producto.nombre }}
+              {{ it.nombre_presentacion || it.producto.nombre }}
               <span *ngIf="it.descuento_linea > 0" class="line-desc-note">
                 (-Bs. {{ it.descuento_linea | number:'1.2-2' }})
               </span>

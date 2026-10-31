@@ -777,25 +777,32 @@
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(3px);
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 20px;
+  padding: 16px;
+  overflow-y: auto;
 }
 
 .modal-card {
   width: 100%;
+  max-height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.3);
   overflow: hidden;
+  margin: auto;
+  position: relative;
 }
 
 .modal-lg {
-  max-width: 640px;
+  max-width: 680px;
 }
 
 .modal-sm {
@@ -803,11 +810,14 @@
 }
 
 .modal-header {
-  padding: 18px 24px;
+  padding: 16px 24px;
   border-bottom: 1px solid #e2e8f0;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  flex-shrink: 0;
+  background: #ffffff;
+  z-index: 10;
 }
 
 .modal-tag {
@@ -842,18 +852,48 @@
   border: none;
   background: #f1f5f9;
   color: #475569;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.btn-close-modal:hover {
+  background: #e2e8f0;
+  color: #0f172a;
 }
 
 .modal-body {
   padding: 20px 24px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  overscroll-behavior: contain;
+}
+
+/* Scrollbar estilizado para el cuerpo del modal */
+.modal-body::-webkit-scrollbar {
+  width: 7px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 .modal-error {
@@ -957,8 +997,17 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  padding-top: 8px;
-  border-top: 1px solid #f1f5f9;
+  padding: 14px 24px;
+  border-top: 1px solid #e2e8f0;
+  background: #ffffff;
+  position: sticky;
+  bottom: -20px;
+  margin-left: -24px;
+  margin-right: -24px;
+  margin-bottom: -20px;
+  margin-top: 10px;
+  z-index: 10;
+  box-shadow: 0 -4px 12px rgba(15, 23, 42, 0.05);
 }
 
 .btn-cancel {
@@ -1392,4 +1441,161 @@
   font-size: 0.74rem;
   color: #64748b;
   line-height: 1.35;
+}
+
+/* ==========================================================================
+   CONFIGURACIÓN DE PAQUETE / CAJA / DUAL EN PRODUCTOS
+   ========================================================================== */
+.package-config-box {
+  background: #f8fafc;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  transition: all 0.2s ease;
+}
+
+.package-config-box:hover {
+  border-color: #94a3b8;
+}
+
+.package-config-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.package-checkbox-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.package-help-text {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-left: 26px;
+  line-height: 1.35;
+}
+
+.package-fields-grid {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dual-calc-card {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 4px;
+}
+
+.dual-calc-card .field-label-bold {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e40af;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.dual-calc-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.dual-calc-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dual-calc-item span {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.dual-calc-item input {
+  width: 95px;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.dual-calc-op {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #3b82f6;
+  margin-top: 16px;
+}
+
+.dual-calc-total {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1.5px solid #3b82f6;
+  border-radius: 8px;
+  padding: 6px 14px;
+  margin-top: 12px;
+}
+
+.dual-calc-total .total-number {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1e3a8a;
+  line-height: 1.1;
+}
+
+.dual-calc-total .total-label {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.pkg-price-sub {
+  display: block;
+  font-size: 0.73rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.pkg-sale-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #ecfdf5;
+  color: #047857;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid #a7f3d0;
+  margin-top: 4px;
+  width: fit-content;
+}
+
+.pkg-compra-tag {
+  font-size: 0.73rem;
+  color: #64748b;
+  margin-top: 3px;
+}
+
+.pkg-venta-tag {
+  font-size: 0.75rem;
+  color: #059669;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-top: 3px;
+  display: inline-block;
 }

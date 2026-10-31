@@ -90,6 +90,8 @@ class ItemVentaCreate(BaseModel):
     producto_id: int
     cantidad: int = Field(..., gt=0)
     descuento_linea: Decimal = Field(default=Decimal("0.00"), ge=0)
+    tipo_empaque: str = Field(default="UNIDAD", description="UNIDAD o PAQUETE")
+    precio_unitario: Optional[Decimal] = Field(default=None, ge=0)
 
 
 class VentaCreate(BaseModel):
@@ -109,6 +111,9 @@ class DetalleVentaOut(BaseModel):
     precio_unitario: Decimal
     descuento_linea: Decimal
     subtotal_linea: Decimal
+    tipo_empaque: Optional[str] = "UNIDAD"
+    unidades_empaque: Optional[int] = 1
+    cantidad_empaque: Optional[int] = 1
     producto_nombre: Optional[str] = None
     producto_codigo: Optional[str] = None
 

@@ -2,17 +2,36 @@
   <!-- BARRA LATERAL PROFESIONAL (IDÉNTICA A EMPLEADO DASHBOARD) -->
   <aside class="sidebar">
     <div class="sidebar-brand">
-      <div class="brand-icon">
-        <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+      <div class="brand-info-wrap">
+        <div class="brand-icon">
+          <img src="/logo.png" alt="CASA COCA" class="brand-img-logo">
+        </div>
+        <div class="brand-title">
+          <h2>CASA COCA</h2>
+          <span>Estación de Empleado</span>
+        </div>
       </div>
-      <div class="brand-title">
-        <h2>CASA COCA</h2>
-        <span>Estación de Empleado</span>
-      </div>
+
+      <!-- BOTÓN 3 RAYITAS PARA MÓVIL -->
+      <button type="button" class="btn-mobile-hamburger" aria-label="Abrir Menú de Navegación">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
 
-    <div class="nav-section-label">OPERACIÓN DE VENTAS</div>
-    <nav class="sidebar-nav">
+    <!-- FONDO OSCURO PARA CERRAR EL MENÚ -->
+    <div class="sidebar-backdrop"></div>
+
+    <!-- CAJÓN DESPLEGABLE MÓVIL (DRAWER) -->
+    <div class="sidebar-drawer-body">
+      <div class="drawer-header-mobile">
+        <span class="drawer-title">MENÚ DE NAVEGACIÓN</span>
+        <button type="button" class="btn-close-drawer" aria-label="Cerrar Menú">✕</button>
+      </div>
+
+      <div class="nav-section-label">OPERACIÓN DE VENTAS</div>
+      <nav class="sidebar-nav">
       <a routerLink="/empleado/dashboard" class="nav-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="3" width="7" height="7" rx="1"></rect>
@@ -61,7 +80,8 @@
         <span>Cerrar Sesión</span>
       </button>
     </div>
-  </aside>
+  </div>
+</aside>
 
   <!-- CONTENIDO PRINCIPAL -->
   <div class="main-wrapper">
@@ -329,6 +349,9 @@
             <div class="card-price-block">
               <span class="price-caption">Precio Venta</span>
               <span class="price-amount">Bs. {{ prod.precio_venta | number: '1.2-2' }}</span>
+              <small *ngIf="prod.tiene_paquete && prod.precio_paquete_venta" style="display: block; font-size: 0.72rem; color: #059669; font-weight: 700; margin-top: 2px;">
+                Bs. {{ prod.precio_paquete_venta | number: '1.2-2' }} / {{ prod.nombre_paquete || 'Paq.' }}
+              </small>
             </div>
 
             <div
@@ -344,7 +367,9 @@
               {{
                 prod.stock_actual <= 0
                   ? 'Agotado'
-                  : prod.stock_actual + ' en stock'
+                  : (prod.tiene_paquete && prod.unidades_por_paquete > 1)
+                    ? formatearStockDual(prod).texto
+                    : (prod.stock_actual + ' en stock')
               }}
             </div>
           </div>
@@ -393,7 +418,12 @@
                     {{ prod.categoria?.nombre || 'General' }}
                   </span>
                 </td>
-                <td class="td-price">Bs. {{ prod.precio_venta | number: '1.2-2' }}</td>
+                <td class="td-price">
+                  <div>Bs. {{ prod.precio_venta | number: '1.2-2' }} <small style="font-size: 0.72rem; color: #64748b;">/ud</small></div>
+                  <div *ngIf="prod.tiene_paquete && prod.precio_paquete_venta" style="font-size: 0.75rem; color: #059669; font-weight: 700; margin-top: 2px;">
+                    Bs. {{ prod.precio_paquete_venta | number: '1.2-2' }} / {{ prod.nombre_paquete || 'Paq.' }}
+                  </div>
+                </td>
                 <td>
                   <span
                     class="card-stock-badge"
@@ -405,7 +435,12 @@
                           : 'stock-good'
                     "
                   >
-                    {{ prod.stock_actual }} unidades disponibles
+                    <ng-container *ngIf="prod.tiene_paquete && prod.unidades_por_paquete > 1">
+                      {{ formatearStockDual(prod).texto }} <small style="font-size: 0.72rem; color: #64748b;">(Total: {{ prod.stock_actual }})</small>
+                    </ng-container>
+                    <ng-container *ngIf="!prod.tiene_paquete || prod.unidades_por_paquete <= 1">
+                      {{ prod.stock_actual }} unidades disponibles
+                    </ng-container>
                   </span>
                 </td>
                 <td class="text-right">

@@ -11,6 +11,7 @@ class ItemCompraCreate(BaseModel):
     nuevo_precio_venta: Optional[Decimal] = Field(default=None, ge=0)
     fecha_vencimiento: Optional[date] = None
     lote: Optional[str] = None
+    tipo_empaque: Optional[str] = "UNIDAD"
     cantidad_paquetes: Optional[int] = None
     unidades_por_paquete: Optional[int] = None
 
@@ -33,6 +34,9 @@ class DetalleCompraOut(BaseModel):
     cantidad: int
     costo_unitario_compra: Decimal
     subtotal_linea: Decimal
+    tipo_empaque: Optional[str] = "UNIDAD"
+    unidades_empaque: Optional[int] = 1
+    cantidad_empaque: Optional[int] = 1
 
 
 class CompraOut(BaseModel):
@@ -93,6 +97,15 @@ class ItemStockDisponibleOut(BaseModel):
     valor_stock_venta: Decimal
     fecha_vencimiento: Optional[date] = None
     lote: Optional[str] = None
+    tiene_paquete: Optional[bool] = False
+    nombre_paquete: Optional[str] = "Paquete"
+    unidades_por_paquete: Optional[int] = 1
+    precio_paquete_venta: Optional[Decimal] = None
+    precio_paquete_compra: Optional[Decimal] = None
+    codigo_barra_paquete: Optional[str] = None
+    stock_paquetes: Optional[int] = 0
+    stock_unidades_sueltas: Optional[int] = 0
+    stock_formato_dual: Optional[str] = None
     activo: bool
     fecha_actualizacion: datetime
 
